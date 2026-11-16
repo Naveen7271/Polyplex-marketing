@@ -15,6 +15,9 @@ class NavigationTest extends TestCase
 
         $response->assertStatus(200);
 
+        // Verify navbar brand logo image is rendered
+        $response->assertSee('Polyplex Digiprint_RGB_Colour 2.png');
+
         // Verify primary navbar items from Image 1
         $response->assertSee('Home');
         $response->assertSee('About Us');
@@ -68,6 +71,7 @@ class NavigationTest extends TestCase
 
         // Verify Fourth Section: Products Showcase ("Our Products are Engineered for Exceptional Results")
         $response->assertSee('Our Products are Engineered for Exceptional Results');
+        $response->assertSee('Durable Print Media for Demanding Digital Applications');
         $response->assertSee('Explore All Products');
 
         // Verify Fifth Section: Made in India & Trust Stats
@@ -84,7 +88,7 @@ class NavigationTest extends TestCase
         $response->assertSee('Pan - India');
         $response->assertSee('Reach');
         $response->assertSee('make-in-india-lion.png');
-        $response->assertSee('india-reach-icon.png');
+        $response->assertSee('panindia.png');
 
         // Verify Sixth Section: Innovation Carousel ("Turning Materials Science into Application Performance")
         $response->assertSee('INNOVATION');
@@ -130,73 +134,12 @@ class NavigationTest extends TestCase
         $response->assertSee('Media Expo 2026');
         $response->assertSee('Digital Yatra 2026, Kolhapur');
         $response->assertSee('Read More');
-        $response->assertSee('news-1-tamil-nadu.jpg');
-        $response->assertSee('news-2-loupe-toray.jpg');
-        $response->assertSee('news-3-loupe-asahi.jpg');
-        $response->assertSee('news-4-digital-yatra-delhi.jpg');
-        $response->assertSee('news-5-media-expo.jpg');
-        $response->assertSee('news-6-digital-yatra-kolhapur.jpg');
-
-        // Verify Tenth Section: Call to Action (Let's Build the Future Together.)
-        $response->assertSee('Let’s Build the Future Together.');
-        $response->assertSee('Have a requirement, need help finding the right media solutions');
-        $response->assertSee('Contact Us');
-
-        // Verify Footer: Newsletter, Company, Products directory, disclaimer & branding
-        $response->assertSee('Subscribe to our newsletter for the latest trends and updates!');
-        $response->assertSee('Formerly known as TechNova Printrite Products Private Limited');
-        $response->assertSee('NovaJet | NovaLife | Saraprint');
-        $response->assertSee('NovaJet | NovaSign');
-        $response->assertSee('NovaJet | NovaCad | Saraprint');
-        $response->assertSee('NovaDom | PoliJet | Saraprint');
-        $response->assertSee('PosiJet | NovaSharp');
-        $response->assertSee('NovaStick');
-        $response->assertSee('Privacy Policy');
-        $response->assertSee('Terms of use');
-        $response->assertSee('Polyplex DigiPrint. All rights reserved.');
-        $response->assertSee('The information, product descriptions, specifications and visuals');
-
-        // Verify Seventh Section: Applications Slider ("Explore Possibilities Across Applications")
-        $response->assertSee('Explore Possibilities Across Applications');
-        $response->assertSee('Commercial Print');
-        $response->assertSee('Photo and Digital Imaging');
-        $response->assertSee('Media solutions designed for brochures');
-        $response->assertSee('Solutions designed for photo reproduction');
-        $response->assertSee('app-commercial-print');
-        $response->assertSee('app-photo-imaging');
-
-        // Verify Eighth Section: Testimonials & Customer Trust
-        $response->assertSee('Trusted by Customers.');
-        $response->assertSee('Proven in Applications.');
-        $response->assertSee('TESTIMONIALS');
-        $response->assertSee('Customer experiences highlight the consistency, quality and support');
-        $response->assertSee('We have been using NovaLife non-tear media for the last 7 years');
-        $response->assertSee('Mr. Ramanan');
-        $response->assertSee('Glo Color Lab, Coimbatore');
-        $response->assertSee('NovaJet Inkjet media is exceptional in terms of colour consistency');
-        $response->assertSee('Mr. Sam Jagdale');
-        $response->assertSee('Image Photo Shop & Digital Lab, Navi Mumbai');
-        $response->assertSee('View More');
-        $response->assertSee('testimonials-banner.png');
-        $response->assertSee('avatar-ramanan');
-        $response->assertSee('avatar-sam-jagdale');
-
-        // Verify Ninth Section: Explore News About People and Technology
-        $response->assertSee('Explore News About People and Technology');
-        $response->assertSee('Tamil Nadu Print &amp; Pack 2026', false);
-        $response->assertSee('Connecting with the Printing &amp; Packaging Industry', false);
-        $response->assertSee('Loupe India 2026 – Toray');
-        $response->assertSee('Loupe India 2026 – Asahi');
-        $response->assertSee('Digital Yatra 2026, Delhi');
-        $response->assertSee('Media Expo 2026');
-        $response->assertSee('Digital Yatra 2026, Kolhapur');
-        $response->assertSee('Read More');
-        $response->assertSee('news-1-tamil-nadu.jpg');
-        $response->assertSee('news-2-loupe-toray.jpg');
-        $response->assertSee('news-3-loupe-asahi.jpg');
-        $response->assertSee('news-4-digital-yatra-delhi.jpg');
-        $response->assertSee('news-5-media-expo.jpg');
-        $response->assertSee('news-6-digital-yatra-kolhapur.jpg');
+        $response->assertSee('news-1-tamil-nadu.png');
+        $response->assertSee('news-2-loupe-toray.png');
+        $response->assertSee('news-3-loupe-asahi.png');
+        $response->assertSee('news-4-digital-yatra-delhi.png');
+        $response->assertSee('news-5-media-expo.png');
+        $response->assertSee('news-6-digital-yatra-kolhapur.png');
 
         // Verify Tenth Section: Call to Action (Let's Build the Future Together.)
         $response->assertSee('Let’s Build the Future Together.');
@@ -240,5 +183,21 @@ class NavigationTest extends TestCase
         $response->assertSee('product-digital-labels');
         $response->assertSee('product-multi-purpose');
         $response->assertSee('product-inkjet-photo');
+    }
+
+    /**
+     * Test active link styling on navbar.
+     */
+    public function test_navbar_active_link_colors_and_hover(): void
+    {
+        // On home route, Home link should be active with color #0E4174, border bottom 1px #0E4174, and no hover color change
+        $homeResponse = $this->get('/');
+        $homeResponse->assertStatus(200);
+        $homeResponse->assertSee('text-[#0E4174] border-[#0E4174] font-medium', false);
+
+        // On about route, About Us link should be active with color #0E4174 and border bottom 1px #0E4174
+        $aboutResponse = $this->get(route('about'));
+        $aboutResponse->assertStatus(200);
+        $aboutResponse->assertSee('text-[#0E4174] border-[#0E4174] font-medium', false);
     }
 }

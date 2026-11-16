@@ -1,7 +1,7 @@
 {{--
     Company Logo Component
-    Note: You can easily add your official logo image by placing it in:
-    public/images/logo.png (or logo.svg / logo.webp)
+    Note: Official logo image is located in:
+    public/images/Polyplex Digiprint_RGB_Colour 2.png
     If the file exists, it will automatically be displayed!
     Otherwise, this crisp SVG vector fallback matching Polyplex DigiPrint is shown.
 --}}
@@ -10,8 +10,23 @@
 @php
     $customLogoPath = null;
     $candidates = $light 
-        ? ['images/logo-white.svg', 'images/logo-white.png', 'images/logo.svg', 'images/logo.png', 'images/logo.webp', 'images/logo.jpg']
-        : ['images/logo.svg', 'images/logo.png', 'images/logo.webp', 'images/logo.jpg'];
+        ? [
+            'images/logo-white.svg',
+            'images/logo-white.png',
+            'images/logo.svg',
+            'images/logo.png',
+            'images/logo.webp',
+            'images/logo.jpg',
+        ]
+        : [
+            'images/Polyplex Digiprint_RGB_Colour 2.png',
+            'images/Polyplex Digiprint_RGB_Colour 2.webp',
+            'images/Polyplex Digiprint_RGB_Colour 2.jpg',
+            'images/logo.svg',
+            'images/logo.png',
+            'images/logo.webp',
+            'images/logo.jpg',
+        ];
     foreach ($candidates as $path) {
         if (file_exists(public_path($path))) {
             $customLogoPath = asset($path);
@@ -21,7 +36,7 @@
 @endphp
 
 @if ($customLogoPath && (!$light || str_contains($customLogoPath, 'white')))
-    <img src="{{ $customLogoPath }}" alt="{{ config('app.name', 'Polyplex DigiPrint') }}" {{ $attributes->merge(['class' => 'h-10 md:h-12 w-auto object-contain']) }}>
+    <img src="{{ $customLogoPath }}" alt="{{ config('app.name') === 'Laravel' ? 'Polyplex DigiPrint' : config('app.name', 'Polyplex DigiPrint') }}" {{ $attributes->merge(['class' => 'h-10 md:h-12 w-auto object-contain']) }}>
 @else
     <div {{ $attributes->merge(['class' => 'inline-flex flex-col select-none']) }}>
         <div class="flex items-center gap-1">

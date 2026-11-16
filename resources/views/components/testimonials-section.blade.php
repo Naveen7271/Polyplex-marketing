@@ -108,7 +108,7 @@
             {{-- Third Row: Centered "View More" CTA Button --}}
             <div class="mt-10 sm:mt-12 lg:mt-14 flex justify-center">
                 <a 
-                    href="#all-products" 
+                    href="{{ route('testimonials') }}" 
                     class="inline-flex items-center justify-center py-[10px] px-[20px] rounded-xs bg-[#003570] hover:bg-[#071d36] text-white font-[500] text-[16px] transition-colors shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#0b2b4e] focus:ring-offset-2"
                 >
                     View More

@@ -91,7 +91,7 @@
                                 {{-- Text Block --}}
                                 <div class="text-center sm:text-left flex flex-col justify-center pt-1 grow">
                                     <h3
-                                        class="font-heading font-[600] text-[24px] sm:text-xl lg:text-[22px] text-[#0E4174] leading-snug mb-2 sm:mb-2.5 group-hover:text-blue-700 transition-colors">
+                                        class="font-heading font-[600] text-[24px] sm:text-xl lg:text-[22px] text-[#0E4174] leading-snug mb-2 sm:mb-2.5 ">
                                         {{ $app['title'] }}
                                     </h3>
                                     <p class="font-sans text-[16px] font-[500] sm:text-sm text-[#000000] lg:max-w-[299px]">

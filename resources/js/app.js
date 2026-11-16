@@ -450,4 +450,298 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // --- About Us Hero Split Image Expand & Hover Handler ---
+    const aboutHero = document.getElementById('about-hero-section');
+    if (aboutHero) {
+        const panelLeft = document.getElementById('about-hero-panel-left');
+        const panelRight = document.getElementById('about-hero-panel-right');
+
+        let currentActive = null;
+
+        const setSide = (side) => {
+            if (currentActive === side) return;
+            currentActive = side;
+
+            if (side === 'left') {
+                aboutHero.classList.add('is-left-expanded');
+                aboutHero.classList.remove('is-right-expanded');
+            } else if (side === 'right') {
+                aboutHero.classList.add('is-right-expanded');
+                aboutHero.classList.remove('is-left-expanded');
+            } else {
+                aboutHero.classList.remove('is-left-expanded', 'is-right-expanded');
+            }
+        };
+
+        // Smooth cursor tracking across section width
+        aboutHero.addEventListener('mousemove', (e) => {
+            const rect = aboutHero.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const ratio = mouseX / rect.width;
+
+            if (ratio < 0.5) {
+                setSide('left');
+            } else {
+                setSide('right');
+            }
+        });
+
+        // Mouse leaves section -> smoothly return to 50/50 split
+        aboutHero.addEventListener('mouseleave', () => {
+            setSide(null);
+        });
+
+        // Mobile & Tablet touch / click support
+        aboutHero.addEventListener('click', (e) => {
+            const rect = aboutHero.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const ratio = mouseX / rect.width;
+
+            if (ratio < 0.5) {
+                setSide(currentActive === 'left' ? null : 'left');
+            } else {
+                setSide(currentActive === 'right' ? null : 'right');
+            }
+        });
+
+        // Keyboard accessibility
+        if (panelLeft && panelRight) {
+            panelLeft.addEventListener('focus', () => setSide('left'));
+            panelRight.addEventListener('focus', () => setSide('right'));
+
+            aboutHero.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    setSide('left');
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    setSide('right');
+                } else if (e.key === 'Escape') {
+                    setSide(null);
+                }
+            });
+        }
+    }
+
+    // --- About Us Vision & Pillars Accordion (Expand One At A Time) ---
+    const visionAccordionButtons = document.querySelectorAll('.about-pillar-toggle');
+    visionAccordionButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const isCurrentlyExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            // Close all items first (ensuring only one is expanded at a time)
+            visionAccordionButtons.forEach((otherBtn) => {
+                otherBtn.setAttribute('aria-expanded', 'false');
+                const otherContentId = otherBtn.getAttribute('aria-controls');
+                const otherContent = otherContentId ? document.getElementById(otherContentId) : null;
+                const otherChevron = otherBtn.querySelector('.pillar-chevron');
+
+                if (otherContent) {
+                    otherContent.classList.remove('grid-rows-[1fr]');
+                    otherContent.classList.add('grid-rows-[0fr]');
+                }
+                if (otherChevron) {
+                    otherChevron.classList.remove('rotate-180');
+                }
+            });
+
+            // If the clicked item was closed, expand it now
+            if (!isCurrentlyExpanded) {
+                btn.setAttribute('aria-expanded', 'true');
+                const contentId = btn.getAttribute('aria-controls');
+                const content = contentId ? document.getElementById(contentId) : null;
+                const chevron = btn.querySelector('.pillar-chevron');
+
+                if (content) {
+                    content.classList.remove('grid-rows-[0fr]');
+                    content.classList.add('grid-rows-[1fr]');
+                }
+                if (chevron) {
+                    chevron.classList.add('rotate-180');
+                }
+            }
+        });
+    });
+
+    // --- About Us: What Sets Us Apart Carousel ---
+    const approachCarousel = document.getElementById('approach-carousel');
+    if (approachCarousel) {
+        const imageTrack = document.getElementById('approach-image-track');
+        const textWrapper = document.getElementById('approach-text-wrapper');
+        const titleEl = document.getElementById('approach-title');
+        const descriptionEl = document.getElementById('approach-description');
+        const counterEl = document.getElementById('approach-counter');
+        const prevBtn = document.getElementById('approach-prev-btn');
+        const nextBtn = document.getElementById('approach-next-btn');
+        const dataItems = approachCarousel.querySelectorAll('.approach-data-item');
+
+        const slidesData = Array.from(dataItems).map((item) => ({
+            title: item.getAttribute('data-title'),
+            description: item.getAttribute('data-description'),
+        }));
+
+        const totalSlides = slidesData.length;
+        let currentSlide = 0;
+        let isTransitioning = false;
+
+        const updateButtons = (idx) => {
+            if (prevBtn) {
+                if (idx === 0) {
+                    prevBtn.classList.add('opacity-30', 'cursor-not-allowed');
+                    prevBtn.setAttribute('disabled', 'disabled');
+                } else {
+                    prevBtn.classList.remove('opacity-30', 'cursor-not-allowed');
+                    prevBtn.removeAttribute('disabled');
+                }
+            }
+            if (nextBtn) {
+                if (idx === totalSlides - 1) {
+                    nextBtn.classList.add('opacity-30', 'cursor-not-allowed');
+                    nextBtn.setAttribute('disabled', 'disabled');
+                } else {
+                    nextBtn.classList.remove('opacity-30', 'cursor-not-allowed');
+                    nextBtn.removeAttribute('disabled');
+                }
+            }
+        };
+
+        const goToSlide = (newIndex) => {
+            if (newIndex < 0 || newIndex >= totalSlides || newIndex === currentSlide || isTransitioning) {
+                return;
+            }
+
+            isTransitioning = true;
+            currentSlide = newIndex;
+
+            // 1. Image track changes from right to left direction
+            if (imageTrack) {
+                imageTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            // Update button states
+            updateButtons(currentSlide);
+
+            // 2. Right side text animates from bottom to top
+            if (textWrapper && titleEl && descriptionEl) {
+                // Outgoing: fade & drift upward
+                textWrapper.style.transition = 'transform 180ms ease-in, opacity 180ms ease-in';
+                textWrapper.style.transform = 'translateY(-20px)';
+                textWrapper.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Update content
+                    titleEl.textContent = slidesData[currentSlide].title;
+                    descriptionEl.textContent = slidesData[currentSlide].description;
+                    if (counterEl) {
+                        counterEl.textContent = `${currentSlide + 1}/${totalSlides}`;
+                    }
+
+                    // Prepare incoming from bottom
+                    textWrapper.style.transition = 'none';
+                    textWrapper.style.transform = 'translateY(28px)';
+                    textWrapper.style.opacity = '0';
+
+                    // Force DOM reflow
+                    void textWrapper.offsetHeight;
+
+                    // Animate up to natural position (bottom-to-top entrance)
+                    textWrapper.style.transition = 'transform 360ms cubic-bezier(0.16, 1, 0.3, 1), opacity 360ms ease-out';
+                    textWrapper.style.transform = 'translateY(0)';
+                    textWrapper.style.opacity = '1';
+
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 380);
+                }, 190);
+            } else {
+                if (counterEl) {
+                    counterEl.textContent = `${currentSlide + 1}/${totalSlides}`;
+                }
+                isTransitioning = false;
+            }
+        };
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            });
+        }
+
+        // Keyboard arrow navigation
+        approachCarousel.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        // Touch swipe support (swipe left -> next, swipe right -> prev)
+        let touchStartX = 0;
+        approachCarousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        approachCarousel.addEventListener('touchend', (e) => {
+            const diffX = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diffX) > 40) {
+                if (diffX > 0) {
+                    goToSlide(currentSlide + 1);
+                } else {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+        }, { passive: true });
+
+        // Initial button states
+        updateButtons(0);
+    }
+
+    // --- About Us: Geographic Distribution World / India Toggle ---
+    const geoWorldBtn = document.getElementById('geo-toggle-world');
+    const geoIndiaBtn = document.getElementById('geo-toggle-india');
+    const geoWorldView = document.getElementById('geo-view-world');
+    const geoIndiaView = document.getElementById('geo-view-india');
+
+    if (geoWorldBtn && geoIndiaBtn && geoWorldView && geoIndiaView) {
+        const setGeoView = (view) => {
+            if (view === 'world') {
+                geoWorldBtn.classList.add('bg-[#0e4175]', 'text-white', 'shadow-xs');
+                geoWorldBtn.classList.remove('bg-white', 'text-slate-800', 'border', 'border-slate-300');
+                geoWorldBtn.setAttribute('aria-selected', 'true');
+
+                geoIndiaBtn.classList.add('bg-white', 'text-slate-800', 'border', 'border-slate-300');
+                geoIndiaBtn.classList.remove('bg-[#0e4175]', 'text-white', 'shadow-xs');
+                geoIndiaBtn.setAttribute('aria-selected', 'false');
+
+                geoWorldView.classList.remove('hidden');
+                geoIndiaView.classList.add('hidden');
+            } else {
+                geoIndiaBtn.classList.add('bg-[#0e4175]', 'text-white', 'shadow-xs');
+                geoIndiaBtn.classList.remove('bg-white', 'text-slate-800', 'border', 'border-slate-300');
+                geoIndiaBtn.setAttribute('aria-selected', 'true');
+
+                geoWorldBtn.classList.add('bg-white', 'text-slate-800', 'border', 'border-slate-300');
+                geoWorldBtn.classList.remove('bg-[#0e4175]', 'text-white', 'shadow-xs');
+                geoWorldBtn.setAttribute('aria-selected', 'false');
+
+                geoIndiaView.classList.remove('hidden');
+                geoWorldView.classList.add('hidden');
+            }
+        };
+
+        geoWorldBtn.addEventListener('click', () => setGeoView('world'));
+        geoIndiaBtn.addEventListener('click', () => setGeoView('india'));
+    }
 });

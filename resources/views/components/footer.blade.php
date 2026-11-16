@@ -81,7 +81,7 @@
                 </h3>
                 <ul class="space-y-2.5 font-sans text-xs sm:text-sm text-slate-300">
                     <li><a href="#top" class="hover:text-white transition-colors">Home</a></li>
-                    <li><a href="#why-us" class="hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                     <li><a href="#featured-products" class="hover:text-white transition-colors">Products</a></li>
                     <li><a href="#applications" class="hover:text-white transition-colors">Industries</a></li>
                     <li><a href="#news" class="hover:text-white transition-colors">Blog &amp; News</a></li>

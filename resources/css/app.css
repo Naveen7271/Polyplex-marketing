@@ -19,3 +19,82 @@
         font-family: var(--font-heading);
     }
 }
+
+/* About Us Hero Section - Smooth Split-Image Expand Animation */
+.about-hero-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+.about-hero-panel {
+    position: relative;
+    height: 100%;
+    flex: 1 1 50%;
+    width: 50%;
+    overflow: hidden;
+    transition: flex 750ms cubic-bezier(0.25, 1, 0.5, 1), width 750ms cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+}
+
+/* Left Expanded State */
+.about-hero-container.is-left-expanded .about-hero-panel-left {
+    flex: 1 0 100%;
+    width: 100%;
+}
+.about-hero-container.is-left-expanded .about-hero-panel-right {
+    flex: 0 0 0%;
+    width: 0%;
+}
+
+/* Right Expanded State */
+.about-hero-container.is-right-expanded .about-hero-panel-right {
+    flex: 1 0 100%;
+    width: 100%;
+}
+.about-hero-container.is-right-expanded .about-hero-panel-left {
+    flex: 0 0 0%;
+    width: 0%;
+}
+
+/* Common active UI refinements */
+.about-hero-container.is-left-expanded .about-hero-divider,
+.about-hero-container.is-right-expanded .about-hero-divider {
+    opacity: 0;
+}
+
+.about-hero-container.is-left-expanded .about-hero-center-pill,
+.about-hero-container.is-right-expanded .about-hero-center-pill {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+}
+
+.about-hero-container.is-left-expanded .about-hero-panel-right .about-hero-hint {
+    opacity: 0;
+}
+
+.about-hero-container.is-right-expanded .about-hero-panel-left .about-hero-hint {
+    opacity: 0;
+}
+
+/* Pure CSS :has() Fallback */
+@supports (selector(:has(*))) {
+    .about-hero-container:not(.is-right-expanded):has(.about-hero-panel-left:hover) .about-hero-panel-left {
+        flex: 1 0 100%;
+        width: 100%;
+    }
+    .about-hero-container:not(.is-right-expanded):has(.about-hero-panel-left:hover) .about-hero-panel-right {
+        flex: 0 0 0%;
+        width: 0%;
+    }
+    .about-hero-container:not(.is-left-expanded):has(.about-hero-panel-right:hover) .about-hero-panel-right {
+        flex: 1 0 100%;
+        width: 100%;
+    }
+    .about-hero-container:not(.is-left-expanded):has(.about-hero-panel-right:hover) .about-hero-panel-left {
+        flex: 0 0 0%;
+        width: 0%;
+    }
+}
+

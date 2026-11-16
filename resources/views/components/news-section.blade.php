@@ -5,7 +5,7 @@
             'date' => 'OCT 26',
             'title' => 'Tamil Nadu Print & Pack 2026',
             'excerpt' => 'Connecting with the Printing & Packaging Industry',
-            'image' => 'images/news-1-tamil-nadu.jpg',
+            'image' => 'images/news-1-tamil-nadu.png',
             'alt' => 'Tamil Nadu Print & Pack 2026 exhibition booth crowd',
         ],
         [
@@ -13,7 +13,7 @@
             'date' => 'OCT 26',
             'title' => 'Loupe India 2026 – Toray',
             'excerpt' => 'Connecting with the Printing Industry',
-            'image' => 'images/news-2-loupe-toray.jpg',
+            'image' => 'images/news-2-loupe-toray.png',
             'alt' => 'Loupe India 2026 Toray trade show floor',
         ],
         [
@@ -21,7 +21,7 @@
             'date' => 'OCT 26',
             'title' => 'Loupe India 2026 – Asahi',
             'excerpt' => 'Connecting with the Printing Industry',
-            'image' => 'images/news-3-loupe-asahi.jpg',
+            'image' => 'images/news-3-loupe-asahi.png',
             'alt' => 'Loupe India 2026 Asahi discussion booth',
         ],
         [
@@ -29,7 +29,7 @@
             'date' => 'SEPT 26',
             'title' => 'Digital Yatra 2026, Delhi',
             'excerpt' => 'Bringing Digital Printing Professionals Together',
-            'image' => 'images/news-4-digital-yatra-delhi.jpg',
+            'image' => 'images/news-4-digital-yatra-delhi.png',
             'alt' => 'Digital Yatra 2026 Delhi presenter with microphone',
         ],
         [
@@ -37,7 +37,7 @@
             'date' => 'SEPT 26',
             'title' => 'Media Expo 2026',
             'excerpt' => 'Connecting with the Media & Printing Industry',
-            'image' => 'images/news-5-media-expo.jpg',
+            'image' => 'images/news-5-media-expo.png',
             'alt' => 'Media Expo 2026 attendee crowd',
         ],
         [
@@ -45,7 +45,7 @@
             'date' => 'AUG 26',
             'title' => 'Digital Yatra 2026, Kolhapur',
             'excerpt' => 'TechNova Imaging Systems organised Digital Yatra 2026 in Kolhapur to highlight innovations.',
-            'image' => 'images/news-6-digital-yatra-kolhapur.jpg',
+            'image' => 'images/news-6-digital-yatra-kolhapur.png',
             'alt' => 'Digital Yatra 2026 Kolhapur Nikon pavilion display',
         ],
     ];

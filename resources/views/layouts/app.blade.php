@@ -77,7 +77,7 @@
                         Quick Links
                     </h3>
                     <ul class="space-y-2.5 text-sm">
-                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="#industries" class="hover:text-white transition-colors">Industries</a></li>
                         <li><a href="#blog" class="hover:text-white transition-colors">Blog &amp; News</a></li>
                         <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>

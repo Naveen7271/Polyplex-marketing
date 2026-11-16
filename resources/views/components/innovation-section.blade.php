@@ -103,7 +103,7 @@
 
                         {{-- Slide Content Overlay --}}
                         <div
-                            class="absolute inset-0 pt-[165px] pr-[105px] sm:p-10 lg:pt-[165px] pr-[105px] flex flex-col pointer-events-none z-10">
+                            class="absolute inset-0 pt-[165px] pr-[105px] sm:p-[105px] lg:pt-[165px] pr-[105px] flex flex-col pointer-events-none z-10">
 
                             {{-- Counter: e.g. 1 / 4 --}}
                             <div class="flex items-center gap-2 mb-2 sm:mb-3">
