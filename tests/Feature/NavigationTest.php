@@ -199,5 +199,40 @@ class NavigationTest extends TestCase
         $aboutResponse = $this->get(route('about'));
         $aboutResponse->assertStatus(200);
         $aboutResponse->assertSee('text-[#0E4174] border-[#0E4174] font-medium', false);
+
+        // On products route, Products link should be active with color #0E4174 and border bottom 1px #0E4174
+        $productsResponse = $this->get(route('products'));
+        $productsResponse->assertStatus(200);
+        $productsResponse->assertSee('text-[#0E4174] border-[#0E4174] font-medium', false);
+    }
+
+    /**
+     * Test that navbar contains valid working links to products page and all individual product pages.
+     */
+    public function test_navbar_contains_valid_product_page_and_products_links(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+
+        // Verify products page link on "Products" and "View All Products"
+        $response->assertSee(route('products'), false);
+
+        // Verify all 9 individual product URLs in navbar
+        $expectedProductSlugs = [
+            'non-tear-media',
+            'gloss-art-paper-media',
+            'inkjet-photo-media',
+            'digital-labels',
+            'multi-purpose-labels',
+            'digital-wide-format-media',
+            'reprographic-media',
+            'polyester-offset-plates',
+            'laser-and-inkjet-positive-films',
+        ];
+
+        foreach ($expectedProductSlugs as $slug) {
+            $response->assertSee(route('products.show', $slug), false);
+        }
     }
 }

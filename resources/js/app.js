@@ -335,6 +335,117 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => updateCarousel(0), 50);
     }
 
+    // --- Product Gallery Carousel ---
+    const galleryContainer = document.getElementById('product-gallery-carousel-container');
+    const galleryTrack = document.getElementById('product-gallery-carousel-track');
+    const gallerySlides = document.querySelectorAll('.product-gallery-slide-wrapper');
+    const galleryPrevBtn = document.getElementById('product-gallery-prev-btn');
+    const galleryNextBtn = document.getElementById('product-gallery-next-btn');
+    const galleryDots = document.querySelectorAll('.product-gallery-dot');
+
+    if (galleryContainer && galleryTrack && gallerySlides.length > 0) {
+        let currentGalleryIndex = 0;
+        const totalGallerySlides = gallerySlides.length;
+
+        const updateGalleryCarousel = (newIndex) => {
+            currentGalleryIndex = Math.max(0, Math.min(totalGallerySlides - 1, newIndex));
+
+            const activeSlide = gallerySlides[currentGalleryIndex];
+            const containerWidth = galleryContainer.offsetWidth;
+            const slideLeft = activeSlide.offsetLeft;
+            const slideWidth = activeSlide.offsetWidth;
+
+            // Center the active slide in the middle of the container
+            const targetX = (containerWidth / 2) - (slideLeft + (slideWidth / 2));
+            galleryTrack.style.transform = `translateX(${targetX}px)`;
+
+            // Update slide scaling and opacity
+            gallerySlides.forEach((slide, idx) => {
+                const card = slide.querySelector('.product-gallery-slide-card');
+                if (!card) return;
+
+                if (idx === currentGalleryIndex) {
+                    card.classList.remove('scale-[0.92]', 'opacity-80', 'z-10', 'cursor-pointer');
+                    card.classList.add('scale-100', 'opacity-100', 'z-20', 'shadow-2xl');
+                } else {
+                    card.classList.remove('scale-100', 'opacity-100', 'z-20', 'shadow-2xl');
+                    card.classList.add('scale-[0.92]', 'opacity-80', 'z-10', 'cursor-pointer');
+                }
+            });
+
+            // Update dots
+            galleryDots.forEach((dot, idx) => {
+                if (idx === currentGalleryIndex) {
+                    dot.classList.remove('bg-slate-300', 'hover:bg-slate-400');
+                    dot.classList.add('bg-slate-900');
+                } else {
+                    dot.classList.remove('bg-slate-900');
+                    dot.classList.add('bg-slate-300', 'hover:bg-slate-400');
+                }
+            });
+
+            // Update prev / next button states
+            if (galleryPrevBtn) {
+                galleryPrevBtn.disabled = currentGalleryIndex === 0;
+            }
+            if (galleryNextBtn) {
+                galleryNextBtn.disabled = currentGalleryIndex === totalGallerySlides - 1;
+            }
+        };
+
+        // Navigation buttons
+        if (galleryPrevBtn) {
+            galleryPrevBtn.addEventListener('click', () => updateGalleryCarousel(currentGalleryIndex - 1));
+        }
+        if (galleryNextBtn) {
+            galleryNextBtn.addEventListener('click', () => updateGalleryCarousel(currentGalleryIndex + 1));
+        }
+
+        // Dot navigation
+        galleryDots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const idx = parseInt(dot.getAttribute('data-index'), 10);
+                if (!isNaN(idx)) updateGalleryCarousel(idx);
+            });
+        });
+
+        // Click peeked slide to focus it
+        gallerySlides.forEach((slide, idx) => {
+            slide.addEventListener('click', () => {
+                if (idx !== currentGalleryIndex) {
+                    updateGalleryCarousel(idx);
+                }
+            });
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        galleryContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        galleryContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentGalleryIndex < totalGallerySlides - 1) {
+                    updateGalleryCarousel(currentGalleryIndex + 1); // Swipe left -> Next
+                } else if (diff < 0 && currentGalleryIndex > 0) {
+                    updateGalleryCarousel(currentGalleryIndex - 1); // Swipe right -> Prev
+                }
+            }
+        }, { passive: true });
+
+        // Recalculate on window resize & initial mount
+        window.addEventListener('resize', () => updateGalleryCarousel(currentGalleryIndex), { passive: true });
+        window.addEventListener('load', () => updateGalleryCarousel(currentGalleryIndex));
+
+        // Initial setup
+        setTimeout(() => updateGalleryCarousel(0), 50);
+    }
+
     // --- Applications Slider ---
     const appsContainer = document.getElementById('apps-slider-container');
     const appsTrack = document.getElementById('apps-slider-track');

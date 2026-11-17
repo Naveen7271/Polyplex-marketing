@@ -82,7 +82,7 @@
                 <ul class="space-y-2.5 font-sans text-xs sm:text-sm text-slate-300">
                     <li><a href="#top" class="hover:text-white transition-colors">Home</a></li>
                     <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="#featured-products" class="hover:text-white transition-colors">Products</a></li>
+                    <li><a href="{{ route('products') }}" class="hover:text-white transition-colors">Products</a></li>
                     <li><a href="#applications" class="hover:text-white transition-colors">Industries</a></li>
                     <li><a href="#news" class="hover:text-white transition-colors">Blog &amp; News</a></li>
                     <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>
@@ -95,29 +95,29 @@
             {{-- Column 3: Products Directory (lg:col-span-5) --}}
             <div class="lg:col-span-5">
                 <h3 class="font-heading font-bold text-white text-base sm:text-lg mb-4">
-                    Products
+                    <a href="{{ route('products') }}" class="hover:text-blue-300 transition-colors">Products</a>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 font-sans">
                     {{-- Sub-column 1 --}}
                     <div class="space-y-3.5">
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Non-Tear Media</p>
+                            <a href="{{ route('products.show', 'non-tear-media') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Non-Tear Media</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaJet | NovaLife | Saraprint</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Gloss Art Paper Media</p>
+                            <a href="{{ route('products.show', 'gloss-art-paper-media') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Gloss Art Paper Media</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaLife</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Inkjet Photo Media</p>
+                            <a href="{{ route('products.show', 'inkjet-photo-media') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Inkjet Photo Media</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaJet</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Digital Labels</p>
+                            <a href="{{ route('products.show', 'digital-labels') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Digital Labels</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaStick</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Multi-Purpose Labels</p>
+                            <a href="{{ route('products.show', 'multi-purpose-labels') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Multi-Purpose Labels</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaJet</p>
                         </div>
                     </div>
@@ -125,19 +125,19 @@
                     {{-- Sub-column 2 --}}
                     <div class="space-y-3.5">
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Digital Wide-Format Media</p>
+                            <a href="{{ route('products.show', 'digital-wide-format-media') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Digital Wide-Format Media</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaJet | NovaSign</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Reprographic Media</p>
+                            <a href="{{ route('products.show', 'reprographic-media') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Reprographic Media</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaJet | NovaCad | Saraprint</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Polyester Offset Plates</p>
+                            <a href="{{ route('products.show', 'polyester-offset-plates') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Polyester Offset Plates</a>
                             <p class="text-[11px] text-slate-400 mt-1">NovaDom | PoliJet | Saraprint</p>
                         </div>
                         <div>
-                            <p class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2">Laser &amp; Inkjet Positive Films</p>
+                            <a href="{{ route('products.show', 'laser-and-inkjet-positive-films') }}" class="font-semibold text-white text-xs underline decoration-slate-600 underline-offset-2 hover:text-blue-300 transition-colors">Laser &amp; Inkjet Positive Films</a>
                             <p class="text-[11px] text-slate-400 mt-1">PosiJet | NovaSharp</p>
                         </div>
                     </div>

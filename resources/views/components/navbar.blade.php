@@ -1,18 +1,30 @@
 @php
     $productColumn1 = [
-        ['title' => 'Non-Tear Media', 'url' => '#non-tear-media'],
-        ['title' => 'Gloss Art Paper Media', 'url' => '#gloss-art-paper'],
-        ['title' => 'Inkjet Photo Media', 'url' => '#inkjet-photo-media'],
-        ['title' => 'Digital Labels', 'url' => '#digital-labels'],
+        ['title' => 'Non-Tear Media', 'url' => route('products.show', 'non-tear-media')],
+        ['title' => 'Gloss Art Paper Media', 'url' => route('products.show', 'gloss-art-paper-media')],
+        ['title' => 'Inkjet Photo Media', 'url' => route('products.show', 'inkjet-photo-media')],
+        ['title' => 'Digital Labels', 'url' => route('products.show', 'digital-labels')],
     ];
 
     $productColumn2 = [
-        ['title' => 'Multi-Purpose Labels', 'url' => '#multi-purpose-labels'],
-        ['title' => 'Digital Wide-Format Media', 'url' => '#digital-wide-format'],
-        ['title' => 'Reprographic Media', 'url' => '#reprographic-media'],
-        ['title' => 'Polyester Offset Plate', 'url' => '#polyester-offset-plate'],
-        ['title' => 'Laser & Inkjet Offset Print', 'url' => '#laser-inkjet-print'],
+        ['title' => 'Multi-Purpose Labels', 'url' => route('products.show', 'multi-purpose-labels')],
+        ['title' => 'Digital Wide-Format Media', 'url' => route('products.show', 'digital-wide-format-media')],
+        ['title' => 'Reprographic Media', 'url' => route('products.show', 'reprographic-media')],
+        ['title' => 'Polyester Offset Plate', 'url' => route('products.show', 'polyester-offset-plates')],
+        ['title' => 'Laser & Inkjet Offset Print', 'url' => route('products.show', 'laser-and-inkjet-positive-films')],
     ];
+
+    $isProductsActive = request()->routeIs('products*')
+        || request()->is('products*')
+        || request()->is('non-tear-media*')
+        || request()->is('gloss-art-paper*')
+        || request()->is('inkjet-photo*')
+        || request()->is('digital-labels*')
+        || request()->is('multi-purpose-label*')
+        || request()->is('digital-wide-format*')
+        || request()->is('reprographic*')
+        || request()->is('polyester-offset*')
+        || request()->is('laser*positive-films*');
 @endphp
 
 <header class="sticky top-0 z-40 w-full bg-white border-b border-slate-200/80 shadow-xs">
@@ -43,12 +55,16 @@
                 </a>
 
                 {{-- Products Dropdown Menu --}}
-                <div class="relative group" id="products-menu-container">
+                <div class="relative group flex items-center" id="products-menu-container">
+                    <a href="{{ route('products') }}"
+                        class="py-2 border-b transition-colors text-[16px] {{ $isProductsActive ? 'text-[#0E4174] border-[#0E4174] font-medium' : 'text-[#000000] border-transparent hover:text-blue-600' }}"
+                        {!! $isProductsActive ? 'aria-current="page"' : '' !!}>
+                        Products
+                    </a>
                     <button type="button" id="products-menu-button"
-                        class="inline-flex items-center gap-1.5 py-2 hover:text-blue-600 transition-colors focus:outline-hidden text-[15px]"
-                        aria-expanded="false" aria-haspopup="true">
-                        <span>Products</span>
-                        <svg class="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-600 transition-transform duration-200 group-hover:rotate-180"
+                        class="py-2 pl-1 pr-1 text-slate-500 hover:text-blue-600 transition-colors focus:outline-hidden"
+                        aria-expanded="false" aria-haspopup="true" aria-label="Toggle products dropdown menu">
+                        <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -63,7 +79,7 @@
                             class="bg-white rounded-xl shadow-xl border border-slate-200/90 p-6 grid grid-cols-2 gap-x-8 gap-y-3.5">
                             {{-- Column 1 --}}
                             <div class="space-y-3.5">
-                                <a href="#products"
+                                <a href="{{ route('products') }}"
                                     class="block text-[14px] font-semibold text-[#1652f0] hover:text-blue-800 transition-colors hover:translate-x-0.5 duration-150"
                                     role="menuitem">
                                     View All Products
@@ -165,18 +181,23 @@
 
             {{-- Mobile Products Accordion --}}
             <div>
-                <button type="button" id="mobile-products-toggle"
-                    class="w-full flex items-center justify-between px-3 py-2 rounded-md text-slate-800 hover:bg-slate-50 hover:text-blue-600 text-left">
-                    <span>Products</span>
-                    <svg id="mobile-products-chevron" class="w-4 h-4 text-slate-500 transition-transform duration-200"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </button>
+                <div class="flex items-center justify-between px-3 py-2 rounded-md {{ $isProductsActive ? 'text-[#0E4174] bg-blue-50/50 font-semibold' : 'text-slate-800 hover:bg-slate-50' }}">
+                    <a href="{{ route('products') }}" class="flex-1 hover:text-blue-600">
+                        Products
+                    </a>
+                    <button type="button" id="mobile-products-toggle"
+                        class="p-1 text-slate-500 hover:text-blue-600 focus:outline-hidden"
+                        aria-label="Toggle products accordion">
+                        <svg id="mobile-products-chevron" class="w-4 h-4 text-slate-500 transition-transform duration-200"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                </div>
 
                 <div id="mobile-products-menu" class="hidden pl-4 pr-2 py-2 space-y-2 bg-slate-50/70 rounded-lg mt-1">
-                    <a href="#products"
+                    <a href="{{ route('products') }}"
                         class="block py-1.5 px-3 text-sm font-semibold text-[#1652f0] hover:text-blue-800">
                         View All Products
                     </a>
