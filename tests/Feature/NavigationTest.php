@@ -235,4 +235,26 @@ class NavigationTest extends TestCase
             $response->assertSee(route('products.show', $slug), false);
         }
     }
+
+    /**
+     * Test that the products dropdown displays accordion chevrons and expandable sub-brands.
+     */
+    public function test_products_dropdown_renders_accordion_chevrons_and_sub_brands(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+
+        // Verify accordion chevrons are present
+        $response->assertSee('product-category-chevron', false);
+        $response->assertSee('product-category-toggle', false);
+
+        // Verify sub-brands under Non-Tear Media
+        $response->assertSee('NovaJet');
+        $response->assertSee('NovaLife');
+        $response->assertSee('Saraprint');
+
+        // Verify NovaJet links to the novajet product page
+        $response->assertSee(route('products.show', 'novajet'));
+    }
 }

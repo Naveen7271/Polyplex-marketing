@@ -71,6 +71,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Products Dropdown Category Accordions (Desktop & Mobile) ---
+    const categoryAccordions = document.querySelectorAll('.product-category-accordion');
+
+    categoryAccordions.forEach((item) => {
+        const toggleBtn = item.querySelector('.product-category-toggle');
+        const brandsContainer = item.querySelector('.product-category-brands');
+        const chevron = item.querySelector('.product-category-chevron');
+
+        if (toggleBtn && brandsContainer && chevron) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+
+                if (isExpanded) {
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    brandsContainer.classList.add('hidden');
+                    chevron.classList.remove('rotate-180');
+                } else {
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                    brandsContainer.classList.remove('hidden');
+                    chevron.classList.add('rotate-180');
+                }
+            });
+        }
+    });
+
     // --- Search Modal Toggle ---
     const openSearchBtn = document.getElementById('open-search-btn');
     const closeSearchBtn = document.getElementById('close-search-btn');

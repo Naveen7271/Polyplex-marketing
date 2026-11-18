@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,7 +27,72 @@ Route::get('/product', function () {
     return redirect()->route('products');
 });
 
+Route::get('/industries', function () {
+    return view('industries');
+})->name('industries');
+
+Route::get('/industry', function () {
+    return redirect()->route('industries');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::get('/contact-us', function () {
+    return redirect()->route('contact');
+});
+
+Route::post('/contact', function (Request $request) {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'nullable|string|max:50',
+        'message' => 'required|string|max:5000',
+    ]);
+
+    return back()->with('success', 'Thank you for reaching out! Your message has been sent successfully. Our team will get back to you shortly.');
+})->name('contact.submit');
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
+Route::get('/privacy', function () {
+    return redirect()->route('privacy-policy');
+})->name('privacy');
+
+Route::get('/terms-of-use', function () {
+    return view('terms-of-use');
+})->name('terms-of-use');
+
+Route::get('/terms', function () {
+    return redirect()->route('terms-of-use');
+})->name('terms');
+
 Route::get('/products/{slug}', function (string $slug) {
+    $brandSlugs = [
+        'novajet',
+        'novalife',
+        'saraprint',
+        'novacad',
+        'novadom',
+        'novasharp',
+        'novasign',
+        'novastick',
+        'polijet',
+        'posijet',
+        'novatrace',
+    ];
+
+    if (strtolower($slug) === 'novacard') {
+        return redirect()->route('products.novacad');
+    }
+
+    if (in_array(strtolower($slug), $brandSlugs, true)) {
+        return view('products.brand', ['slug' => strtolower($slug)]);
+    }
+
     return view('products.show', ['slug' => $slug]);
 })->name('products.show');
 
@@ -98,3 +164,52 @@ Route::get('/laser-and-inkjet-positive-films', function () {
 Route::get('/laser-inkjet-positive-films', function () {
     return redirect()->route('products.laser-and-inkjet-positive-films');
 });
+
+// Direct alias routes for brand and product items
+Route::get('/novajet', function () {
+    return view('products.brand', ['slug' => 'novajet']);
+})->name('products.novajet');
+
+Route::get('/novalife', function () {
+    return view('products.brand', ['slug' => 'novalife']);
+})->name('products.novalife');
+
+Route::get('/saraprint', function () {
+    return view('products.brand', ['slug' => 'saraprint']);
+})->name('products.saraprint');
+
+Route::get('/novacad', function () {
+    return view('products.brand', ['slug' => 'novacad']);
+})->name('products.novacad');
+
+Route::get('/novacard', function () {
+    return redirect()->route('products.novacad');
+});
+
+Route::get('/novadom', function () {
+    return view('products.brand', ['slug' => 'novadom']);
+})->name('products.novadom');
+
+Route::get('/novasharp', function () {
+    return view('products.brand', ['slug' => 'novasharp']);
+})->name('products.novasharp');
+
+Route::get('/novasign', function () {
+    return view('products.brand', ['slug' => 'novasign']);
+})->name('products.novasign');
+
+Route::get('/novastick', function () {
+    return view('products.brand', ['slug' => 'novastick']);
+})->name('products.novastick');
+
+Route::get('/polijet', function () {
+    return view('products.brand', ['slug' => 'polijet']);
+})->name('products.polijet');
+
+Route::get('/posijet', function () {
+    return view('products.brand', ['slug' => 'posijet']);
+})->name('products.posijet');
+
+Route::get('/novatrace', function () {
+    return view('products.brand', ['slug' => 'novatrace']);
+})->name('products.novatrace');

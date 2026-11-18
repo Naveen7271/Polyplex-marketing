@@ -14,8 +14,11 @@ Pass custom titles, images, circle text, paragraphs, or brochure links via props
     'productTitle' => 'Non-Tear Media',
     'bannerImage' => 'images/products/banner-non-tear.jpg',
     'bannerAlt' => 'Polyplex DigiPrint Industrial Print Substrates',
+    'badgeLogo' => null,
+    'badgeLogoAlt' => null,
     'badgeHeading' => 'Durability that goes Beyond Paper',
     'badgeSubtitle' => 'Durable Print Media for Demanding Digital Applications',
+    'badgeDescription' => null,
     'paragraphs' => [
         'Non-Tear Films are designed for applications where printed materials need to withstand regular handling while maintaining their appearances and useability.',
         'Their durability and non-tear characteristics make them suitable for photo products, personal memories and commercial print applications where the finished material needs to offer a combination of print quality and long-term usability.',
@@ -72,69 +75,89 @@ Pass custom titles, images, circle text, paragraphs, or brochure links via props
                         </svg>
 
                         {{-- Circle Narrative Content --}}
-                        <div class="relative z-10 flex flex-col items-center justify-center px-2">
-                            <h2
-                                class="font-heading font-[600] text-[24px] text-[#0E4174] sm:text-xl md:text-[22px] lg:text-[23px] leading-snug text-[#0E4174] tracking-tight max-w-[260px]">
-                                @if (is_array($badgeHeading))
-                                    @foreach ($badgeHeading as $line)
-                                        <span class="block">{{ $line }}</span>
-                                    @endforeach
-                                @elseif (str_contains($badgeHeading, "\n"))
-                                    @foreach (explode("\n", $badgeHeading) as $line)
-                                        <span class="block">{{ trim($line) }}</span>
-                                    @endforeach
-                                @elseif (str_contains($badgeHeading, '<br>'))
-                                    {!! $badgeHeading !!}
-                                @elseif (str_contains($badgeHeading, 'Beyond Paper'))
-                                    <span>{{ str_replace('Beyond Paper', '', $badgeHeading) }}</span>
-                                    <span class="block">Beyond Paper</span>
-                                @elseif (str_contains($badgeHeading, 'Colour to Life'))
-                                    <span>{{ str_replace('Colour to Life', '', $badgeHeading) }}</span>
-                                    <span class="block">Colour to Life</span>
-                                @elseif (str_contains($badgeHeading, 'Closer to Reality'))
-                                    <span>{{ str_replace('Closer to Reality', '', $badgeHeading) }}</span>
-                                    <span class="block">Closer to Reality</span>
-                                @elseif (str_contains($badgeHeading, 'Meaningful Product'))
-                                    <span>{{ str_replace('Meaningful Product Communication', '', $badgeHeading) }}</span>
-                                    <span class="block">Meaningful Product</span>
-                                    <span class="block">Communication</span>
-                                @else
-                                    {{ $badgeHeading }}
-                                @endif
-                            </h2>
+                        @if (!empty($badgeLogo))
+                            <div class="relative z-10 flex flex-col items-center justify-center px-4 max-w-[280px]">
+                                {{-- Brand Logo --}}
+                                <img src="{{ asset($badgeLogo) }}" alt="{{ $badgeLogoAlt ?? $productTitle }}"
+                                    class="max-h-11 sm:max-h-12 w-auto object-contain mb-2 sm:mb-2.5" />
 
-                            @if (!empty($badgeSubtitle))
-                                <p
-                                    class="font-sans text-[16px] font-[500] sm:text-[13px] md:text-[13.5px] leading-snug sm:leading-relaxed text-[#1E1E1E] font-medium tracking-normal max-w-[240px] mt-2 sm:mt-3">
-                                    @if (is_array($badgeSubtitle))
-                                        @foreach ($badgeSubtitle as $line)
+                                @if (!empty($badgeSubtitle))
+                                    <h3 class="font-heading font-semibold text-xs sm:text-[13px] md:text-[13.5px] text-[#0E4174] tracking-tight mb-2 sm:mb-2.5 text-center">
+                                        {{ $badgeSubtitle }}
+                                    </h3>
+                                @endif
+
+                                @if (!empty($badgeDescription))
+                                    <p class="font-sans text-xs sm:text-[12px] md:text-[12.5px] leading-relaxed text-[#1E1E1E] font-medium text-center">
+                                        {{ $badgeDescription }}
+                                    </p>
+                                @endif
+                            </div>
+                        @else
+                            <div class="relative z-10 flex flex-col items-center justify-center px-2">
+                                <h2
+                                    class="font-heading font-[600] text-[24px] text-[#0E4174] sm:text-xl md:text-[22px] lg:text-[23px] leading-snug text-[#0E4174] tracking-tight max-w-[260px]">
+                                    @if (is_array($badgeHeading))
+                                        @foreach ($badgeHeading as $line)
                                             <span class="block">{{ $line }}</span>
                                         @endforeach
-                                    @elseif (str_contains($badgeSubtitle, "\n"))
-                                        @foreach (explode("\n", $badgeSubtitle) as $line)
+                                    @elseif (str_contains($badgeHeading, "\n"))
+                                        @foreach (explode("\n", $badgeHeading) as $line)
                                             <span class="block">{{ trim($line) }}</span>
                                         @endforeach
-                                    @elseif (str_contains($badgeSubtitle, '<br>'))
-                                        {!! $badgeSubtitle !!}
-                                    @elseif (str_contains($badgeSubtitle, 'Demanding Digital Applications'))
-                                        <span>{{ str_replace('Demanding Digital Applications', '', $badgeSubtitle) }}</span>
-                                        <span class="block">Demanding Digital Applications</span>
-                                    @elseif (str_contains($badgeSubtitle, 'Commercial & Photo Reproduction'))
-                                        <span>{{ str_replace('Commercial & Photo Reproduction', '', $badgeSubtitle) }}</span>
-                                        <span class="block">Commercial & Photo Reproduction</span>
-                                    @elseif (str_contains($badgeSubtitle, 'Detailed, Photorealistic Prints'))
-                                        <span>{{ str_replace('Detailed, Photorealistic Prints', '', $badgeSubtitle) }}</span>
-                                        <span class="block">Detailed, Photorealistic Prints</span>
-                                    @elseif (str_contains($badgeSubtitle, 'Branding, Identification'))
-                                        <span>Versatile Label Media for</span>
-                                        <span class="block">Branding, Identification and</span>
-                                        <span class="block">Information</span>
+                                    @elseif (str_contains($badgeHeading, '<br>'))
+                                        {!! $badgeHeading !!}
+                                    @elseif (str_contains($badgeHeading, 'Beyond Paper'))
+                                        <span>{{ str_replace('Beyond Paper', '', $badgeHeading) }}</span>
+                                        <span class="block">Beyond Paper</span>
+                                    @elseif (str_contains($badgeHeading, 'Colour to Life'))
+                                        <span>{{ str_replace('Colour to Life', '', $badgeHeading) }}</span>
+                                        <span class="block">Colour to Life</span>
+                                    @elseif (str_contains($badgeHeading, 'Closer to Reality'))
+                                        <span>{{ str_replace('Closer to Reality', '', $badgeHeading) }}</span>
+                                        <span class="block">Closer to Reality</span>
+                                    @elseif (str_contains($badgeHeading, 'Meaningful Product'))
+                                        <span>{{ str_replace('Meaningful Product Communication', '', $badgeHeading) }}</span>
+                                        <span class="block">Meaningful Product</span>
+                                        <span class="block">Communication</span>
                                     @else
-                                        {{ $badgeSubtitle }}
+                                        {{ $badgeHeading }}
                                     @endif
-                                </p>
-                            @endif
-                        </div>
+                                </h2>
+
+                                @if (!empty($badgeSubtitle))
+                                    <p
+                                        class="font-sans text-[16px] font-[500] sm:text-[13px] md:text-[13.5px] leading-snug sm:leading-relaxed text-[#1E1E1E] font-medium tracking-normal max-w-[240px] mt-2 sm:mt-3">
+                                        @if (is_array($badgeSubtitle))
+                                            @foreach ($badgeSubtitle as $line)
+                                                <span class="block">{{ $line }}</span>
+                                            @endforeach
+                                        @elseif (str_contains($badgeSubtitle, "\n"))
+                                            @foreach (explode("\n", $badgeSubtitle) as $line)
+                                                <span class="block">{{ trim($line) }}</span>
+                                            @endforeach
+                                        @elseif (str_contains($badgeSubtitle, '<br>'))
+                                            {!! $badgeSubtitle !!}
+                                        @elseif (str_contains($badgeSubtitle, 'Demanding Digital Applications'))
+                                            <span>{{ str_replace('Demanding Digital Applications', '', $badgeSubtitle) }}</span>
+                                            <span class="block">Demanding Digital Applications</span>
+                                        @elseif (str_contains($badgeSubtitle, 'Commercial & Photo Reproduction'))
+                                            <span>{{ str_replace('Commercial & Photo Reproduction', '', $badgeSubtitle) }}</span>
+                                            <span class="block">Commercial & Photo Reproduction</span>
+                                        @elseif (str_contains($badgeSubtitle, 'Detailed, Photorealistic Prints'))
+                                            <span>{{ str_replace('Detailed, Photorealistic Prints', '', $badgeSubtitle) }}</span>
+                                            <span class="block">Detailed, Photorealistic Prints</span>
+                                        @elseif (str_contains($badgeSubtitle, 'Branding, Identification'))
+                                            <span>Versatile Label Media for</span>
+                                            <span class="block">Branding, Identification and</span>
+                                            <span class="block">Information</span>
+                                        @else
+                                            {{ $badgeSubtitle }}
+                                        @endif
+                                    </p>
+                                @endif
+                            </div>
+                        @endif
 
                     </div>
                 </div>

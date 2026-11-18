@@ -64,6 +64,12 @@
                 'image' => 'images/products/technologies/dry-toner.png',
                 'alt' => 'Dry Toner laser and digital printing technology',
             ],
+            [
+                'id' => 'inkjet-dye-pigment',
+                'title' => 'Inkjet Dye and Pigment',
+                'image' => 'images/products/technologies/inkjet-dye-pigment.png',
+                'alt' => 'Inkjet Dye and Pigment printing technology',
+            ],
         ],
     ];
 
@@ -140,16 +146,16 @@
         ],
         'technologies' => [
             [
-                'id' => 'hp-indigo',
-                'title' => 'HP Indigo',
-                'image' => 'images/products/technologies/hp-indigo.png',
-                'alt' => 'HP Indigo commercial digital printing press compatibility',
-            ],
-            [
                 'id' => 'dry-toner',
                 'title' => 'Dry Toner',
                 'image' => 'images/products/technologies/dry-toner.png',
                 'alt' => 'Dry Toner laser and digital printing technology',
+            ],
+            [
+                'id' => 'inkjet-dye-pigment',
+                'title' => 'Inkjet Dye and Pigment',
+                'image' => 'images/products/technologies/inkjet-dye-pigment.png',
+                'alt' => 'Inkjet Dye and Pigment printing technology',
             ],
         ],
     ];

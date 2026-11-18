@@ -945,4 +945,228 @@ class ProductPageTest extends TestCase
         $this->get('/laser-inkjet-positive-films')->assertRedirect('/laser-and-inkjet-positive-films');
         $this->get('/products/laser-and-inkjet-positive-films')->assertStatus(200);
     }
+
+    /**
+     * Test that the NovaJet page is accessible and displays the brand logo in the circle badge.
+     */
+    public function test_novajet_page_renders_hero_with_brand_logo_and_narrative(): void
+    {
+        $response = $this->get('/products/novajet');
+
+        $response->assertStatus(200);
+
+        // Verify NovaJet title
+        $response->assertSee('NovaJet', false);
+
+        // Verify circular badge brand logo
+        $response->assertSee('images/brands/logos/novajet-wide.png', false);
+        $response->assertSee('Digital Wide Format Media', false);
+        $response->assertSee('A range of durable non-tear media designed for photo and general commercial applications', false);
+
+        // Verify narrative paragraphs
+        $response->assertSee('Developed for demanding digital printing applications, NovaJet offers media solutions that combine durability with printing versatility', false);
+        $response->assertSee('Download Brochure', false);
+
+        // Verify direct alias /novajet
+        $aliasResponse = $this->get('/novajet');
+        $aliasResponse->assertStatus(200);
+        $aliasResponse->assertSee('NovaJet', false);
+    }
+
+    /**
+     * Test that the NovaJet page renders the Features section with all 5 feature cards.
+     */
+    public function test_novajet_page_renders_features_section(): void
+    {
+        $response = $this->get('/products/novajet');
+
+        $response->assertStatus(200);
+
+        // Section overline
+        $response->assertSee('FEATURES', false);
+        $response->assertSee('id="product-features"', false);
+
+        // Card 1
+        $response->assertSee('Durability and Tear Resistance', false);
+        $response->assertSee('Designed to withstand tearing during handling and use, helping printed materials maintain their usability across different applications.', false);
+
+        // Card 2
+        $response->assertSee('Versatile Application Potential', false);
+        $response->assertSee('Suitable for photographic and general commercial applications where durable and reliable printed media is required.', false);
+
+        // Card 3
+        $response->assertSee('Digital Production Printing', false);
+        $response->assertSee('Developed for digital production printing environments, supporting different printing requirements and production workflows.', false);
+
+        // Card 4
+        $response->assertSee('Multiple Printing Technology Support', false);
+        $response->assertSee('Compatible with HP Indigo, dry toner and inkjet technologies, offering flexibility across different digital printing systems.', false);
+
+        // Card 5
+        $response->assertSee('Dye and Pigment Ink Compatibility', false);
+        $response->assertSee('Supports inkjet printing with both dye and pigment inks, accommodating different inkjet printing requirements.', false);
+    }
+
+    /**
+     * Test that the NovaJet page renders the atmospheric statement banner.
+     */
+    public function test_novajet_page_renders_statement_banner(): void
+    {
+        $response = $this->get('/products/novajet');
+
+        $response->assertStatus(200);
+
+        $response->assertSee('NovaJet includes durable film media designed to provide tear resistance and support demanding photographic and general commercial printing applications.', false);
+    }
+
+    /**
+     * Test that the NovaJet page renders the Compatibility section with 3 cards.
+     */
+    public function test_novajet_page_renders_compatibility_section(): void
+    {
+        $response = $this->get('/products/novajet');
+
+        $response->assertStatus(200);
+
+        // Section overline and headline
+        $response->assertSee('COMPATIBILITY', false);
+        $response->assertSee('NovaJet supports multiple digital printing technologies, providing flexibility across different production environments.', false);
+        $response->assertSee('id="product-compatibility"', false);
+
+        // Card 1: HP Indigo
+        $response->assertSee('HP Indigo', false);
+        $response->assertSee('Compatible with HP Indigo digital printing technology for applications requiring digital production printing.', false);
+
+        // Card 2: Dry Toner
+        $response->assertSee('Dry Toner', false);
+        $response->assertSee('Suitable for compatible dry toner printing systems used in digital production environments.', false);
+
+        // Card 3: Inkjet (Dye & Pigment)
+        $response->assertSee('Inkjet (Dye &amp; Pigment)', false);
+        $response->assertSee('Compatible with inkjet printing systems using both dye and pigment inks, supporting different printing requirements.', false);
+    }
+
+    /**
+     * Test that the NovaJet page renders the You Might Also Like recommendations section.
+     */
+    public function test_novajet_page_renders_recommendations_section(): void
+    {
+        $response = $this->get('/products/novajet');
+
+        $response->assertStatus(200);
+
+        // Section title and id
+        $response->assertSee('You Might Also Like', false);
+        $response->assertSee('id="brand-recommendations"', false);
+
+        // Brand cards
+        $response->assertSee('NovaCad', false);
+        $response->assertSee('Reprographic Media', false);
+
+        $response->assertSee('NovaDom', false);
+        $response->assertSee('Desktop Offset Plate', false);
+
+        $response->assertSee('NovaJet', false);
+        $response->assertSee('Digital Wide Format Media', false);
+
+        // CTA button
+        $response->assertSee('Explore all brands', false);
+    }
+
+    /**
+     * Test that the NovaDom page renders hero section with logo, badge description and narrative.
+     */
+    public function test_novadom_page_renders_hero_with_brand_logo_and_narrative(): void
+    {
+        $response = $this->get('/products/novadom');
+
+        $response->assertStatus(200);
+
+        // Verify NovaDom title
+        $response->assertSee('NovaDom', false);
+
+        // Verify circular badge logo and content
+        $response->assertSee('images/brands/logos/novadom.png', false);
+        $response->assertSee('Desktop Offset Plate', false);
+        $response->assertSee('A range of laser and inkjet imageable plate solutions developed for selected offset', false);
+
+        // Verify narrative paragraphs
+        $response->assertSee('Designed to support different imaging requirements, NovaDom offers plate solutions that can be imaged using laser and inkjet technologies', false);
+        $response->assertSee('Download Brochure', false);
+
+        // Verify direct alias /novadom
+        $aliasResponse = $this->get('/novadom');
+        $aliasResponse->assertStatus(200);
+        $aliasResponse->assertSee('NovaDom', false);
+    }
+
+    /**
+     * Test that the NovaDom page renders the 6 features cards.
+     */
+    public function test_novadom_page_renders_features_section(): void
+    {
+        $response = $this->get('/products/novadom');
+
+        $response->assertStatus(200);
+
+        // Section overline
+        $response->assertSee('FEATURES', false);
+        $response->assertSee('id="product-features"', false);
+
+        // Card 1
+        $response->assertSee('Laser-Imageable Plate Solutions', false);
+        $response->assertSee('Designed to support laser-based imaging workflows for selected offset-printing applications.', false);
+
+        // Card 2
+        $response->assertSee('Inkjet-Imageable Technology', false);
+        $response->assertSee('Supports inkjet-based imaging, offering an alternative approach for selected plate preparation requirements.', false);
+
+        // Card 3
+        $response->assertSee('Designed for Offset Printing', false);
+        $response->assertSee('Developed for use in selected offset-printing applications, supporting specialised print production workflows.', false);
+
+        // Card 4
+        $response->assertSee('Imaging Flexibility', false);
+        $response->assertSee('Offers both laser and inkjet imageable plate solutions, providing flexibility across different imaging requirements.', false);
+
+        // Card 5
+        $response->assertSee('Precision in Plate Imaging', false);
+        $response->assertSee('Designed for imaging applications where accurate reproduction of text, graphics and other visual elements is important.', false);
+
+        // Card 6
+        $response->assertSee('Specialised Printing Applications', false);
+        $response->assertSee('Suitable for selected offset-printing requirements where compatible imageable plate solutions are needed.', false);
+    }
+
+    /**
+     * Test that all 12 brand product items render through the dedicated brand UI view.
+     */
+    public function test_all_12_brand_product_items_render_via_brand_ui(): void
+    {
+        $brandItems = [
+            'novajet' => 'NovaJet',
+            'novalife' => 'NovaLife',
+            'saraprint' => 'Saraprint',
+            'novacad' => 'NovaCad',
+            'novadom' => 'NovaDom',
+            'novasharp' => 'NovaSharp',
+            'novasign' => 'NovaSign',
+            'novastick' => 'NovaStick',
+            'polijet' => 'PoliJet',
+            'posijet' => 'PosiJet',
+            'novatrace' => 'NovaTrace',
+        ];
+
+        foreach ($brandItems as $slug => $brandTitle) {
+            // Verify /products/{slug}
+            $productRouteResponse = $this->get('/products/'.$slug);
+            $productRouteResponse->assertStatus(200);
+            $productRouteResponse->assertSee($brandTitle, false);
+
+            // Verify direct alias /{slug}
+            $aliasRouteResponse = $this->get('/'.$slug);
+            $aliasRouteResponse->assertStatus(200);
+            $aliasRouteResponse->assertSee($brandTitle, false);
+        }
+    }
 }

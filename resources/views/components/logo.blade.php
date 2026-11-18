@@ -1,7 +1,8 @@
 {{--
     Company Logo Component
-    Note: Official logo image is located in:
-    public/images/Polyplex Digiprint_RGB_Colour 2.png
+    Note: Official logo images are located in:
+    - Light on dark: public/images/Polyplex Digiprint_RGB_Colour 1.png
+    - Dark on light: public/images/Polyplex Digiprint_RGB_Colour 2.png
     If the file exists, it will automatically be displayed!
     Otherwise, this crisp SVG vector fallback matching Polyplex DigiPrint is shown.
 --}}
@@ -11,6 +12,9 @@
     $customLogoPath = null;
     $candidates = $light 
         ? [
+            'images/Polyplex Digiprint_RGB_Colour 1.png',
+            'images/Polyplex Digiprint_RGB_Colour 1.webp',
+            'images/Polyplex Digiprint_RGB_Colour 1.jpg',
             'images/logo-white.svg',
             'images/logo-white.png',
             'images/logo.svg',
@@ -35,7 +39,7 @@
     }
 @endphp
 
-@if ($customLogoPath && (!$light || str_contains($customLogoPath, 'white')))
+@if ($customLogoPath && (!$light || str_contains($customLogoPath, 'white') || str_contains($customLogoPath, 'Colour 1')))
     <img src="{{ $customLogoPath }}" alt="{{ config('app.name') === 'Laravel' ? 'Polyplex DigiPrint' : config('app.name', 'Polyplex DigiPrint') }}" {{ $attributes->merge(['class' => 'h-10 md:h-12 w-auto object-contain']) }}>
 @else
     <div {{ $attributes->merge(['class' => 'inline-flex flex-col select-none']) }}>
