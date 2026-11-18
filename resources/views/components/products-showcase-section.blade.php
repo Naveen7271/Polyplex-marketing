@@ -53,7 +53,7 @@
     </div>
 
     {{-- Content Container --}}
-    <div class="relative z-10 max-w-[1352px] mx-auto">
+    <div class="relative z-10 max-w-[1352px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Headline: Montserrat Bold Centered --}}
         <div class="text-center max-w-4xl mx-auto">
@@ -65,7 +65,7 @@
 
         {{-- 4 Product Cards Grid --}}
         <div
-            class="mt-10 sm:mt-12 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px] sm:gap-5 lg:gap-[20px]">
+            class="mt-10 sm:mt-12 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px] sm:gap-5 lg:gap-[20px] justify-items-center">
             @foreach ($products as $prod)
                 @php
                     // Check if custom uploaded product image exists
@@ -81,7 +81,7 @@
                 @endphp
 
                 <a href="{{ $prod['link'] }}"
-                    class="group relative w-[323px] h-[392px] rounded-[5px] overflow-hidden border-[1px] border-[#FFFFFF] hover:border-white/70 transition-all duration-300 shadow-xl block bg-slate-950 focus:outline-none focus:ring-2 focus:ring-white/60">
+                    class="group relative w-full max-w-[323px] h-[392px] rounded-[5px] overflow-hidden border-[1px] border-[#FFFFFF] hover:border-white/70 transition-all duration-300 shadow-xl block bg-slate-950 focus:outline-none focus:ring-2 focus:ring-white/60">
                     {{-- Product Image --}}
                     <img src="{{ $cardImg }}" alt="{{ $prod['alt'] }}"
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"

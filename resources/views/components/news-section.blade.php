@@ -90,7 +90,7 @@
         </div>
 
         {{-- Page 1: 3x2 Grid of 6 News Cards --}}
-        <div id="news-grid-page-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[21px] lg:gap-[21px]">
+        <div id="news-grid-page-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[21px] lg:gap-[21px] justify-items-center sm:justify-items-stretch">
             @foreach ($newsItemsPage1 as $item)
                 @php
                     $imgSrc = null;
@@ -98,10 +98,10 @@
                         $imgSrc = asset($item['image']);
                     }
                 @endphp
-                <article class="bg-white w-[400px] h-[463px] rounded-xl shadow-xs border border-slate-200/70 p-3 sm:p-3.5 flex flex-col gap-[16px] hover:shadow-md transition-shadow group">
+                <article class="bg-white w-full max-w-[400px] sm:max-w-none min-h-[463px] rounded-xl shadow-xs border border-slate-200/70 p-3 sm:p-3.5 flex flex-col justify-between hover:shadow-md transition-shadow group">
                     <div>
                         {{-- Card Thumbnail Image --}}
-                        <div class="w-[370px] h-[290px] rounded-lg overflow-hidden bg-slate-100 mb-3.5 relative">
+                        <div class="w-full h-[220px] min-[400px]:h-[250px] sm:h-[280px] lg:h-[290px] rounded-lg overflow-hidden bg-slate-100 mb-3.5 relative">
                             @if ($imgSrc)
                                 <img 
                                     src="{{ $imgSrc }}" 
@@ -133,7 +133,7 @@
                     </div>
 
                     {{-- Read More Link --}}
-                    <div class="pt-1 mt-1">
+                    <div class="pt-2 mt-auto">
                         <a 
                             href="#news" 
                             class="font-sans text-[14px] font-[600] text-[#D6001C] hover:text-[#c8102e] inline-flex items-center gap-1.5 transition-colors"

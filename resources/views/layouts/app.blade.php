@@ -14,7 +14,7 @@
     {{-- Compiled Assets --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-slate-50/40 text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white flex flex-col">
+<body class="min-h-screen bg-slate-50/40 text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white flex flex-col overflow-x-clip">
     
     {{-- Header / Navigation Bar --}}
     <x-navbar />

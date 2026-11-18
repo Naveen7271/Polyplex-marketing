@@ -33,39 +33,39 @@
 
 {{-- Explore Possibilities Across Applications Section --}}
 <section id="applications"
-    class="relative w-full max-h-[501px] py-16 sm:py-20 lg:py-[60px] bg-[#F3F3F3] border-b border-slate-200/80 overflow-hidden">
+    class="relative w-full lg:max-h-[501px] py-12 sm:py-16 lg:py-[60px] bg-[#F3F3F3] border-b border-slate-200/80 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Title: Montserrat Bold Centered --}}
-        <div class="text-center max-w-4xl mx-auto mb-10 sm:mb-12 lg:mb-[37px]">
+        <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-12 lg:mb-[37px]">
             <h2
-                class="font-heading font-[700] text-2xl sm:text-3xl lg:text-[32px] text-[#0E4174] tracking-tight leading-tight">
+                class="font-heading font-[700] text-2xl sm:text-3xl lg:text-[32px] text-[#0E4174] tracking-tight leading-tight max-w-[280px] sm:max-w-none mx-auto">
                 Explore Possibilities Across Applications
             </h2>
         </div>
 
         {{-- Floating White Applications Slider Card --}}
         <div
-            class="relative bg-white sm: shadow-xl shadow-slate-200/60 border border-slate-100 px-4 sm:px-8 lg:px-[40px] py-8 sm:py-10 lg:py-[40px]">
+            class="relative bg-white rounded-xl sm:rounded-none shadow-xl shadow-slate-200/60 border border-slate-100 px-4 sm:px-8 lg:px-[40px] py-5 sm:py-10 lg:py-[40px]">
 
             {{-- Prev Arrow Button --}}
             <button id="apps-prev-btn" type="button"
-                class="absolute left-2 sm:left-4 lg:left-5 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-[#0b2b4e] transition-colors z-20 focus:outline-none disabled:opacity-20 disabled:pointer-events-none"
-                aria-label="Previous Applications">
-                <svg class="w-5 h-5 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                class="absolute left-2 sm:left-4 lg:left-5 top-[125px] sm:top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0b2b4e] rounded-full shadow-lg flex items-center justify-center transition-all z-20 focus:outline-none disabled:opacity-0 disabled:pointer-events-none cursor-pointer border border-slate-100"
+                aria-label="Previous Applications" disabled>
+                <svg class="w-4 h-4 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
 
             {{-- Slider Viewport --}}
-            <div id="apps-slider-container" class="overflow-hidden w-full mx-auto px-6 sm:px-4">
+            <div id="apps-slider-container" class="overflow-hidden w-full mx-auto px-0 sm:px-4">
                 <div id="apps-slider-track"
                     class="flex transition-transform duration-500 ease-out will-change-transform">
                     @foreach ($applications as $idx => $app)
                         @php
                             $customAppImg = null;
-                            foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
+                            foreach (['png', 'webp', 'jpg', 'jpeg'] as $ext) {
                                 $candidate = "images/app-{$app['id']}.{$ext}";
                                 if (file_exists(public_path($candidate))) {
                                     $customAppImg = asset($candidate);
@@ -76,25 +76,25 @@
                         @endphp
 
                         {{-- Individual Application Item (1 per view on mobile/tablet, 2 per view on desktop) --}}
-                        <div class="apps-slide-item w-full lg:w-1/2 shrink-0 px-3 sm:px-5 lg:px-6" data-index="{{ $idx }}">
+                        <div class="apps-slide-item w-full lg:w-1/2 shrink-0 px-1 sm:px-5 lg:px-6" data-index="{{ $idx }}">
                             <div
-                                class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 lg:gap-7 group">
+                                class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 lg:gap-7 group">
 
                                 {{-- Thumbnail Image --}}
                                 <div
-                                    class="w-[218px] h-[225px] sm:w-36 sm:h-36 lg:w-[218px] lg:h-[225px] shrink-0  overflow-hidden shadow-md bg-slate-100">
+                                    class="w-full h-[220px] min-[400px]:h-[240px] sm:w-36 sm:h-36 lg:w-[218px] lg:h-[225px] shrink-0 rounded-lg sm:rounded-none overflow-hidden shadow-xs bg-slate-100 relative">
                                     <img src="{{ $appImg }}" alt="{{ $app['alt'] }}"
                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                         loading="lazy">
                                 </div>
 
                                 {{-- Text Block --}}
-                                <div class="text-center sm:text-left flex flex-col justify-center pt-1 grow">
+                                <div class="text-left flex flex-col justify-center pt-1 grow w-full">
                                     <h3
-                                        class="font-heading font-[600] text-[24px] sm:text-xl lg:text-[22px] text-[#0E4174] leading-snug mb-2 sm:mb-2.5 ">
+                                        class="font-heading font-[600] text-xl sm:text-xl lg:text-[22px] text-[#0E4174] leading-snug mb-2 sm:mb-2.5">
                                         {{ $app['title'] }}
                                     </h3>
-                                    <p class="font-sans text-[16px] font-[500] sm:text-sm text-[#000000] lg:max-w-[299px]">
+                                    <p class="font-sans text-[13.5px] sm:text-sm text-slate-800 lg:max-w-[299px] leading-relaxed">
                                         {{ $app['description'] }}
                                     </p>
                                 </div>
@@ -107,10 +107,10 @@
 
             {{-- Next Arrow Button --}}
             <button id="apps-next-btn" type="button"
-                class="absolute right-2 sm:right-4 lg:right-5 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-[#0b2b4e] transition-colors z-20 focus:outline-none disabled:opacity-20 disabled:pointer-events-none"
+                class="absolute right-2 sm:right-4 lg:right-5 top-[125px] sm:top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0b2b4e] rounded-full shadow-lg flex items-center justify-center transition-all z-20 focus:outline-none disabled:opacity-0 disabled:pointer-events-none cursor-pointer border border-slate-100"
                 aria-label="Next Applications">
-                <svg class="w-5 h-5 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="w-4 h-4 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9 5l7 7-7 7" />
                 </svg>
             </button>

@@ -53,7 +53,7 @@
                     
                     {{-- Left Column: Circular Badge overlapping Banner --}}
                     <div class="lg:col-span-5 flex justify-center lg:justify-start -mt-28 sm:-mt-36 md:-mt-44 lg:-mt-[212px] relative z-20">
-                        <div class="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] md:w-[424px] md:h-[424px] shrink-0 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center p-8 sm:p-10 md:p-12 text-center border border-slate-100">
+                        <div class="relative w-[280px] h-[280px] min-[360px]:w-[320px] min-[360px]:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[424px] md:h-[424px] max-w-full shrink-0 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center p-6 min-[360px]:p-8 sm:p-10 md:p-12 text-center border border-slate-100">
                             
                             {{-- Red Side Borders / Arcs --}}
                             <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 424 424" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

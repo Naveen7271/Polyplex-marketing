@@ -2,14 +2,14 @@
     $boxes = [
         [
             'id' => 1,
-            'title' => 'Controlled <br> Material Inputs',
+            'title' => 'Controlled Material Inputs',
             'description' => 'Controlled material inputs help establish consistency across manufacturing processes and support reliable product performance.',
             'image' => asset('images/about-manufacturing-1.jpg'),
             'icon' => 'badge-check',
         ],
         [
             'id' => 2,
-            'title' => 'Process & <br> Formulation Expertise',
+            'title' => 'Process & Formulation Expertise',
             'description' => 'Our process and formulation expertise enables us to translate material knowledge into products designed for specific print and application requirements.',
             'image' => asset('images/about-manufacturing-2.jpg'),
             'icon' => 'brain-circuit',
@@ -27,13 +27,13 @@
 {{-- Manufacturing Excellence Section --}}
 <section id="about-manufacturing-section" class="relative w-full bg-[#F3F3F3]">
     {{-- Top Background Banner with Heading --}}
-    <div class="relative w-full pb-[221px] pt-[66px] sm:pb-36 sm:pt-20 lg:pb-[221px] lg:pt-[66px]">
+    <div class="relative w-full pb-[200px] pt-[66px] sm:pb-36 sm:pt-20 lg:pb-[221px] lg:pt-[66px]">
         {{-- Background Image with Dark Overlay --}}
         <div class="absolute inset-0 overflow-hidden">
             <img src="{{ asset('images/about-manufacturing-bg.png') }}"
                 alt="Manufacturing Excellence - Polyplex Production Facility"
                 class="h-full w-full object-cover object-center" />
-            <div class="absolute inset-0 "></div>
+            <div class="absolute inset-0 bg-black/40"></div>
         </div>
 
         {{-- Section Title --}}
@@ -46,10 +46,10 @@
 
     {{-- Floating Card with 3 Interactive Hover Boxes --}}
     <div
-        class="relative z-20 mx-auto -mt-[150px] max-w-[1301px] max-h-[477px] pb-16 sm:-mt-[150px]  sm:pb-20 lg:-mt-[150px] lg:pb-[477px]">
-        <div class="grid grid-cols-1 overflow-hidden bg-white md:grid-cols-3">
+        class="relative z-20 mx-auto -mt-28 sm:-mt-32 md:-mt-36 lg:-mt-[150px] max-w-[1301px] px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20">
+        <div class="grid grid-cols-1 overflow-hidden bg-white shadow-xl md:grid-cols-3">
             @foreach ($boxes as $box)
-                <div class="group relative mx-auto cursor-pointer w-[434px] h-[477px] overflow-hidden py-[140px] px-[70px] transition-all duration-300 sm:py-[140px] lg:py-[140px]"
+                <div class="group relative mx-auto md:mx-0 w-full min-h-[300px] sm:min-h-[340px] md:h-[477px] overflow-hidden py-10 px-6 sm:py-14 sm:px-10 lg:py-[140px] lg:px-[70px] cursor-pointer transition-all duration-300 border-b md:border-b-0 md:border-r border-slate-100 last:border-b-0 last:border-r-0"
                     tabindex="0">
                     {{-- Hover Background Image with Dark Overlay --}}
                     <div
@@ -82,7 +82,7 @@
                         {{-- Title --}}
                         <h3
                             class="mb-[12px] font-heading text-[24px] font-[600] leading-tight text-[#000000] transition-colors duration-300 group-hover:text-white group-focus:text-white sm:text-[24px]">
-                            {!! $box['title'] !!}
+                            {{ $box['title'] }}
                         </h3>
 
                         {{-- Description --}}

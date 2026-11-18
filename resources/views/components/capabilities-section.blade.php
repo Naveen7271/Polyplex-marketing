@@ -136,7 +136,7 @@
                 >
                     {{-- Header Row --}}
                     <div 
-                        class="capability-header bg-white py-3 sm:py-3.5 cursor-pointer flex items-start gap-3.5 sm:gap-5 group transition-colors select-none"
+                        class="capability-header bg-white py-3 sm:py-3.5 cursor-pointer flex flex-col sm:flex-row items-start gap-3 sm:gap-5 group transition-colors select-none"
                         data-index="{{ $cap['index'] }}"
                         tabindex="0"
                         role="button"
@@ -210,7 +210,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             
                             {{-- Image A --}}
-                            <div class="relative w-full max-w-[546px] h-[282px] overflow-hidden shadow-xs bg-slate-100 group">
+                            <div class="relative w-full max-w-[546px] h-[200px] min-[400px]:h-[240px] sm:h-[282px] overflow-hidden shadow-xs bg-slate-100 group">
                                 @if ($customImgA)
                                     <img src="{{ $customImgA }}" alt="{{ $cap['title'] }} specimen 1" width="546" height="282" class="w-full h-full object-cover">
                                 @else
@@ -223,7 +223,7 @@
                             </div>
 
                             {{-- Image B --}}
-                            <div class="relative w-full max-w-[546px] h-[282px] overflow-hidden shadow-xs bg-slate-100 group">
+                            <div class="relative w-full max-w-[546px] h-[200px] min-[400px]:h-[240px] sm:h-[282px] overflow-hidden shadow-xs bg-slate-100 group">
                                 @if ($customImgB)
                                     <img src="{{ $customImgB }}" alt="{{ $cap['title'] }} specimen 2" width="546" height="282" class="w-full h-full object-cover">
                                 @else

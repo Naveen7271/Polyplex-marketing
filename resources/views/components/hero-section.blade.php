@@ -35,11 +35,11 @@
                 <div
                     class="lg:col-span-5 flex justify-center lg:justify-start -mt-32 sm:-mt-40 lg:-mt-[212px] relative z-20">
                     <div
-                        class="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] md:w-[424px] md:h-[424px] shrink-0 bg-white rounded-full shadow-2xl flex items-center justify-center p-8 sm:p-10 md:p-12 text-center border border-slate-100">
+                        class="relative w-[363px] h-[363px] md:w-[424px] md:h-[424px] max-w-full shrink-0 bg-white rounded-full shadow-2xl flex items-center justify-center p-8 sm:p-10 md:p-12 text-center border border-slate-100">
 
                         {{-- Red Side Borders / Arcs --}}
-                        <svg class="absolute inset-0 w-full h-full pointer-events-none"
-                            viewBox="0 0 424 424" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 424 424"
+                            fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             {{-- Left Red Border Arc --}}
                             <path d="M 127 39.84 A 192 192 0 0 0 127 384.16 L 127 363.83 A 174 174 0 0 1 127 60.17 Z"
                                 fill="#d6001c" />
@@ -51,7 +51,7 @@
 
                         {{-- Circle Narrative Content --}}
                         <p
-                            class="relative z-10 font-sans text-[15px] sm:text-[16px] md:text-[17.5px] leading-relaxed sm:leading-[1.65] text-[#003570] font-[600] tracking-normal max-w-[285px]">
+                            class="relative z-10 font-sans text-[15px] sm:text-[14px] md:text-[17.5px] leading-relaxed sm:leading-[1.65] text-[#003570] font-[600] tracking-normal max-w-[285px]">
                             Polyplex DigiPrint, a strategic joint
                             venture between Polyplex and TechNova, combines manufacturing
                             excellence and print industry expertise to develop the next generation of digital print

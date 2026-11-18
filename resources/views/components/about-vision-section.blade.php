@@ -38,7 +38,7 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     {{-- Main Statement + Chevron Row --}}
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
-                            class="font-heading font-[600] text-[#000000] text-[20px] sm:text-lg md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl ">
+                            class="font-heading font-[600] text-[#000000] text-[20px] sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl ">
                             To be a globally trusted and technology-driven leader in digital print substrates,
                             recognised for quality, innovation and value creation across diverse applications.
                         </p>
@@ -98,7 +98,7 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     {{-- Main Statement + Chevron Row --}}
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
-                            class="font-heading font-semibold text-slate-900 text-base sm:text-lg md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
+                            class="font-heading font-semibold text-slate-900 text-[20px] sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
                             To deliver high-performance print media solutions that enable our customers to Create,
                             Communicate and Connect — while building a sustainable and profitable business together.
                         </p>
@@ -161,7 +161,7 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     {{-- Main Statement + Chevron Row --}}
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
-                            class="font-heading font-semibold text-slate-900 text-base sm:text-lg md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
+                            class="font-heading font-semibold text-slate-900 text-[20px] sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
                             To shape the future of print with lasting solutions, made in India for the world, with
                             sustainability at their core.
                         </p>
@@ -224,7 +224,7 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     {{-- Main Statement + Chevron Row --}}
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
-                            class="font-heading font-semibold text-slate-900 text-base sm:text-lg md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
+                            class="font-heading font-semibold text-slate-900 text-base sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
                             Our values are integral to how we build trust, embrace responsibility and create lasting
                             value for our customers and stakeholders.
                         </p>

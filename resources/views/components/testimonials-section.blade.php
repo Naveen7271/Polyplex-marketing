@@ -19,8 +19,8 @@
 
 {{-- Testimonials & Customer Trust Section --}}
 <section id="testimonials" class="relative w-full bg-white select-none">
-    {{-- Top Banner Image Area --}}
-    <div class="relative w-full h-64 sm:h-72 md:h-80 lg:h-[572px] xl:h-[572px] bg-slate-900 overflow-hidden">
+    {{-- Top Banner Image Area (Desktop only) --}}
+    <div class="hidden lg:block relative w-full h-64 sm:h-72 md:h-80 lg:h-[572px] xl:h-[572px] bg-slate-900 overflow-hidden">
         <img 
             src="{{ asset('images/testimonials-banner.png') }}" 
             alt="Polyplex DigiPrint Customer Collaboration" 
@@ -29,8 +29,73 @@
         />
     </div>
 
-    {{-- White Content Area with Overlapping Circle Badge, Narrative, Cards & Button --}}
-    <div class="relative bg-white pb-16 sm:pb-20 lg:pb-24 border-b border-slate-200/80">
+    {{-- Mobile Version (Matches attached design for mobile devices) --}}
+    <div class="lg:hidden bg-white pt-10 pb-12 border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            {{-- Category Eyebrow --}}
+            <p class="font-heading font-[600] text-[13px] text-[#0E4174] tracking-[0.2em] uppercase mb-3">
+                TESTIMONIALS
+            </p>
+
+            {{-- Narrative Paragraph --}}
+            <p class="font-sans text-[15px] font-[500] text-slate-800 leading-relaxed mb-8 max-w-xl">
+                Customer experiences highlight the consistency, quality and support associated with our media solutions.
+            </p>
+
+            {{-- Stacked Testimonials with Dividers --}}
+            <div class="space-y-8">
+                @foreach ($testimonials as $index => $testimonial)
+                    <div class="space-y-4">
+                        {{-- Quote --}}
+                        <p class="font-sans text-slate-900 text-[15px] font-[500] leading-relaxed">
+                            "{{ $testimonial['quote'] }}"
+                        </p>
+
+                        {{-- Author Details --}}
+                        <div class="flex items-center gap-3 pt-1">
+                            @if ($testimonial['avatar'])
+                                <img 
+                                    src="{{ $testimonial['avatar'] }}" 
+                                    alt="{{ $testimonial['author'] }}" 
+                                    class="w-11 h-11 rounded-[4px] object-cover shrink-0"
+                                    loading="lazy"
+                                />
+                            @else
+                                <div class="w-11 h-11 rounded-[4px] bg-[#0b2b4e] text-white font-heading font-bold text-xs flex items-center justify-center shrink-0">
+                                    {{ $testimonial['initials'] }}
+                                </div>
+                            @endif
+                            <div>
+                                <h4 class="font-heading font-[700] text-slate-900 text-[15px] leading-tight">
+                                    {{ $testimonial['author'] }}
+                                </h4>
+                                <p class="font-sans text-[11px] text-slate-500 font-normal mt-0.5">
+                                    {{ $testimonial['company'] }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if ($index < count($testimonials) - 1)
+                        <div class="border-t border-slate-200"></div>
+                    @endif
+                @endforeach
+            </div>
+
+            {{-- Centered "View More" CTA Button --}}
+            <div class="mt-10 flex justify-center">
+                <a 
+                    href="{{ route('testimonials') }}" 
+                    class="inline-flex items-center justify-center py-2.5 px-6 rounded bg-[#003570] hover:bg-[#071d36] text-white font-[500] text-sm transition-colors shadow-xs"
+                >
+                    View More
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {{-- Desktop Version (Retains Banner, Circular Badge & 2-column Grid) --}}
+    <div class="hidden lg:block relative bg-white pb-16 sm:pb-20 lg:pb-24 border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {{-- Top Row: Overlapping Circle Badge + Testimonials Narrative --}}
@@ -38,7 +103,7 @@
                 
                 {{-- Left Column: Circular Badge overlapping Banner --}}
                 <div class="lg:col-span-5 flex justify-center lg:justify-start -mt-28 sm:-mt-36 md:-mt-44 lg:-mt-[212px] relative z-20">
-                    <div class="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] md:w-[424px] md:h-[424px] shrink-0 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center p-8 sm:p-10 md:p-12 text-center border border-slate-100">
+                    <div class="relative w-[280px] h-[280px] min-[360px]:w-[320px] min-[360px]:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[424px] md:h-[424px] max-w-full shrink-0 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center p-6 min-[360px]:p-8 sm:p-10 md:p-12 text-center border border-slate-100">
                         
                         {{-- Red Side Borders / Arcs --}}
                         <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 424 424" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -70,7 +135,7 @@
             </div>
 
             {{-- Second Row: 2 Testimonial Cards --}}
-            <div class="grid grid-cols-1 max-h-[219px] md:grid-cols-2 gap-6 lg:gap-[63px] mt-[41px] sm:mt-12 lg:mt-[41px]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-[63px] mt-[41px] sm:mt-12 lg:mt-[41px]">
                 @foreach ($testimonials as $testimonial)
                     <div class="bg-[#F3F3F3] border-[0.3px] border-slate-300 rounded-[5px] p-6 sm:p-8 flex flex-col justify-between hover:border-slate-300 hover:shadow-xs transition-all">
                         {{-- Quote --}}

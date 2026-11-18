@@ -16,7 +16,7 @@ class AboutPageTest extends TestCase
         $response->assertStatus(200);
 
         // Verify the exact headline from the user's design reference
-        $response->assertSee('For over 55 years, we’ve built on a legacy of innovation', false);
+        $response->assertSee('For over 60 years, we’ve built on a legacy of innovation', false);
         $response->assertSee('taking our own approach to creating print solutions that make a meaningful impact.', false);
 
         // Verify split hero structural elements

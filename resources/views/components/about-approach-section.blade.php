@@ -46,33 +46,33 @@
 @endphp
 
 {{-- What Sets Us Apart Section --}}
-<section id="about-approach-section" class="w-full bg-white py-[85px] px-[100px] sm:py-18 lg:py-[85px]">
+<section id="about-approach-section" class="w-full bg-white py-12 px-4 sm:py-16 sm:px-6 lg:py-[85px] lg:px-8 xl:px-[100px]">
     <div class="mx-auto max-w-[1240px] text-center">
         {{-- Eyebrow --}}
         <p
-            class="mb-[43px] font-heading text-[16px] font-[500] text-[#1E1E1E] uppercase tracking-[0.2em]  sm:mb-6 sm:text-sm">
+            class="mb-3 sm:mb-4 lg:mb-6 font-heading text-[13px] min-[360px]:text-[14px] sm:text-sm font-[500] text-[#1E1E1E] uppercase tracking-[0.2em]">
             WHAT SETS US APART
         </p>
 
         {{-- Main Headline from Reference --}}
         <h2
-            class="mx-auto pb-[54px] max-w-[1015px] font-heading text-[32px] font-[700] leading-snug text-[#0E4174] sm:mb-16 sm:text-3xl sm:leading-snug lg:text-[32px]">
-            Our integrated approach brings together capabilities across the value chain, enabling us to move from
-            understanding requirements to delivering solutions and supporting customers through their journey.
+            class="mx-auto mb-8 sm:mb-12 lg:mb-14 max-w-xs min-[360px]:max-w-sm sm:max-w-2xl lg:max-w-[1015px] font-heading text-[19px] min-[360px]:text-[21px] sm:text-2xl md:text-[28px] lg:text-[32px] font-[700] leading-snug text-[#0E4174]">
+            Our integrated approach brings together capabilities across the value chain,
+            enabling us to move from understanding requirements to delivering solutions and supporting customers through their journey.
         </h2>
 
         {{-- Carousel Card --}}
         <div id="approach-carousel"
-            class="mx-auto max-w-[1240px] max-h-[340px] overflow-hidden bg-[#F3F3F3] shadow-xs focus:outline-hidden"
+            class="mx-auto max-w-[1240px] max-h-none md:max-h-[340px] overflow-hidden bg-[#F3F3F3] shadow-xs focus:outline-hidden"
             aria-roledescription="carousel" aria-label="What sets us apart" tabindex="0">
             <div class="grid grid-cols-1 md:grid-cols-2">
                 {{-- Left: Sliding Images Track (Right-to-Left movement) --}}
-                <div class="relative max-h-[340px] w-full overflow-hidden  sm:min-h-[320px] md:min-h-[380px]">
+                <div class="relative w-full h-[280px] min-[360px]:h-[300px] sm:h-[340px] md:h-full md:max-h-[340px] overflow-hidden">
                     <div id="approach-image-track"
                         class="flex h-full w-full transition-transform duration-500 ease-in-out"
                         style="transform: translateX(0%);">
                         @foreach ($slides as $idx => $slide)
-                            <div class="relative max-h-[340px] w-full shrink-0">
+                            <div class="relative h-full w-full shrink-0">
                                 <img src="{{ $slide['image'] }}" alt="{{ $slide['alt'] }}"
                                     class="block h-full w-full object-cover object-center"
                                     loading="{{ $idx === 0 ? 'eager' : 'lazy' }}" />
@@ -82,25 +82,25 @@
                 </div>
 
                 {{-- Right: Content Box (Bottom-to-Top text animation) --}}
-                <div class="flex flex-col max-h-[340px] justify-between  bg-[#F3F3F3] p-[50px] text-left ">
+                <div class="flex flex-col justify-between bg-[#F3F3F3] p-6 sm:p-8 md:p-[50px] text-left md:max-h-[340px]">
                     {{-- Text Wrapper with overflow hidden --}}
-                    <div class="flex min-h-[190px] flex-col justify-center overflow-hidden sm:min-h-[190px]">
+                    <div class="flex min-h-[170px] sm:min-h-[190px] flex-col justify-start md:justify-center overflow-hidden">
                         <div id="approach-text-wrapper" class="transition-all duration-300 ease-out">
                             <h3 id="approach-title"
-                                class="mb-4 font-heading text-[32px] font-[600] leading-tight text-[#0E4174] sm:mb-6 sm:text-[28px]">
+                                class="mb-3 sm:mb-4 md:mb-6 font-heading text-[22px] min-[360px]:text-[24px] sm:text-[26px] md:text-[32px] font-[600] leading-tight text-[#0E4174]">
                                 {{ $slides[0]['title'] }}
                             </h3>
                             <p id="approach-description"
-                                class="font-sans text-[20px] font-[300] leading-relaxed text-[#000000] sm:text-base">
+                                class="font-sans text-[15px] sm:text-base md:text-[18px] lg:text-[20px] font-[400] sm:font-[300] leading-relaxed text-[#333333] sm:text-[#000000]">
                                 {{ $slides[0]['description'] }}
                             </p>
                         </div>
                     </div>
 
                     {{-- Footer: Counter & Navigation Buttons --}}
-                    <div class="mt-1 flex items-center justify-between">
+                    <div class="mt-6 md:mt-1 flex items-center justify-between">
                         <span id="approach-counter"
-                            class="font-heading text-[15px] font-[400] tracking-wider text-[#0E4174] sm:text-sm"
+                            class="font-heading text-[14px] sm:text-[15px] font-[500] tracking-wider text-[#0E4174]"
                             aria-live="polite">
                             1/{{ count($slides) }}
                         </span>

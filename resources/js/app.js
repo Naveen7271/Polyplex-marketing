@@ -259,8 +259,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const slideLeft = activeSlide.offsetLeft;
             const slideWidth = activeSlide.offsetWidth;
 
-            // Center the active slide in the middle of the container
-            const targetX = (containerWidth / 2) - (slideLeft + (slideWidth / 2));
+            // Center the active slide in the middle of the container (on mobile align slide 0 to left padding so next slide peeks generously)
+            let targetX = (containerWidth / 2) - (slideLeft + (slideWidth / 2));
+            if (window.innerWidth < 768) {
+                if (currentIndex === 0) {
+                    targetX = 16 - slideLeft;
+                } else if (currentIndex === totalSlides - 1) {
+                    targetX = containerWidth - 16 - (slideLeft + slideWidth);
+                }
+            }
             carouselTrack.style.transform = `translateX(${targetX}px)`;
 
             // Update slide scaling and opacity
@@ -269,11 +276,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!card) return;
 
                 if (idx === currentIndex) {
-                    card.classList.remove('scale-[0.88]', 'opacity-75', 'sm:opacity-85', 'z-10', 'cursor-pointer');
+                    card.classList.remove('scale-[0.92]', 'scale-[0.88]', 'opacity-75', 'sm:opacity-85', 'z-10', 'cursor-pointer');
                     card.classList.add('scale-100', 'opacity-100', 'z-20');
                 } else {
                     card.classList.remove('scale-100', 'opacity-100', 'z-20');
-                    card.classList.add('scale-[0.88]', 'opacity-75', 'sm:opacity-85', 'z-10', 'cursor-pointer');
+                    card.classList.add('scale-[0.92]', 'opacity-75', 'sm:opacity-85', 'z-10', 'cursor-pointer');
                 }
             });
 
@@ -599,6 +606,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentActive = null;
 
         const setSide = (side) => {
+            if (window.innerWidth < 768) {
+                aboutHero.classList.remove('is-left-expanded', 'is-right-expanded');
+                currentActive = null;
+                return;
+            }
+
             if (currentActive === side) return;
             currentActive = side;
 
@@ -613,8 +626,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Smooth cursor tracking across section width
+        // Smooth cursor tracking across section width (desktop only)
         aboutHero.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 768) return;
             const rect = aboutHero.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const ratio = mouseX / rect.width;
@@ -628,11 +642,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mouse leaves section -> smoothly return to 50/50 split
         aboutHero.addEventListener('mouseleave', () => {
+            if (window.innerWidth < 768) return;
             setSide(null);
         });
 
-        // Mobile & Tablet touch / click support
+        // Tablet & Desktop click toggle support
         aboutHero.addEventListener('click', (e) => {
+            if (window.innerWidth < 768) return;
             const rect = aboutHero.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const ratio = mouseX / rect.width;

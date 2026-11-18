@@ -71,12 +71,32 @@
     {{-- Carousel Track Container: Overflow hidden to reveal peeked neighboring slides --}}
     <div id="innovation-carousel-container" class="relative w-full overflow-hidden py-4">
 
+        {{-- Floating Previous Button --}}
+        <button id="innovation-prev-btn" type="button"
+            class="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 bg-white hover:bg-slate-100 text-slate-800 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 z-30 focus:outline-hidden disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
+            aria-label="Previous Slide" disabled>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+
+        {{-- Floating Next Button --}}
+        <button id="innovation-next-btn" type="button"
+            class="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 bg-white hover:bg-slate-100 text-slate-800 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 z-30 focus:outline-hidden disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
+            aria-label="Next Slide">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </button>
+
         <div id="innovation-carousel-track"
             class="flex items-center transition-transform duration-500 ease-out will-change-transform">
             @foreach ($slides as $idx => $slide)
                 @php
                     $customSlideImg = null;
-                    foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
+                    foreach (['png', 'webp', 'jpg', 'jpeg'] as $ext) {
                         $candidate = "images/innovation-slide-" . ($idx + 1) . ".{$ext}";
                         if (file_exists(public_path($candidate))) {
                             $customSlideImg = asset($candidate);
@@ -87,43 +107,46 @@
                 @endphp
 
                 {{-- Individual Slide Wrapper --}}
-                <div class="innovation-slide-wrapper w-[86%] sm:w-[72%] lg:w-[62%] max-w-4xl shrink-0 px-2 sm:px-3 lg:px-4 transition-all duration-500 ease-out"
+                <div class="innovation-slide-wrapper w-[82%] sm:w-[72%] lg:w-[62%] max-w-4xl shrink-0 px-2 sm:px-3 lg:px-4 transition-all duration-500 ease-out"
                     data-slide-index="{{ $idx }}">
                     {{-- Slide Card Container --}}
                     <div
-                        class="innovation-slide-card relative aspect-16/10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl transition-all duration-500 ease-out bg-slate-900 select-none {{ $idx === 0 ? 'scale-100 opacity-100 z-20' : 'scale-[0.88] opacity-75 sm:opacity-85 z-10 cursor-pointer' }}">
+                        class="innovation-slide-card relative h-[440px] sm:h-[480px] lg:h-auto lg:aspect-16/10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl transition-all duration-500 ease-out bg-slate-900 select-none {{ $idx === 0 ? 'scale-100 opacity-100 z-20' : 'scale-[0.92] opacity-75 sm:opacity-85 z-10 cursor-pointer' }}">
                         {{-- Background Image --}}
                         <img src="{{ $slideImg }}" alt="{{ $slide['alt'] }}"
                             class="w-full h-full object-cover transition-transform duration-700 ease-out" loading="lazy">
 
                         {{-- Dark Gradient Overlay for Text Legibility --}}
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none">
+                            class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/25 lg:bg-gradient-to-r lg:from-black/85 lg:via-black/45 lg:to-transparent pointer-events-none">
                         </div>
 
                         {{-- Slide Content Overlay --}}
                         <div
-                            class="absolute inset-0 pt-[165px] pr-[105px] sm:p-[105px] lg:pt-[165px] pr-[105px] flex flex-col pointer-events-none z-10">
+                            class="absolute inset-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-between pointer-events-none z-10">
 
                             {{-- Counter: e.g. 1 / 4 --}}
-                            <div class="flex items-center gap-2 mb-2 sm:mb-3">
+                            <div>
                                 <span
                                     class="text-xs sm:text-sm font-medium tracking-[0.25em] text-white/90 uppercase font-sans">
                                     {{ $slide['counter'] }}
                                 </span>
                             </div>
 
-                            {{-- Title: Montserrat Bold --}}
-                            <h3
-                                class="font-heading font-[600] text-[32px] sm:text-2xl lg:text-[32px] text-white tracking-tight leading-snug drop-shadow-md max-w-xl">
-                                {{ $slide['title'] }}
-                            </h3>
+                            {{-- Bottom Group: Title + Description --}}
+                            <div class="space-y-2 sm:space-y-3">
+                                {{-- Title: Montserrat Bold --}}
+                                <h3
+                                    class="font-heading font-[600] text-xl sm:text-2xl lg:text-[32px] text-white tracking-tight leading-snug drop-shadow-md max-w-xl">
+                                    {{ $slide['title'] }}
+                                </h3>
 
-                            {{-- Description: Inter Regular --}}
-                            <p
-                                class="font-sans text-[20px] sm:text-sm lg:text-[20px] text-white font-[500] mt-[16px] sm:mt-3 max-w-lg leading-relaxed">
-                                {{ $slide['description'] }}
-                            </p>
+                                {{-- Description: Inter Regular --}}
+                                <p
+                                    class="font-sans text-xs sm:text-sm lg:text-base text-white/90 font-[400] leading-relaxed max-w-lg">
+                                    {{ $slide['description'] }}
+                                </p>
+                            </div>
 
                         </div>
 
@@ -134,38 +157,13 @@
 
     </div>
 
-    {{-- Carousel Controls: Arrow Buttons & Dots --}}
-    <div class="flex items-center justify-center gap-4 mt-6 sm:mt-8 select-none">
-
-        {{-- Previous Slide Arrow --}}
-        <button id="innovation-prev-btn" type="button"
-            class="w-8 h-8 rounded-full flex items-center justify-center text-slate-700 hover:text-slate-950 transition-all focus:outline-none disabled:opacity-0 disabled:pointer-events-none"
-            aria-label="Previous Slide" disabled>
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 18l-6-6 6-6" />
-            </svg>
-        </button>
-
-        {{-- Dot Indicators --}}
-        <div id="innovation-dots-container" class="flex items-center gap-2.5">
-            @foreach ($slides as $idx => $slide)
-                <button type="button"
-                    class="innovation-dot transition-all duration-300 rounded-full {{ $idx === 0 ? 'w-2.5 h-2.5 bg-slate-900' : 'w-2 h-2 bg-slate-300 hover:bg-slate-400' }}"
-                    data-index="{{ $idx }}" aria-label="Go to slide {{ $idx + 1 }}"></button>
-            @endforeach
-        </div>
-
-        {{-- Next Slide Arrow --}}
-        <button id="innovation-next-btn" type="button"
-            class="w-8 h-8 rounded-full flex items-center justify-center text-slate-700 hover:text-slate-950 transition-all focus:outline-none disabled:opacity-0 disabled:pointer-events-none"
-            aria-label="Next Slide">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 18l6-6-6-6" />
-            </svg>
-        </button>
-
+    {{-- Carousel Controls: Dots --}}
+    <div id="innovation-dots-container" class="flex items-center justify-center gap-2.5 mt-5 sm:mt-7 select-none">
+        @foreach ($slides as $idx => $slide)
+            <button type="button"
+                class="innovation-dot transition-all duration-300 rounded-full {{ $idx === 0 ? 'w-2.5 h-2.5 bg-slate-900' : 'w-2 h-2 bg-slate-300 hover:bg-slate-400' }}"
+                data-index="{{ $idx }}" aria-label="Go to slide {{ $idx + 1 }}"></button>
+        @endforeach
     </div>
 
 </section>
