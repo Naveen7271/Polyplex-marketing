@@ -136,8 +136,7 @@ Pass a custom title or brand array via props:
         </div>
 
         {{-- 4x3 Brand Cards Grid --}}
-        <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[30px] sm:gap-5 lg:gap-[30px] justify-items-center justify-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[30px] sm:gap-5 lg:gap-[30px] justify-items-center justify-center">
             @foreach ($items as $brand)
                 <a href="{{ $brand['url'] ?? '#' . $brand['id'] }}" id="brand-card-{{ $brand['id'] }}"
                     class="group relative mx-auto w-full max-w-[301px] h-[207px] bg-white rounded-[5px] p-5 sm:p-6 lg:p-7 min-h-[140px] sm:min-h-[148px] md:min-h-[155px] flex flex-col items-center justify-center text-center shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 focus:outline-hidden focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900 cursor-pointer">
