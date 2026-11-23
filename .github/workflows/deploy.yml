@@ -23,6 +23,10 @@ jobs:
 
             cd /var/www/polyplex
 
+            echo "🔑 Ensuring directory permissions..."
+            mkdir -p bootstrap/cache storage/logs storage/framework/sessions storage/framework/views storage/framework/cache
+            chmod -R 775 storage bootstrap/cache 2>/dev/null || true
+
             echo "📥 Pulling latest changes from git..."
             git pull origin main
 
