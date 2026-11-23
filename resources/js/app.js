@@ -899,4 +899,194 @@ document.addEventListener('DOMContentLoaded', () => {
         geoWorldBtn.addEventListener('click', () => setGeoView('world'));
         geoIndiaBtn.addEventListener('click', () => setGeoView('india'));
     }
+
+    // --- Blog & News Page: Category Filter Tabs & Article Modal ---
+    const blogTabBlogs = document.getElementById('blog-tab-blogs');
+    const blogTabNews = document.getElementById('blog-tab-news');
+    const blogTabNewsletter = document.getElementById('blog-tab-newsletter');
+    const blogPanelBlogs = document.getElementById('blog-panel-blogs');
+    const blogPanelNews = document.getElementById('blog-panel-news');
+    const blogExploreContainer = document.getElementById('blog-explore-container');
+    const newsExploreContainer = document.getElementById('news-explore-container');
+
+    const updateBlogTabs = (activeTab) => {
+        const tabs = [
+            { el: blogTabBlogs, id: 'blogs', panel: blogPanelBlogs },
+            { el: blogTabNews, id: 'news', panel: blogPanelNews },
+            { el: blogTabNewsletter, id: 'newsletter', panel: null },
+        ];
+
+        tabs.forEach(({ el, id, panel }) => {
+            if (!el) return;
+            const isActive = id === activeTab;
+            el.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+            if (isActive) {
+                el.classList.add('bg-[#0E4174]', 'text-white', 'shadow-xs');
+                el.classList.remove('bg-[#DFDFE7]', 'text-[#0E4174]', 'hover:bg-[#d0dbe6]');
+            } else {
+                el.classList.remove('bg-[#0E4174]', 'text-white', 'shadow-xs');
+                el.classList.add('bg-[#DFDFE7]', 'text-[#0E4174]', 'hover:bg-[#d0dbe6]');
+            }
+
+            if (panel) {
+                if (isActive) {
+                    panel.classList.remove('hidden');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            }
+        });
+
+        // Switch secondary section grids based on active category
+        if (activeTab === 'blogs') {
+            if (blogExploreContainer) blogExploreContainer.classList.remove('hidden');
+            if (newsExploreContainer) newsExploreContainer.classList.add('hidden');
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '?tab=blogs');
+            }
+        } else if (activeTab === 'news') {
+            if (newsExploreContainer) newsExploreContainer.classList.remove('hidden');
+            if (blogExploreContainer) blogExploreContainer.classList.add('hidden');
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '?tab=news');
+            }
+        }
+    };
+
+    if (blogTabBlogs && blogTabNews && blogTabNewsletter) {
+        blogTabBlogs.addEventListener('click', () => {
+            updateBlogTabs('blogs');
+        });
+
+        blogTabNews.addEventListener('click', () => {
+            updateBlogTabs('news');
+        });
+
+        blogTabNewsletter.addEventListener('click', () => {
+            updateBlogTabs('newsletter');
+            const footerNewsletter = document.querySelector('footer input[name="email"]');
+            if (footerNewsletter) {
+                footerNewsletter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => {
+                    footerNewsletter.focus();
+                    footerNewsletter.classList.add('ring-2', 'ring-[#0E4174]');
+                    setTimeout(() => footerNewsletter.classList.remove('ring-2', 'ring-[#0E4174]'), 2000);
+                }, 600);
+            }
+        });
+
+        // Check URL query parameters or hash on page load (e.g. ?tab=news or #news)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab') || (window.location.hash ? window.location.hash.replace('#', '') : null);
+        if (tabParam === 'news' || tabParam === 'news-events') {
+            updateBlogTabs('news');
+        } else if (tabParam === 'newsletter') {
+            updateBlogTabs('newsletter');
+        }
+    }
+
+    // --- More to Explore Section Pagination ---
+    const explorePage1 = document.getElementById('explore-grid-page-1');
+    const explorePage2 = document.getElementById('explore-grid-page-2');
+    const explorePage3 = document.getElementById('explore-grid-page-3');
+    const exploreDot1 = document.getElementById('explore-dot-1');
+    const exploreDot2 = document.getElementById('explore-dot-2');
+    const exploreDot3 = document.getElementById('explore-dot-3');
+    const exploreNextBtn = document.getElementById('explore-next-btn');
+
+    if (explorePage1 && (exploreDot1 || exploreNextBtn)) {
+        let currentExplorePage = 1;
+        const totalExplorePages = explorePage3 ? 3 : (explorePage2 ? 2 : 1);
+
+        const setExplorePage = (p) => {
+            currentExplorePage = p;
+            const pages = [explorePage1, explorePage2, explorePage3];
+            pages.forEach((pg, idx) => {
+                if (!pg) return;
+                if (idx + 1 === currentExplorePage) {
+                    pg.classList.remove('hidden');
+                } else {
+                    pg.classList.add('hidden');
+                }
+            });
+
+            const dots = [exploreDot1, exploreDot2, exploreDot3];
+            dots.forEach((dot, idx) => {
+                if (!dot) return;
+                if (idx + 1 === currentExplorePage) {
+                    dot.className = 'w-2 h-2 rounded-full bg-[#0E4174] transition-all cursor-pointer focus:outline-hidden';
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.className = 'w-1.5 h-1.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all cursor-pointer focus:outline-hidden';
+                    dot.removeAttribute('aria-current');
+                }
+            });
+        };
+
+        if (exploreDot1) exploreDot1.addEventListener('click', () => setExplorePage(1));
+        if (exploreDot2) exploreDot2.addEventListener('click', () => setExplorePage(2));
+        if (exploreDot3) exploreDot3.addEventListener('click', () => setExplorePage(3));
+
+        if (exploreNextBtn) {
+            exploreNextBtn.addEventListener('click', () => {
+                const nextP = currentExplorePage >= totalExplorePages ? 1 : currentExplorePage + 1;
+                setExplorePage(nextP);
+            });
+        }
+    }
+
+    // --- Individual Blog Post: Like & Share Interactivity ---
+    const blogLikeBtn = document.getElementById('blog-like-btn');
+    const blogLikeCount = document.getElementById('blog-like-count');
+    const blogShareBtn = document.getElementById('blog-share-btn');
+    const blogToast = document.getElementById('blog-toast');
+
+    if (blogLikeBtn && blogLikeCount) {
+        let isLiked = false;
+        const baseCount = parseInt(blogLikeBtn.getAttribute('data-likes') || '128', 10);
+
+        blogLikeBtn.addEventListener('click', () => {
+            isLiked = !isLiked;
+            const newCount = isLiked ? baseCount + 1 : baseCount;
+            blogLikeCount.textContent = newCount;
+
+            const icon = blogLikeBtn.querySelector('svg');
+            if (isLiked) {
+                blogLikeBtn.classList.add('text-[#0E4174]', 'font-bold');
+                if (icon) icon.setAttribute('fill', 'currentColor');
+            } else {
+                blogLikeBtn.classList.remove('text-[#0E4174]', 'font-bold');
+                if (icon) icon.setAttribute('fill', 'none');
+            }
+        });
+    }
+
+    if (blogShareBtn) {
+        blogShareBtn.addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: document.title,
+                        url: window.location.href,
+                    });
+                    return;
+                } catch (err) {
+                    // fall through to clipboard
+                }
+            }
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    if (blogToast) {
+                        blogToast.classList.remove('hidden', 'translate-y-4');
+                        setTimeout(() => {
+                            blogToast.classList.add('translate-y-4');
+                            setTimeout(() => blogToast.classList.add('hidden'), 300);
+                        }, 2500);
+                    }
+                });
+            }
+        });
+    }
 });

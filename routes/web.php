@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\BlogData;
+use App\Support\NewsData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,52 @@ Route::get('/contact', function () {
 
 Route::get('/contact-us', function () {
     return redirect()->route('contact');
+});
+
+Route::get('/careers', function () {
+    return view('careers');
+})->name('careers');
+
+Route::get('/career', function () {
+    return redirect()->route('careers');
+});
+
+Route::get('/blog', function () {
+    return view('blog');
+})->name('blog');
+
+Route::get('/blogs', function () {
+    return redirect()->route('blog');
+});
+
+Route::get('/blog-and-news', function () {
+    return redirect()->route('blog');
+});
+
+Route::get('/news', function () {
+    return redirect()->route('blog', ['tab' => 'news']);
+})->name('news');
+
+Route::get('/news/{slug}', function (string $slug) {
+    $article = NewsData::find($slug);
+
+    return view('news.show', [
+        'slug' => $slug,
+        'article' => $article,
+    ]);
+})->name('news.show');
+
+Route::get('/blog/{slug}', function (string $slug) {
+    $post = BlogData::find($slug);
+
+    return view('blog.show', [
+        'slug' => $slug,
+        'post' => $post,
+    ]);
+})->name('blog.show');
+
+Route::get('/blogs/{slug}', function (string $slug) {
+    return redirect()->route('blog.show', ['slug' => $slug]);
 });
 
 Route::post('/contact', function (Request $request) {

@@ -257,4 +257,15 @@ class NavigationTest extends TestCase
         // Verify NovaJet links to the novajet product page
         $response->assertSee(route('products.show', 'novajet'));
     }
+
+    /**
+     * Test that navbar and footer link to the dedicated Blog and News route.
+     */
+    public function test_navbar_and_footer_link_to_blog_route(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee(route('blog'));
+    }
 }

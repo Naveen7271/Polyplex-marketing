@@ -4,7 +4,7 @@
     'description' => 'Have a requirement, need help finding the right media solutions, or want to explore an opportunity with Polyplex DigiPrint? Connect with our team.',
     'buttonText' => 'Contact Us',
     'buttonUrl' => null,
-    'bg' => 'bg-white',
+    'bg' => 'bg-[#F3F3F3]',
 ])
 
 @php

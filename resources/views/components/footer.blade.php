@@ -95,8 +95,8 @@
                     <li><a href="{{ route('products') }}" class="hover:text-white transition-colors">Products</a></li>
                     <li><a href="{{ route('industries') }}" class="hover:text-white transition-colors">Industries</a>
                     </li>
-                    <li><a href="#news" class="hover:text-white transition-colors">Blog &amp; News</a></li>
-                    <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>
+                    <li><a href="{{ route('blog') }}" class="hover:text-white transition-colors">Blog &amp; News</a></li>
+                    <li><a href="{{ route('careers') }}" class="hover:text-white transition-colors">Careers</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact</a></li>
                     <li><a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">Privacy Policy</a></li>
                     <li><a href="{{ route('terms-of-use') }}" class="hover:text-white transition-colors">Terms of use</a></li>

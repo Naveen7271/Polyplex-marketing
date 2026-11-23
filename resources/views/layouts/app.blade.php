@@ -80,7 +80,7 @@
                         <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                         <li><a href="#industries" class="hover:text-white transition-colors">Industries</a></li>
                         <li><a href="#blog" class="hover:text-white transition-colors">Blog &amp; News</a></li>
-                        <li><a href="#careers" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="{{ route('careers') }}" class="hover:text-white transition-colors">Careers</a></li>
                         <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
                 </div>

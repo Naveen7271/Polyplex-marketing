@@ -252,11 +252,15 @@
                     Industries
                 </a>
 
-                <a href="#blog" class="hover:text-blue-600 transition-colors py-2">
+                <a href="{{ route('blog') }}"
+                    class="py-2 border-b transition-colors {{ request()->routeIs('blog*') || request()->routeIs('news*') || request()->is('blog*') || request()->is('news*') ? 'text-[#0E4174] border-[#0E4174] font-medium' : 'text-[#000000] border-transparent hover:text-blue-600' }}"
+                    {!! request()->routeIs('blog*') || request()->routeIs('news*') || request()->is('blog*') || request()->is('news*') ? 'aria-current="page"' : '' !!}>
                     Blog &amp; News
                 </a>
 
-                <a href="#careers" class="hover:text-blue-600 transition-colors py-2">
+                <a href="{{ route('careers') }}"
+                    class="py-2 border-b transition-colors {{ request()->routeIs('careers*') || request()->is('careers*') ? 'text-[#0E4174] border-[#0E4174] font-medium' : 'text-[#000000] border-transparent hover:text-blue-600' }}"
+                    {!! request()->routeIs('careers*') || request()->is('careers*') ? 'aria-current="page"' : '' !!}>
                     Careers
                 </a>
 
@@ -426,10 +430,14 @@
                 {!! request()->routeIs('industries') || request()->is('industries*') ? 'aria-current="page"' : '' !!}>
                 Industries
             </a>
-            <a href="#blog" class="block px-3 py-2 rounded-md text-slate-800 hover:bg-slate-50 hover:text-blue-600">
+            <a href="{{ route('blog') }}"
+                class="block px-3 py-2 rounded-md {{ request()->routeIs('blog*') || request()->routeIs('news*') || request()->is('blog*') || request()->is('news*') ? 'text-[#0E4174] font-medium bg-slate-50' : 'text-slate-800 hover:bg-slate-50 hover:text-blue-600' }}"
+                {!! request()->routeIs('blog*') || request()->routeIs('news*') || request()->is('blog*') || request()->is('news*') ? 'aria-current="page"' : '' !!}>
                 Blog &amp; News
             </a>
-            <a href="#careers" class="block px-3 py-2 rounded-md text-slate-800 hover:bg-slate-50 hover:text-blue-600">
+            <a href="{{ route('careers') }}"
+                class="block px-3 py-2 rounded-md {{ request()->routeIs('careers*') || request()->is('careers*') ? 'text-[#0E4174] font-medium bg-slate-50' : 'text-slate-800 hover:bg-slate-50 hover:text-blue-600' }}"
+                {!! request()->routeIs('careers*') || request()->is('careers*') ? 'aria-current="page"' : '' !!}>
                 Careers
             </a>
             <a href="{{ route('contact') }}"

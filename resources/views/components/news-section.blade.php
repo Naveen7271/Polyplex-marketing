@@ -2,6 +2,7 @@
     $newsItemsPage1 = [
         [
             'id' => 1,
+            'slug' => 'tamil-nadu-print-and-pack-2026',
             'date' => 'OCT 26',
             'title' => 'Tamil Nadu Print & Pack 2026',
             'excerpt' => 'Connecting with the Printing & Packaging Industry',
@@ -10,6 +11,7 @@
         ],
         [
             'id' => 2,
+            'slug' => 'loupe-india-2026-toray',
             'date' => 'OCT 26',
             'title' => 'Loupe India 2026 – Toray',
             'excerpt' => 'Connecting with the Printing Industry',
@@ -18,6 +20,7 @@
         ],
         [
             'id' => 3,
+            'slug' => 'loupe-india-2026-asahi',
             'date' => 'OCT 26',
             'title' => 'Loupe India 2026 – Asahi',
             'excerpt' => 'Connecting with the Printing Industry',
@@ -26,6 +29,7 @@
         ],
         [
             'id' => 4,
+            'slug' => 'digital-yatra-2026-delhi',
             'date' => 'SEPT 26',
             'title' => 'Digital Yatra 2026, Delhi',
             'excerpt' => 'Bringing Digital Printing Professionals Together',
@@ -34,6 +38,7 @@
         ],
         [
             'id' => 5,
+            'slug' => 'media-expo-2026',
             'date' => 'SEPT 26',
             'title' => 'Media Expo 2026',
             'excerpt' => 'Connecting with the Media & Printing Industry',
@@ -42,6 +47,7 @@
         ],
         [
             'id' => 6,
+            'slug' => 'digital-yatra-2026-kolhapur',
             'date' => 'AUG 26',
             'title' => 'Digital Yatra 2026, Kolhapur',
             'excerpt' => 'TechNova Imaging Systems organised Digital Yatra 2026 in Kolhapur to highlight innovations.',
@@ -53,6 +59,7 @@
     $newsItemsPage2 = [
         [
             'id' => 7,
+            'slug' => 'printpack-india-summit-2026',
             'date' => 'AUG 12',
             'title' => 'PrintPack India Summit 2026',
             'excerpt' => 'Highlighting Next-Gen Substrates for High-Speed Commercial Presses',
@@ -61,6 +68,7 @@
         ],
         [
             'id' => 8,
+            'slug' => 'packaging-innovations-forum-mumbai',
             'date' => 'JULY 18',
             'title' => 'Packaging Innovations Forum, Mumbai',
             'excerpt' => 'Showcasing Sustainable Non-Tear Synthetic Media Alternatives',
@@ -69,6 +77,7 @@
         ],
         [
             'id' => 9,
+            'slug' => 'digital-label-expo-asia',
             'date' => 'JUN 24',
             'title' => 'Digital Label Expo Asia',
             'excerpt' => 'Demonstrating Self-Adhesive Films for Modern Digital Label Presses',
@@ -135,7 +144,7 @@
                     {{-- Read More Link --}}
                     <div class="pt-2 mt-auto">
                         <a 
-                            href="#news" 
+                            href="{{ route('news.show', $item['slug']) }}" 
                             class="font-sans text-[14px] font-[600] text-[#D6001C] hover:text-[#c8102e] inline-flex items-center gap-1.5 transition-colors"
                         >
                             <span>Read More</span>
@@ -187,7 +196,7 @@
 
                     <div class="pt-3 mt-1">
                         <a 
-                            href="#news" 
+                            href="{{ route('news.show', $item['slug']) }}" 
                             class="font-sans text-xs font-semibold text-[#e31b23] hover:text-[#c8102e] inline-flex items-center gap-1.5 transition-colors"
                         >
                             <span>Read More</span>
