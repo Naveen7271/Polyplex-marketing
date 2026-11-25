@@ -17,10 +17,9 @@
     {{-- Sixth Section of About Us Page: Our Geographic Distribution (World & India Interactive Map) --}}
     <x-about-distribution-section />
 
-    {{-- Seventh Section of About Us Page: Manufacturing Excellence (Interactive Hover Boxes) --}}
+    {{-- Seventh Section of About Us Page: Manufacturing Excellence (Interactive Hover Boxes) just tesing --}}
     <x-about-manufacturing-section />
 
     {{-- Call to Action: Let's Build the Future Together --}}
     <x-cta-section />
 </x-layouts.app>
-
