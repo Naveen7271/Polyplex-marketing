@@ -52,10 +52,7 @@
                         {{-- Circle Narrative Content --}}
                         <p
                             class="relative z-10 font-sans text-[15px] sm:text-[14px] md:text-[17.5px] leading-relaxed sm:leading-[1.65] text-[#003570] font-[600] tracking-normal max-w-[285px]">
-                            Polyplex DigiPrint, a strategic joint
-                            venture between Polyplex and TechNova, combines manufacturing
-                            excellence and print industry expertise to develop the next generation of digital print
-                            media.
+                            Materials expertise meets print application know-how.
                         </p>
                     </div>
                 </div>
@@ -63,10 +60,10 @@
                 {{-- Right: Narrative Text & CTA Button --}}
                 <div class="lg:col-span-7 space-y-6 pt-2 lg:pt-0">
                     <p class="text-slate-800 text-sm sm:text-base lg:text-[16px] leading-relaxed font-[500]">
-                        Powered by advanced coating technologies, materials science and decades of industry experience,
-                        our application-driven approach enables us to develop digital print media that deliver
-                        measurable value. From exceptional print quality to consistent performance and reliability, our
-                        portfolio is engineered to meet the demands of diverse applications.
+                        Polyplex DigiPrint is a strategic joint venture between Polyplex and TechNova, bringing together
+                        complementary strengths in materials, coated substrates and printing applications. We focus on
+                        media solutions that help print businesses create high-quality work across a wide range of
+                        applications.
                     </p>
 
                     <div>

@@ -39,8 +39,7 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
                             class="font-heading font-[600] text-[#000000] text-[20px] sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl ">
-                            To be a globally trusted and technology-driven leader in digital print substrates,
-                            recognised for quality, innovation and value creation across diverse applications.
+                            To be a preferred partner for innovative and application-focused print media solutions.
                         </p>
 
                         {{-- Red Chevron --}}
@@ -99,8 +98,9 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
                             class="font-heading font-semibold text-slate-900 text-[20px] sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
-                            To deliver high-performance print media solutions that enable our customers to Create,
-                            Communicate and Connect — while building a sustainable and profitable business together.
+                            To deliver dependable print media, relevant product innovation and responsive support
+                            through an understanding of substrates, technology and customer applications.
+
                         </p>
 
                         {{-- Red Chevron --}}
@@ -162,8 +162,8 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                     <div class="mt-[35px] pl-9 sm:pl-12 md:pl-14 flex items-start justify-between gap-6 sm:gap-10">
                         <p
                             class="font-heading font-semibold text-slate-900 text-[20px] sm:text-[20px] md:text-[19px] lg:text-[20px] leading-snug sm:leading-relaxed max-w-3xl group-hover:text-[#003570] transition-colors">
-                            To shape the future of print with lasting solutions, made in India for the world, with
-                            sustainability at their core.
+                            To help print businesses turn ideas into valuable finished applications through the right
+                            materials and knowledge.
                         </p>
 
                         {{-- Red Chevron --}}

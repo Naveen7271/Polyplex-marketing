@@ -550,21 +550,21 @@
     } catch (\Throwable) {
         $dbBrand = null;
     }
-    $hardcodedBrand = $brandsData[$currentSlug] ?? ($brandsData['novajet'] ?? []);
+    $hardcodedBrand = $brandsData[$currentSlug] ?? [];
 
     $brand = [
         'id' => $dbBrand?->slug ?? ($hardcodedBrand['id'] ?? $currentSlug),
         'title' => $dbBrand?->name ?? ($hardcodedBrand['title'] ?? ucwords(str_replace('-', ' ', $currentSlug))),
         'banner' => (!empty($dbBrand?->banner)) ? $dbBrand->banner : ($hardcodedBrand['banner'] ?? 'images/products/banner-non-tear.jpg'),
         'bannerAlt' => ($dbBrand?->name ?? $hardcodedBrand['title'] ?? 'Brand') . ' Print Media Substrates',
-        'badgeLogo' => $dbBrand?->logo ?? ($hardcodedBrand['badgeLogo'] ?? 'images/brands/logos/' . $currentSlug . '.png'),
-        'badgeLogoAlt' => $dbBrand?->alt ?? ($hardcodedBrand['badgeLogoAlt'] ?? (($dbBrand?->name ?? 'Brand') . ' - ' . ($dbBrand?->subtitle ?? ''))),
-        'badgeSubtitle' => $dbBrand?->subtitle ?? ($hardcodedBrand['badgeSubtitle'] ?? ''),
+        'badgeLogo' => (!empty($dbBrand?->logo)) ? $dbBrand->logo : ($hardcodedBrand['badgeLogo'] ?? null),
+        'badgeLogoAlt' => (!empty($dbBrand?->alt)) ? $dbBrand->alt : ($hardcodedBrand['badgeLogoAlt'] ?? (($dbBrand?->name ?? 'Brand') . (!empty($dbBrand?->subtitle) ? ' - ' . $dbBrand->subtitle : ''))),
+        'badgeSubtitle' => (!empty($dbBrand?->subtitle)) ? $dbBrand->subtitle : ($hardcodedBrand['badgeSubtitle'] ?? ''),
         'badgeDescription' => (!empty($dbBrand?->badge_description)) ? $dbBrand->badge_description : ($hardcodedBrand['badgeDescription'] ?? ''),
         'paragraphs' => (!empty($dbBrand?->paragraphs))
             ? array_values(array_filter(explode("\n\n", $dbBrand->paragraphs)))
             : ($hardcodedBrand['paragraphs'] ?? []),
-        'brochureUrl' => $dbBrand?->brochure_url ?? ($hardcodedBrand['brochureUrl'] ?? '#download-brochure'),
+        'brochureUrl' => (!empty($dbBrand?->brochure_url)) ? $dbBrand->brochure_url : ($hardcodedBrand['brochureUrl'] ?? '#download-brochure'),
         'brochureText' => $hardcodedBrand['brochureText'] ?? 'Download Brochure',
         'featuresOverline' => $hardcodedBrand['featuresOverline'] ?? 'FEATURES',
         'features' => ($dbBrand && $dbBrand->features->isNotEmpty())
@@ -603,6 +603,7 @@
     {{-- Section 1: Hero with Dark Industrial Banner & Overlapping Circular Badge with Brand Logo --}}
     <x-product-detail-hero-section :product-title="$brand['title']" :banner-image="$brand['banner']"
         :badge-logo="$brand['badgeLogo'] ?? null" :badge-logo-alt="$brand['badgeLogoAlt'] ?? null"
+        :badge-heading="$brand['title']"
         :badge-subtitle="$brand['badgeSubtitle'] ?? null"
         :badge-description="$brand['badgeDescription'] ?? null"
         :paragraphs="$brand['paragraphs']" :brochure-url="$brand['brochureUrl']"

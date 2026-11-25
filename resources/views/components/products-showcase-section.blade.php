@@ -55,12 +55,18 @@
     {{-- Content Container --}}
     <div class="relative z-10 max-w-[1352px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {{-- Section Headline: Montserrat Bold Centered --}}
+        {{-- Section Headline: Eyebrow, Montserrat Bold Centered Heading & Subtitle --}}
         <div class="text-center max-w-4xl mx-auto">
+            <p class="font-heading text-xs sm:text-sm font-[500] uppercase tracking-[0.22em] text-white/95 mb-3">
+                OUR PRODUCTS
+            </p>
             <h2
                 class="font-heading font-[700] text-[32px] sm:text-3xl lg:text-[32px] text-white tracking-tight leading-snug drop-shadow-sm">
                 Our Products are Engineered for Exceptional Results
             </h2>
+            <p class="mt-4 font-sans text-sm sm:text-[15px] lg:text-[16px] font-normal text-white/90 leading-relaxed max-w-2xl mx-auto">
+                Explore specialised media for photo printing, commercial print, labels, wide-format graphics, reprographics and prepress. Each category has its own application needs, finishes and compatible printing processes.
+            </p>
         </div>
 
         {{-- 4 Product Cards Grid --}}

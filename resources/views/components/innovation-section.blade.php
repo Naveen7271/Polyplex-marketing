@@ -51,7 +51,7 @@
                 </span>
                 <h2
                     class="font-heading font-[700] text-[32px] sm:text-3xl lg:text-[32px] text-[#0E4174] tracking-tight leading-snug">
-                    Turning Materials Science into<br class="hidden sm:inline"> Application Performance
+                    From Material Science to <br class="hidden sm:inline"> Print Performance
                 </h2>
             </div>
 
@@ -59,8 +59,9 @@
             <div
                 class="max-w-md md:text-left text-[#000000] font-[#000000] font-sans text-[16px] sm:text-sm lg:text-[16px] leading-relaxed">
                 <p>
-                    From material selection to final application, innovation at Polyplex DigiPrint is focused on
-                    developing solutions with measurable performance.
+                    Our innovation approach starts with understanding the substrate, the printing process and the
+                    intended use. Product recommendations are backed by approved technical information and real
+                    application requirements.
                 </p>
             </div>
 

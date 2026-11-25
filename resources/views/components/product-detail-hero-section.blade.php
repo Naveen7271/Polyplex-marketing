@@ -156,6 +156,12 @@ Pass custom titles, images, circle text, paragraphs, or brochure links via props
                                         @endif
                                     </p>
                                 @endif
+
+                                @if (!empty($badgeDescription))
+                                    <p class="font-sans text-xs sm:text-[12px] md:text-[12.5px] leading-relaxed text-[#1E1E1E] font-medium text-center max-w-[240px] mt-2">
+                                        {{ $badgeDescription }}
+                                    </p>
+                                @endif
                             </div>
                         @endif
 

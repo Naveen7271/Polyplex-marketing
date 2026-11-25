@@ -268,4 +268,23 @@ class NavigationTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee(route('blog'));
     }
+
+    /**
+     * Test that the footer renders the updated 4-column layout with Company, Products, and Brands.
+     */
+    public function test_footer_renders_company_products_and_brands_columns(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('Formerly known as TechNova Printrite Products Private Limited');
+        $response->assertSee('Polyplex DigiPrint brings together materials expertise and print-industry know-how');
+        $response->assertSee('Insights &amp; News', false);
+        $response->assertSee('Contact Us');
+        $response->assertSee('Brands');
+        $response->assertSee('NovaJet MPL');
+        $response->assertSee('NovaTrace');
+        $response->assertSee('Polyplex DigiPrint. All rights reserved.');
+        $response->assertDontSee('Subscribe to our newsletter for the latest trends and updates!');
+    }
 }

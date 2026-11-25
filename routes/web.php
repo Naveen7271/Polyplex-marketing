@@ -7,10 +7,12 @@ use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminBrandFeatureController;
 use App\Http\Controllers\Admin\AdminProductBrandController;
 use App\Http\Controllers\Admin\AdminProductController;
+use App\Models\Brand;
 use App\Support\BlogData;
 use App\Support\NewsData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 // ─── Admin Routes ────────────────────────────────────────────────────────────
 
@@ -196,12 +198,25 @@ Route::get('/products/{slug}', function (string $slug) {
         'novatrace',
     ];
 
-    if (strtolower($slug) === 'novacard') {
+    $normalizedSlug = strtolower($slug);
+
+    if ($normalizedSlug === 'novacard') {
         return redirect()->route('products.novacad');
     }
 
-    if (in_array(strtolower($slug), $brandSlugs, true)) {
-        return view('products.brand', ['slug' => strtolower($slug)]);
+    $isBrand = in_array($normalizedSlug, $brandSlugs, true);
+
+    if (! $isBrand) {
+        try {
+            $isBrand = Schema::hasTable('brands')
+                && Brand::where('slug', $normalizedSlug)->exists();
+        } catch (Throwable) {
+            $isBrand = false;
+        }
+    }
+
+    if ($isBrand) {
+        return view('products.brand', ['slug' => $normalizedSlug]);
     }
 
     return view('products.show', ['slug' => $slug]);
@@ -324,3 +339,18 @@ Route::get('/posijet', function () {
 Route::get('/novatrace', function () {
     return view('products.brand', ['slug' => 'novatrace']);
 })->name('products.novatrace');
+
+// Dynamic fallback route for brands created in the admin panel
+Route::get('/{slug}', function (string $slug) {
+    $normalizedSlug = strtolower($slug);
+
+    try {
+        if (Schema::hasTable('brands') && Brand::where('slug', $normalizedSlug)->exists()) {
+            return view('products.brand', ['slug' => $normalizedSlug]);
+        }
+    } catch (Throwable) {
+        // Fall through to 404 when database is unavailable
+    }
+
+    abort(404);
+})->where('slug', '[A-Za-z0-9\-_]+')->name('brands.show');

@@ -512,4 +512,40 @@ class AdminPanelTest extends TestCase
         $response->assertSee('Custom Screen Printing Tech', false);
         $response->assertSee('High opacity ink screen printing technology', false);
     }
+
+    /**
+     * Test that a newly created brand in admin is accessible via /{slug} and /products/{slug} as a brand page.
+     */
+    public function test_newly_created_brand_renders_brand_page_on_root_and_products_routes(): void
+    {
+        $this->withSession(['admin_logged_in' => true])
+            ->post('/admin/brands', [
+                'name' => 'NovaTest',
+                'slug' => 'novatest',
+                'subtitle' => 'Specialty Test Media',
+                'badge_description' => 'Custom badge summary for NovaTest brand.',
+                'paragraphs' => "First paragraph for NovaTest.\n\nSecond paragraph for NovaTest.",
+            ])
+            ->assertRedirect();
+
+        $rootResponse = $this->get('/novatest');
+        $rootResponse->assertStatus(200);
+        $rootResponse->assertSee('NovaTest', false);
+        $rootResponse->assertSee('Specialty Test Media', false);
+        $rootResponse->assertSee('Custom badge summary for NovaTest brand.', false);
+        $rootResponse->assertSee('First paragraph for NovaTest.', false);
+        $rootResponse->assertDontSee('Durability that goes Beyond Paper', false);
+        $rootResponse->assertDontSee('images/brands/logos/novajet-wide.png', false);
+        $rootResponse->assertDontSee('id="product-brands-section"', false);
+        $rootResponse->assertDontSee('A Closer Look at the Product', false);
+
+        $productsSlugResponse = $this->get('/products/novatest');
+        $productsSlugResponse->assertStatus(200);
+        $productsSlugResponse->assertSee('NovaTest', false);
+        $productsSlugResponse->assertSee('Specialty Test Media', false);
+        $productsSlugResponse->assertDontSee('id="product-brands-section"', false);
+        $productsSlugResponse->assertDontSee('A Closer Look at the Product', false);
+
+        $this->get('/non-existent-brand-slug')->assertStatus(404);
+    }
 }

@@ -108,7 +108,7 @@ class WelcomePageTest extends TestCase
     }
 
     /**
-     * Test that Testimonials section has dedicated mobile layout matching design with dividers and View More button.
+     * Test that Testimonials section matches the dark atmospheric 2-card layout with View More button.
      */
     public function test_testimonials_section_mobile_layout(): void
     {
@@ -117,7 +117,7 @@ class WelcomePageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('id="testimonials"', false);
         $response->assertSee('TESTIMONIALS');
-        $response->assertSee('Customer experiences highlight the consistency, quality and support associated with our media solutions.');
+        $response->assertSee('Real Applications. Customer Experiences.');
         $response->assertSee('Mr. Ramanan');
         $response->assertSee('Glo Color Lab, Coimbatore');
         $response->assertSee('Mr. Sam Jagdale');

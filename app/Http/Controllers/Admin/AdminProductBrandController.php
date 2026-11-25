@@ -67,7 +67,7 @@ class AdminProductBrandController
             'subtitle' => $validated['subtitle'],
             'logo' => $validated['logo'],
             'alt' => $validated['name'].($validated['subtitle'] ? ' - '.$validated['subtitle'] : ''),
-            'url' => $validated['url'] ?? '#'.$slug,
+            'url' => ! empty($validated['url']) ? $validated['url'] : '/'.$slug,
         ]);
 
         $product->brands()->attach($brand->id, [

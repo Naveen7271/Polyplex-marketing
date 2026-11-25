@@ -11,7 +11,7 @@ or pass custom paths via props:
     'imageRight' => 'images/about-hero-2.png',
     'altLeft' => 'Polyplex DigiPrint Manufacturing Facility',
     'altRight' => 'Polyplex DigiPrint Technology & Innovation Hub',
-    'headline' => 'For over 60 years, we’ve built on a legacy of innovation, taking our own approach to creating print solutions that make a meaningful impact.',
+    'headline' => 'Two Legacies. One Purpose: Better Possibilities in Print.',
 ])
 
 {{-- About Us Hero Section with Smooth Split-Image Hover Expand Effect --}}
@@ -54,7 +54,7 @@ or pass custom paths via props:
         <div class="w-full max-w-full px-6 py-8 sm:px-8 md:px-[108px] md:py-[174px]">
             <div class="max-w-full">
                 <h1
-                    class="font-heading max-w-[21ch] sm:max-w-none md:max-w-[1022px] font-[600] text-[26px] min-[360px]:text-[28px] min-[400px]:text-[32px] sm:text-3xl md:text-[36px] lg:text-[40px] xl:text-[40px] text-[#F3F3F3] tracking-tight leading-[1.28] sm:leading-[1.28] drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+                    class="font-heading max-w-[1255px] sm:max-w-none md:max-w-[1255px] font-[600] text-[26px] min-[360px]:text-[28px] min-[400px]:text-[32px] sm:text-3xl md:text-[36px] lg:text-[40px] xl:text-[40px] text-[#F3F3F3] tracking-tight leading-[1.28] sm:leading-[1.28] drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
                     {{ $headline }}
                 </h1>
             </div>

@@ -33,15 +33,23 @@
 
 {{-- Explore Possibilities Across Applications Section --}}
 <section id="applications"
-    class="relative w-full lg:max-h-[501px] py-12 sm:py-16 lg:py-[60px] bg-[#F3F3F3] border-b border-slate-200/80 overflow-hidden">
+    class="relative w-full py-12 sm:py-16 lg:py-[60px] bg-[#F3F3F3] border-b border-slate-200/80 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {{-- Section Title: Montserrat Bold Centered --}}
+        {{-- Section Title: Eyebrow, Montserrat Bold Centered Heading & Subtitle --}}
         <div class="text-center max-w-4xl mx-auto mb-8 sm:mb-12 lg:mb-[37px]">
+            <p class="font-heading text-xs sm:text-sm font-[500] uppercase tracking-[0.22em] text-slate-800 mb-3">
+                APPLICATIONS
+            </p>
             <h2
                 class="font-heading font-[700] text-2xl sm:text-3xl lg:text-[32px] text-[#0E4174] tracking-tight leading-tight max-w-[280px] sm:max-w-none mx-auto">
-                Explore Possibilities Across Applications
+                Choose the Media. Create the Application.
             </h2>
+            <p
+                class="mt-4 font-sans text-sm sm:text-[15px] lg:text-[16px] font-normal text-slate-800 leading-relaxed max-w-3xl mx-auto">
+                Every project asks something different of print media—visual impact, flexibility, handling strength,
+                dimensional stability or ease of use. Discover products through the applications you want to create.
+            </p>
         </div>
 
         {{-- Floating White Applications Slider Card --}}
@@ -77,8 +85,7 @@
 
                         {{-- Individual Application Item (1 per view on mobile/tablet, 2 per view on desktop) --}}
                         <div class="apps-slide-item w-full lg:w-1/2 shrink-0 px-1 sm:px-5 lg:px-6" data-index="{{ $idx }}">
-                            <div
-                                class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 lg:gap-7 group">
+                            <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 lg:gap-7 group">
 
                                 {{-- Thumbnail Image --}}
                                 <div
@@ -94,7 +101,8 @@
                                         class="font-heading font-[600] text-xl sm:text-xl lg:text-[22px] text-[#0E4174] leading-snug mb-2 sm:mb-2.5">
                                         {{ $app['title'] }}
                                     </h3>
-                                    <p class="font-sans text-[13.5px] sm:text-sm text-slate-800 lg:max-w-[299px] leading-relaxed">
+                                    <p
+                                        class="font-sans text-[13.5px] sm:text-sm text-slate-800 lg:max-w-[299px] leading-relaxed">
                                         {{ $app['description'] }}
                                     </p>
                                 </div>

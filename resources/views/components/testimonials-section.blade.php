@@ -18,169 +18,72 @@
 @endphp
 
 {{-- Testimonials & Customer Trust Section --}}
-<section id="testimonials" class="relative w-full bg-white select-none">
-    {{-- Top Banner Image Area (Desktop only) --}}
-    <div class="hidden lg:block relative w-full h-64 sm:h-72 md:h-80 lg:h-[572px] xl:h-[572px] bg-slate-900 overflow-hidden">
-        <img 
-            src="{{ asset('images/testimonials-banner.png') }}" 
-            alt="Polyplex DigiPrint Customer Collaboration" 
-            class="w-full h-full object-cover object-center"
-            loading="lazy"
-        />
-    </div>
+<section id="testimonials"
+    class="relative w-full py-14 sm:py-16 lg:py-20 overflow-hidden select-none"
+    style="background: radial-gradient(ellipse 55% 85% at 0% 60%, rgba(138, 10, 26, 0.82) 0%, rgba(4, 7, 16, 0) 70%),
+               radial-gradient(ellipse 55% 85% at 100% 45%, rgba(14, 65, 116, 0.85) 0%, rgba(4, 7, 16, 0) 70%),
+               #04060c;"
+    aria-labelledby="testimonials-heading">
 
-    {{-- Mobile Version (Matches attached design for mobile devices) --}}
-    <div class="lg:hidden bg-white pt-10 pb-12 border-b border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-5 sm:px-6">
-            {{-- Category Eyebrow --}}
-            <p class="font-heading font-[600] text-[13px] text-[#0E4174] tracking-[0.2em] uppercase mb-3">
+    <div class="relative z-10 max-w-[1140px] mx-auto px-5 sm:px-6 lg:px-8">
+
+        {{-- Centered Section Header --}}
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <p class="font-heading text-xs sm:text-[13px] font-medium uppercase tracking-[0.22em] text-white/85 mb-3">
                 TESTIMONIALS
             </p>
+            <h2 id="testimonials-heading"
+                class="font-heading font-bold text-2xl sm:text-3xl lg:text-[34px] text-white tracking-tight leading-tight">
+                Real Applications. Customer Experiences.
+            </h2>
+        </div>
 
-            {{-- Narrative Paragraph --}}
-            <p class="font-sans text-[15px] font-[500] text-slate-800 leading-relaxed mb-8 max-w-xl">
-                Customer experiences highlight the consistency, quality and support associated with our media solutions.
-            </p>
+        {{-- 2-Column Testimonial Cards Grid --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+            @foreach ($testimonials as $testimonial)
+                <div class="bg-[#F3F3F3] rounded-[4px] p-7 sm:p-8 lg:px-9 lg:py-8 flex flex-col justify-between shadow-lg">
+                    {{-- Quote --}}
+                    <p class="font-sans text-[#1E1E1E] text-[14.5px] sm:text-[15px] leading-[1.65] font-normal mb-6">
+                        “{{ $testimonial['quote'] }}”
+                    </p>
 
-            {{-- Stacked Testimonials with Dividers --}}
-            <div class="space-y-8">
-                @foreach ($testimonials as $index => $testimonial)
-                    <div class="space-y-4">
-                        {{-- Quote --}}
-                        <p class="font-sans text-slate-900 text-[15px] font-[500] leading-relaxed">
-                            "{{ $testimonial['quote'] }}"
-                        </p>
-
-                        {{-- Author Details --}}
-                        <div class="flex items-center gap-3 pt-1">
-                            @if ($testimonial['avatar'])
-                                <img 
-                                    src="{{ $testimonial['avatar'] }}" 
-                                    alt="{{ $testimonial['author'] }}" 
-                                    class="w-11 h-11 rounded-[4px] object-cover shrink-0"
-                                    loading="lazy"
-                                />
-                            @else
-                                <div class="w-11 h-11 rounded-[4px] bg-[#0b2b4e] text-white font-heading font-bold text-xs flex items-center justify-center shrink-0">
-                                    {{ $testimonial['initials'] }}
-                                </div>
-                            @endif
-                            <div>
-                                <h4 class="font-heading font-[700] text-slate-900 text-[15px] leading-tight">
-                                    {{ $testimonial['author'] }}
-                                </h4>
-                                <p class="font-sans text-[11px] text-slate-500 font-normal mt-0.5">
-                                    {{ $testimonial['company'] }}
-                                </p>
+                    {{-- Author Details --}}
+                    <div class="flex items-center gap-3.5 pt-1">
+                        @if (!empty($testimonial['avatar']))
+                            <img
+                                src="{{ $testimonial['avatar'] }}"
+                                alt="{{ $testimonial['author'] }}"
+                                class="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover shrink-0 border border-slate-200"
+                                loading="lazy"
+                            />
+                        @else
+                            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#0E4174] text-white font-heading font-bold text-xs flex items-center justify-center shrink-0">
+                                {{ $testimonial['initials'] }}
                             </div>
+                        @endif
+                        <div>
+                            <h3 class="font-heading font-bold text-[#111111] text-[16px] sm:text-[17px] leading-snug">
+                                {{ $testimonial['author'] }}
+                            </h3>
+                            <p class="font-sans text-[11.5px] text-slate-600 font-normal mt-0.5">
+                                {{ $testimonial['company'] }}
+                            </p>
                         </div>
                     </div>
-
-                    @if ($index < count($testimonials) - 1)
-                        <div class="border-t border-slate-200"></div>
-                    @endif
-                @endforeach
-            </div>
-
-            {{-- Centered "View More" CTA Button --}}
-            <div class="mt-10 flex justify-center">
-                <a 
-                    href="{{ route('testimonials') }}" 
-                    class="inline-flex items-center justify-center py-2.5 px-6 rounded bg-[#003570] hover:bg-[#071d36] text-white font-[500] text-sm transition-colors shadow-xs"
-                >
-                    View More
-                </a>
-            </div>
-        </div>
-    </div>
-
-    {{-- Desktop Version (Retains Banner, Circular Badge & 2-column Grid) --}}
-    <div class="hidden lg:block relative bg-white pb-16 sm:pb-20 lg:pb-24 border-b border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            {{-- Top Row: Overlapping Circle Badge + Testimonials Narrative --}}
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                
-                {{-- Left Column: Circular Badge overlapping Banner --}}
-                <div class="lg:col-span-5 flex justify-center lg:justify-start -mt-28 sm:-mt-36 md:-mt-44 lg:-mt-[212px] relative z-20">
-                    <div class="relative w-[280px] h-[280px] min-[360px]:w-[320px] min-[360px]:h-[320px] sm:w-[380px] sm:h-[380px] md:w-[424px] md:h-[424px] max-w-full shrink-0 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center p-6 min-[360px]:p-8 sm:p-10 md:p-12 text-center border border-slate-100">
-                        
-                        {{-- Red Side Borders / Arcs --}}
-                        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 424 424" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            {{-- Left Red Border Arc --}}
-                            <path d="M 127 39.84 A 192 192 0 0 0 127 384.16 L 127 363.83 A 174 174 0 0 1 127 60.17 Z" fill="#d6001c" />
-                            
-                            {{-- Right Red Border Arc --}}
-                            <path d="M 297 39.84 A 192 192 0 0 1 297 384.16 L 297 363.83 A 174 174 0 0 0 297 60.17 Z" fill="#d6001c" />
-                        </svg>
-
-                        {{-- Inner White Circle Card Content --}}
-                        <h3 class="relative z-10 font-heading font-[600] text-[22px] sm:text-2xl md:text-[26px] text-[#0E4174] leading-snug max-w-[280px]">
-                            Trusted by Customers.<br>
-                            Proven in Applications.
-                        </h3>
-                    </div>
                 </div>
-
-                {{-- Right Column: Narrative Copy --}}
-                <div class="lg:col-span-7 pt-2 lg:pt-8 text-center lg:text-left">
-                    <p class="font-heading font-[50] text-[16px] sm:text-sm text-[#0E4174] tracking-[0.2em] uppercase mb-[20px]">
-                        TESTIMONIALS
-                    </p>
-                    <p class="font-sans text-[#000000] text-[16px] font-[500] sm:text-base lg:text-[16px] leading-relaxed max-w-xl mx-auto lg:mx-0">
-                        Customer experiences highlight the consistency, quality and support associated with our media solutions.
-                    </p>
-                </div>
-
-            </div>
-
-            {{-- Second Row: 2 Testimonial Cards --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-[63px] mt-[41px] sm:mt-12 lg:mt-[41px]">
-                @foreach ($testimonials as $testimonial)
-                    <div class="bg-[#F3F3F3] border-[0.3px] border-slate-300 rounded-[5px] p-6 sm:p-8 flex flex-col justify-between hover:border-slate-300 hover:shadow-xs transition-all">
-                        {{-- Quote --}}
-                        <p class="font-sans text-[#00000] max-w-[463px] text-[16px] font-[500] sm:text-sm md:text-[14.5px] leading-relaxed mb-6">
-                            "{{ $testimonial['quote'] }}"
-                        </p>
-
-                        {{-- Author Details --}}
-                        <div class="flex items-center gap-3.5 pt-2">
-                            @if ($testimonial['avatar'])
-                                <img 
-                                    src="{{ $testimonial['avatar'] }}" 
-                                    alt="{{ $testimonial['author'] }}" 
-                                    class="w-[44px] h-[44px] sm:w-10 sm:h-10 rounded-[3px] object-cover shrink-0"
-                                    loading="lazy"
-                                />
-                            @else
-                                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xs bg-[#0b2b4e] text-white font-heading font-bold text-xs flex items-center justify-center shrink-0">
-                                    {{ $testimonial['initials'] }}
-                                </div>
-                            @endif
-                            <div>
-                                <h4 class="font-heading  font-[600] text-[#000000] text-[20px] leading-tight">
-                                    {{ $testimonial['author'] }}
-                                </h4>
-                                <p class="font-sans text-[11px] font-[500] mt-0.1">
-                                    {{ $testimonial['company'] }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            {{-- Third Row: Centered "View More" CTA Button --}}
-            <div class="mt-10 sm:mt-12 lg:mt-14 flex justify-center">
-                <a 
-                    href="{{ route('testimonials') }}" 
-                    class="inline-flex items-center justify-center py-[10px] px-[20px] rounded-xs bg-[#003570] hover:bg-[#071d36] text-white font-[500] text-[16px] transition-colors shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#0b2b4e] focus:ring-offset-2"
-                >
-                    View More
-                </a>
-            </div>
-
+            @endforeach
         </div>
+
+        {{-- Centered "View More" CTA Button --}}
+        <div class="mt-10 sm:mt-12 flex justify-center">
+            <a
+                href="{{ route('testimonials') }}"
+                class="inline-flex items-center justify-center px-5 py-2.5 rounded-[3px] bg-white hover:bg-slate-100 text-[#0E4174] font-sans font-semibold text-sm sm:text-[15px] transition-colors shadow-md focus:outline-hidden focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-[#04060c]"
+            >
+                View More
+            </a>
+        </div>
+
     </div>
 </section>
 

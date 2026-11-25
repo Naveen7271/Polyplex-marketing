@@ -46,19 +46,20 @@
 @endphp
 
 {{-- What Sets Us Apart Section --}}
-<section id="about-approach-section" class="w-full bg-white py-12 px-4 sm:py-16 sm:px-6 lg:py-[85px] lg:px-8 xl:px-[100px]">
+<section id="about-approach-section"
+    class="w-full bg-white py-12 px-4 sm:py-16 sm:px-6 lg:py-[85px] lg:px-8 xl:px-[100px]">
     <div class="mx-auto max-w-[1240px] text-center">
         {{-- Eyebrow --}}
         <p
             class="mb-3 sm:mb-4 lg:mb-6 font-heading text-[13px] min-[360px]:text-[14px] sm:text-sm font-[500] text-[#1E1E1E] uppercase tracking-[0.2em]">
-            WHAT SETS US APART
+            What Makes Us Different
         </p>
 
         {{-- Main Headline from Reference --}}
         <h2
             class="mx-auto mb-8 sm:mb-12 lg:mb-14 max-w-xs min-[360px]:max-w-sm sm:max-w-2xl lg:max-w-[1015px] font-heading text-[19px] min-[360px]:text-[21px] sm:text-2xl md:text-[28px] lg:text-[32px] font-[700] leading-snug text-[#0E4174]">
-            Our integrated approach brings together capabilities across the value chain,
-            enabling us to move from understanding requirements to delivering solutions and supporting customers through their journey.
+            We connect expertise from material development and coating with the realities of print production. Our focus
+            is on product relevance, consistent quality, industry collaboration and responsive support.
         </h2>
 
         {{-- Carousel Card --}}
@@ -67,7 +68,8 @@
             aria-roledescription="carousel" aria-label="What sets us apart" tabindex="0">
             <div class="grid grid-cols-1 md:grid-cols-2">
                 {{-- Left: Sliding Images Track (Right-to-Left movement) --}}
-                <div class="relative w-full h-[280px] min-[360px]:h-[300px] sm:h-[340px] md:h-full md:max-h-[340px] overflow-hidden">
+                <div
+                    class="relative w-full h-[280px] min-[360px]:h-[300px] sm:h-[340px] md:h-full md:max-h-[340px] overflow-hidden">
                     <div id="approach-image-track"
                         class="flex h-full w-full transition-transform duration-500 ease-in-out"
                         style="transform: translateX(0%);">
@@ -82,9 +84,11 @@
                 </div>
 
                 {{-- Right: Content Box (Bottom-to-Top text animation) --}}
-                <div class="flex flex-col justify-between bg-[#F3F3F3] p-6 sm:p-8 md:p-[50px] text-left md:max-h-[340px]">
+                <div
+                    class="flex flex-col justify-between bg-[#F3F3F3] p-6 sm:p-8 md:p-[50px] text-left md:max-h-[340px]">
                     {{-- Text Wrapper with overflow hidden --}}
-                    <div class="flex min-h-[170px] sm:min-h-[190px] flex-col justify-start md:justify-center overflow-hidden">
+                    <div
+                        class="flex min-h-[170px] sm:min-h-[190px] flex-col justify-start md:justify-center overflow-hidden">
                         <div id="approach-text-wrapper" class="transition-all duration-300 ease-out">
                             <h3 id="approach-title"
                                 class="mb-3 sm:mb-4 md:mb-6 font-heading text-[22px] min-[360px]:text-[24px] sm:text-[26px] md:text-[32px] font-[600] leading-tight text-[#0E4174]">

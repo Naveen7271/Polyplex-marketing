@@ -2,7 +2,10 @@
     {{-- First Section of About Us Page: Split Image Interactive Hero Section --}}
     <x-about-hero-section />
 
-    {{-- Second Section of About Us Page: Vision, Mission, Purpose & Core Values --}}
+    {{-- Second Section of About Us Page: Our Story --}}
+    <x-about-story-section />
+
+    {{-- Third Section of About Us Page: Vision, Mission, Purpose & Core Values --}}
     <x-about-vision-section />
 
     {{-- Third Section of About Us Page: Interactive Legacy Timeline --}}

@@ -31,6 +31,24 @@ class AboutPageTest extends TestCase
     }
 
     /**
+     * Test that the Our Story section renders right after the About hero section.
+     */
+    public function test_about_page_renders_our_story_section_after_hero(): void
+    {
+        $response = $this->get('/about');
+
+        $response->assertStatus(200);
+        $response->assertSee('id="about-story-section"', false);
+        $response->assertSee('OUR STORY');
+        $response->assertSee('Print media is where material science meets creativity and application.', false);
+        $response->assertSeeInOrder([
+            'id="about-hero-section"',
+            'id="about-story-section"',
+            'id="about-pillars-section"',
+        ], false);
+    }
+
+    /**
      * Test that /about-us route redirects to /about.
      */
     public function test_about_us_alias_redirects_to_about(): void
@@ -157,7 +175,10 @@ class AboutPageTest extends TestCase
 
         // Verify all 3 presence statements from the design reference
         $response->assertSee('Our global presence in 60+ countries highlights our significant footprint and track record worldwide.');
-        $response->assertSee('A strong operational network of 9 manufacturing locations, 2 R&D facilities and 12 distribution & conversion centers in India.');
+        $response->assertSee('A strong operational network across India');
+        $response->assertSee('9 manufacturing locations');
+        $response->assertSee('2 R&amp;D facilities', false);
+        $response->assertSee('12 distribution &amp; conversion centres', false);
         $response->assertSee('700+ regional partners across India combine scale with regional strength, helping us serve customers across diverse markets.');
 
         // Verify all 3 presence images

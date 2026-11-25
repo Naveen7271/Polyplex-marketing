@@ -94,7 +94,7 @@
         {{-- Section Title: Montserrat Bold Centered --}}
         <div class="text-center max-w-4xl mx-auto mb-10 sm:mb-12 lg:mb-14">
             <h2 class="font-heading font-[700] text-[32px] sm:text-3xl lg:text-[32px] text-[#0E4174] tracking-tight leading-tight">
-                Explore News About People and Technology
+                Latest from Polyplex DigiPrint
             </h2>
         </div>
 

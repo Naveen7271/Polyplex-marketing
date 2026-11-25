@@ -16,7 +16,12 @@
         ],
         [
             'type' => 'text',
-            'text' => 'A strong operational network of 9 manufacturing locations, 2 R&D facilities and 12 distribution & conversion centers in India.',
+            'heading' => 'A strong operational network across India',
+            'bullets' => [
+                '9 manufacturing locations',
+                '2 R&D facilities',
+                '12 distribution & conversion centres',
+            ],
         ],
         [
             'type' => 'image',
@@ -51,11 +56,28 @@
                     </div>
                 @else
                     {{-- Text Cell --}}
-                    <div class="flex aspect-4/3 w-full items-center bg-[#FFFFFF] justify-center p-6 text-center sm:p-8">
-                        <p
-                            class="mx-auto max-w-xs font-sans text-[16px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-base lg:text-[16px]">
-                            {{ $item['text'] }}
-                        </p>
+                    <div class="flex aspect-4/3 w-full items-center bg-[#FFFFFF] justify-center p-6 sm:p-8">
+                        @if (!empty($item['heading']) || !empty($item['bullets']))
+                            <div class="mx-auto w-full max-w-[310px] text-left">
+                                @if (!empty($item['heading']))
+                                    <h3 class="font-heading text-[20px] font-[600] leading-[1.3] text-[#0E4174] sm:text-[21px]">
+                                        {{ $item['heading'] }}
+                                    </h3>
+                                @endif
+                                @if (!empty($item['bullets']))
+                                    <ul class="mt-4 list-disc space-y-1.5 pl-5 font-sans text-[15px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-[16px]">
+                                        @foreach ($item['bullets'] as $bullet)
+                                            <li>{{ $bullet }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
+                        @else
+                            <p
+                                class="mx-auto max-w-xs text-center font-sans text-[16px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-base lg:text-[16px]">
+                                {{ $item['text'] }}
+                            </p>
+                        @endif
                     </div>
                 @endif
             @endforeach

@@ -26,15 +26,15 @@
                 {{-- Main Heading (Montserrat) --}}
                 <h2
                     class="font-heading font-bold text-3xl sm:text-4xl lg:text-[32px] font-[700] text-white tracking-tight leading-[1.18]">
-                    Digital Printing is Evolving.<br>
-                    So Are We.
+                    The science behind the substrate.<br>The understanding behind the print.
                 </h2>
 
                 {{-- Body Paragraph (Inter) --}}
                 <p
                     class="font-sans text-[16px] font-[500] sm:text-base text-white leading-relaxed max-w-[480px] font-normal">
-                    Our capabilities combine materials science, digital print media expertise, manufacturing excellence,
-                    application understanding and market reach to create an integrated advantage across the print value chain.
+                    A great print begins before ink or toner reaches the surface. It begins with choosing the right
+                    substrate, coating and finish for the application. Our approach connects material performance with
+                    practical printing requirements to help customers make more informed media choices.
                 </p>
 
                 {{-- Action Button --}}
