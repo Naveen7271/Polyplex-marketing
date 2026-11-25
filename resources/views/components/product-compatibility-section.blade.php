@@ -22,24 +22,24 @@ Customization:
             'id' => 'hp-indigo',
             'title' => 'HP Indigo',
             'description' => 'Compatible with HP Indigo digital printing technology for applications requiring digital production printing.',
-            'image' => 'images/products/compatibility/hp-indigo.jpg',
-            'fallbackImage' => 'images/products/applications/commercial-prints.jpg',
+            'image' => 'images/products/technologies/hp-indigo.png',
+            'fallbackImage' => 'images/products/technologies/hp-indigo.png',
             'alt' => 'HP Indigo digital printing technology compatibility',
         ],
         [
             'id' => 'dry-toner',
             'title' => 'Dry Toner',
             'description' => 'Suitable for compatible dry toner printing systems used in digital production environments.',
-            'image' => 'images/products/compatibility/dry-toner.jpg',
-            'fallbackImage' => 'images/products/applications/travel-albums.jpg',
+            'image' => 'images/products/technologies/dry-toner.png',
+            'fallbackImage' => 'images/products/technologies/dry-toner.png',
             'alt' => 'Dry toner digital printing technology compatibility',
         ],
         [
             'id' => 'inkjet-dye-pigment',
             'title' => 'Inkjet (Dye & Pigment)',
             'description' => 'Compatible with inkjet printing systems using both dye and pigment inks, supporting different printing requirements.',
-            'image' => 'images/products/compatibility/inkjet.jpg',
-            'fallbackImage' => 'images/products/applications/family-portraits.jpg',
+            'image' => 'images/products/technologies/inkjet-dye-pigment.png',
+            'fallbackImage' => 'images/products/technologies/inkjet-dye-pigment.png',
             'alt' => 'Inkjet dye and pigment ink printing compatibility',
         ],
     ];
@@ -84,9 +84,23 @@ Customization:
             @foreach ($items as $item)
                 @php
                     $displayImage = null;
-                    if (!empty($item['image']) && file_exists(public_path($item['image']))) {
-                        $displayImage = $item['image'];
-                    } elseif (!empty($item['fallbackImage']) && file_exists(public_path($item['fallbackImage']))) {
+                    if (!empty($item['image'])) {
+                        if (str_starts_with($item['image'], 'http://') || str_starts_with($item['image'], 'https://')) {
+                            $displayImage = $item['image'];
+                        } elseif (file_exists(public_path($item['image']))) {
+                            $displayImage = $item['image'];
+                        } else {
+                            // If code was looking inside images/products/compatibility, map to images/products/technologies
+                            $techCandidate = str_replace('images/products/compatibility/', 'images/products/technologies/', $item['image']);
+                            $techPng = preg_replace('/\.(jpg|jpeg|webp)$/i', '.png', $techCandidate);
+                            if (file_exists(public_path($techCandidate))) {
+                                $displayImage = $techCandidate;
+                            } elseif (file_exists(public_path($techPng))) {
+                                $displayImage = $techPng;
+                            }
+                        }
+                    }
+                    if (!$displayImage && !empty($item['fallbackImage']) && file_exists(public_path($item['fallbackImage']))) {
                         $displayImage = $item['fallbackImage'];
                     }
                 @endphp
@@ -97,7 +111,7 @@ Customization:
                     {{-- Top Card Photo Container --}}
                     <div class="w-full h-48 sm:h-52 md:h-56 bg-slate-100 overflow-hidden relative">
                         @if ($displayImage)
-                            <img src="{{ asset($displayImage) }}" alt="{{ $item['alt'] ?? $item['title'] }}"
+                            <img src="{{ (str_starts_with($displayImage, 'http://') || str_starts_with($displayImage, 'https://')) ? $displayImage : asset($displayImage) }}" alt="{{ $item['alt'] ?? $item['title'] }}"
                                 class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
                                 loading="lazy" />
                         @else

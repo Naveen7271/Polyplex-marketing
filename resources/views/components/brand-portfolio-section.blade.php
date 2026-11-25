@@ -112,7 +112,27 @@ Pass a custom title or brand array via props:
         ],
     ];
 
-    $items = $brands ?? $defaultBrands;
+    try {
+        $dbBrands = \Illuminate\Support\Facades\Schema::hasTable('brands') ? \App\Models\Brand::all() : collect();
+    } catch (\Throwable) {
+        $dbBrands = collect();
+    }
+    if ($brands !== null) {
+        $items = $brands;
+    } elseif ($dbBrands->isNotEmpty()) {
+        $items = $dbBrands->map(function ($b) {
+            return [
+                'id' => $b->slug ?? (string) $b->id,
+                'name' => $b->name,
+                'subtitle' => $b->subtitle,
+                'logo' => $b->logo,
+                'alt' => $b->alt ?? ($b->name . ' - ' . $b->subtitle),
+                'url' => $b->url ?? ('#' . ($b->slug ?? (string) $b->id)),
+            ];
+        })->toArray();
+    } else {
+        $items = $defaultBrands;
+    }
 @endphp
 
 <section id="brand-portfolio" class="relative w-full py-[60px] sm:py-20 lg:py-[60px] overflow-hidden select-none" style="background: radial-gradient(ellipse 65% 85% at 0% 50%, rgba(135, 10, 25, 0.45) 0%, rgba(4, 7, 16, 0) 70%),

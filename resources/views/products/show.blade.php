@@ -445,19 +445,69 @@
     ];
 
     $currentSlug = $slug ?? 'non-tear-media';
+    $dbProduct = null;
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('products')) {
+            $dbProduct = \App\Models\Product::with(['applications', 'brands'])->where('slug', $currentSlug)->first();
+        }
+    } catch (\Throwable) {
+        $dbProduct = null;
+    }
+
     $product = $productData[$currentSlug] ?? [
-        'title' => ucwords(str_replace('-', ' ', $currentSlug)),
-        'banner' => 'images/products/banner-non-tear.jpg',
+        'title' => $dbProduct?->name ?? ucwords(str_replace('-', ' ', $currentSlug)),
+        'banner' => $dbProduct?->banner_image ?? 'images/products/banner-non-tear.jpg',
         'badgeHeading' => 'Durability that goes Beyond Paper',
-        'badgeSubtitle' => 'Durable Print Media for Demanding Digital Applications',
-        'paragraphs' => [
+        'badgeSubtitle' => $dbProduct?->short_description ?? 'Durable Print Media for Demanding Digital Applications',
+        'paragraphs' => $dbProduct?->description ? array_values(array_filter(explode("\n\n", $dbProduct->description))) : [
             'Non-Tear Films are designed for applications where printed materials need to withstand regular handling while maintaining their appearances and useability.',
             'Their durability and non-tear characteristics make them suitable for photo products, personal memories and commercial print applications where the finished material needs to offer a combination of print quality and long-term usability.',
         ],
-        'brochureUrl' => '#download-brochure',
-        'brands' => $productData['non-tear-media']['brands'],
-        'technologies' => $productData['non-tear-media']['technologies'],
+        'brochureUrl' => $dbProduct?->brochure_url ?? '#download-brochure',
+        'brands' => $productData['non-tear-media']['brands'] ?? [],
+        'technologies' => $productData['non-tear-media']['technologies'] ?? [],
     ];
+
+    if ($dbProduct) {
+        if (!empty($dbProduct->name)) {
+            $product['title'] = $dbProduct->name;
+        }
+        if (!empty($dbProduct->banner_image)) {
+            $product['banner'] = $dbProduct->banner_image;
+        }
+        if (!empty($dbProduct->short_description)) {
+            $product['badgeSubtitle'] = $dbProduct->short_description;
+        }
+        if (!empty($dbProduct->description)) {
+            $product['paragraphs'] = array_values(array_filter(explode("\n\n", $dbProduct->description)));
+        }
+        if (!empty($dbProduct->brochure_url)) {
+            $product['brochureUrl'] = $dbProduct->brochure_url;
+        }
+        if ($dbProduct->relationLoaded('brands')) {
+            $product['brands'] = $dbProduct->brands->map(function ($b) {
+                return [
+                    'id' => $b->slug ?? (string) $b->id,
+                    'name' => $b->name,
+                    'subtitle' => $b->subtitle,
+                    'logo' => $b->logo,
+                    'alt' => $b->alt ?? $b->name,
+                    'url' => $b->url ?? ('#' . ($b->slug ?? (string) $b->id)),
+                ];
+            })->toArray();
+        }
+        if ($dbProduct->applications->isNotEmpty()) {
+            $product['applications'] = $dbProduct->applications->map(function ($app) {
+                return [
+                    'id' => (string) $app->id,
+                    'title' => $app->title,
+                    'description' => $app->description,
+                    'image' => $app->image,
+                    'alt' => $app->alt ?? $app->title,
+                ];
+            })->toArray();
+        }
+    }
 @endphp
 
 <x-layouts.app :title="$product['title'] . ' | Polyplex DigiPrint - Synthetic Paper & Specialty Print Media'">

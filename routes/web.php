@@ -1,9 +1,72 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminApplicationController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminBrandCompatibilityController;
+use App\Http\Controllers\Admin\AdminBrandController;
+use App\Http\Controllers\Admin\AdminBrandFeatureController;
+use App\Http\Controllers\Admin\AdminProductBrandController;
+use App\Http\Controllers\Admin\AdminProductController;
 use App\Support\BlogData;
 use App\Support\NewsData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// ─── Admin Routes ────────────────────────────────────────────────────────────
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Auth (no middleware)
+    Route::get('login', [AdminAuthController::class, 'showLogin'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('login.post');
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+    // Protected admin routes
+    Route::middleware('admin')->group(function () {
+        Route::get('/', [AdminProductController::class, 'dashboard'])->name('dashboard');
+
+        // Products CRUD
+        Route::resource('products', AdminProductController::class)->except(['show']);
+
+        // Brands CRUD
+        Route::resource('brands', AdminBrandController::class)->except(['show']);
+
+        // Applications CRUD (Diverse Applications)
+        Route::resource('applications', AdminApplicationController::class)->except(['show']);
+
+        // Brand Features (nested)
+        Route::prefix('brands/{brand}/features')->name('brands.features.')->group(function () {
+            Route::post('/', [AdminBrandFeatureController::class, 'store'])->name('store');
+            Route::put('{feature}', [AdminBrandFeatureController::class, 'update'])->name('update');
+            Route::delete('{feature}', [AdminBrandFeatureController::class, 'destroy'])->name('destroy');
+        });
+
+        // Brand Compatibilities (nested)
+        Route::prefix('brands/{brand}/compatibilities')->name('brands.compatibilities.')->group(function () {
+            Route::post('/', [AdminBrandCompatibilityController::class, 'store'])->name('store');
+            Route::put('{compatibility}', [AdminBrandCompatibilityController::class, 'update'])->name('update');
+            Route::delete('{compatibility}', [AdminBrandCompatibilityController::class, 'destroy'])->name('destroy');
+        });
+
+        // Product Brands (attach / detach / create)
+        Route::prefix('products/{product}/brands')->name('products.brands.')->group(function () {
+            Route::post('/', [AdminProductBrandController::class, 'attach'])->name('attach');
+            Route::delete('{brand}', [AdminProductBrandController::class, 'detach'])->name('detach');
+            Route::post('create', [AdminProductBrandController::class, 'storeAndAttach'])->name('store');
+        });
+
+        // Product Applications (nested)
+        Route::prefix('products/{product}/applications')->name('products.applications.')->group(function () {
+            Route::get('create', [AdminApplicationController::class, 'create'])->name('create');
+            Route::post('/', [AdminApplicationController::class, 'store'])->name('store');
+            Route::get('{application}/edit', [AdminApplicationController::class, 'edit'])->name('edit');
+            Route::put('{application}', [AdminApplicationController::class, 'update'])->name('update');
+            Route::delete('{application}', [AdminApplicationController::class, 'destroy'])->name('destroy');
+        });
+    });
+});
+
+// ─── Public Routes ───────────────────────────────────────────────────────────
 
 Route::get('/', function () {
     return view('welcome');

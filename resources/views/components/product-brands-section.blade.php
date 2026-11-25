@@ -45,6 +45,7 @@ Pass a custom title, product name, or brand array via props:
     $headingTitle = $title ?? ('Explore our Brands for ' . $productName);
 @endphp
 
+@if(!empty($items) && count($items) > 0)
 <section id="product-brands-section" class="relative w-full py-[80px] sm:py-20 lg:py-[80px] overflow-hidden select-none"
     style="background: radial-gradient(ellipse 65% 85% at 0% 50%, rgba(135, 10, 25, 0.45) 0%, rgba(4, 7, 16, 0) 70%),
                radial-gradient(ellipse 65% 85% at 100% 50%, rgba(14, 65, 116, 0.5) 0%, rgba(4, 7, 16, 0) 70%),
@@ -106,3 +107,4 @@ Pass a custom title, product name, or brand array via props:
 
     </div>
 </section>
+@endif

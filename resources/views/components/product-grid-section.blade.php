@@ -88,7 +88,33 @@ You can replace these images at any time with high-resolution assets or pass cus
         ],
     ];
 
-    $items = $products ?? $defaultProducts;
+    try {
+        $dbProducts = \Illuminate\Support\Facades\Schema::hasTable('products')
+            ? \App\Models\Product::where('is_active', true)->orderBy('sort_order')->get()
+            : collect();
+    } catch (\Throwable) {
+        $dbProducts = collect();
+    }
+    if ($products !== null) {
+        $items = $products;
+    } elseif ($dbProducts->isNotEmpty()) {
+        $items = $dbProducts->map(function ($p) {
+            $words = explode(' ', $p->name);
+            $mid = ceil(count($words) / 2);
+            $line1 = implode(' ', array_slice($words, 0, (int)$mid));
+            $line2 = implode(' ', array_slice($words, (int)$mid));
+            return [
+                'id' => $p->slug,
+                'title' => $p->name,
+                'title_lines' => $line2 ? [$line1, $line2] : [$line1],
+                'image' => $p->banner_image ?? ('images/products/' . $p->slug . '.jpg'),
+                'url' => route('products.show', $p->slug),
+                'alt' => $p->name,
+            ];
+        })->toArray();
+    } else {
+        $items = $defaultProducts;
+    }
 @endphp
 
 <section id="discover-products"

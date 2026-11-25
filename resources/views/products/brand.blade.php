@@ -51,24 +51,24 @@
                     'id' => 'hp-indigo',
                     'title' => 'HP Indigo',
                     'description' => 'Compatible with HP Indigo digital printing technology for applications requiring digital production printing.',
-                    'image' => 'images/products/compatibility/hp-indigo.jpg',
-                    'fallbackImage' => 'images/products/applications/commercial-prints.jpg',
+                    'image' => 'images/products/technologies/hp-indigo.png',
+                    'fallbackImage' => 'images/products/technologies/hp-indigo.png',
                     'alt' => 'HP Indigo digital printing technology compatibility',
                 ],
                 [
                     'id' => 'dry-toner',
                     'title' => 'Dry Toner',
                     'description' => 'Suitable for compatible dry toner printing systems used in digital production environments.',
-                    'image' => 'images/products/compatibility/dry-toner.jpg',
-                    'fallbackImage' => 'images/products/applications/travel-albums.jpg',
+                    'image' => 'images/products/technologies/dry-toner.png',
+                    'fallbackImage' => 'images/products/technologies/dry-toner.png',
                     'alt' => 'Dry toner digital printing technology compatibility',
                 ],
                 [
                     'id' => 'inkjet-dye-pigment',
                     'title' => 'Inkjet (Dye & Pigment)',
                     'description' => 'Compatible with inkjet printing systems using both dye and pigment inks, supporting different printing requirements.',
-                    'image' => 'images/products/compatibility/inkjet.jpg',
-                    'fallbackImage' => 'images/products/applications/family-portraits.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
+                    'fallbackImage' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'alt' => 'Inkjet dye and pigment ink printing compatibility',
                 ],
             ],
@@ -159,7 +159,7 @@
                     'id' => 'laser-imaging',
                     'title' => 'Laser Imaging',
                     'description' => 'Suitable for compatible laser-based imaging systems used in offset plate preparation.',
-                    'image' => 'images/products/compatibility/novadom-laser-imaging.jpg',
+                    'image' => 'images/products/technologies/dry-toner.png',
                     'fallbackImage' => 'images/products/technologies/dry-toner.png',
                     'alt' => 'Laser-based imaging systems used in offset plate preparation',
                 ],
@@ -167,7 +167,7 @@
                     'id' => 'inkjet-imaging',
                     'title' => 'Inkjet Imaging',
                     'description' => 'Designed for compatible inkjet-based imaging workflows for selected offset-printing applications.',
-                    'image' => 'images/products/compatibility/novadom-inkjet-imaging.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/technologies/hp-indigo.png',
                     'alt' => 'Inkjet-based imaging workflows for selected offset-printing applications',
                 ],
@@ -175,7 +175,7 @@
                     'id' => 'offset-printing',
                     'title' => 'Offset Printing',
                     'description' => 'Developed for use in selected offset-printing processes requiring compatible imageable plate solutions.',
-                    'image' => 'images/products/compatibility/novadom-offset-printing.jpg',
+                    'image' => 'images/products/technologies/Offset.png',
                     'fallbackImage' => 'images/products/technologies/Offset.png',
                     'alt' => 'Selected offset-printing processes requiring compatible imageable plate solutions',
                 ],
@@ -267,7 +267,7 @@
                     'id' => 'cad-printing',
                     'title' => 'CAD Printing',
                     'description' => 'Suitable for computer-aided design printing workflows involving technical drawings, engineering plans and architectural layouts.',
-                    'image' => 'images/products/compatibility/novacad-cad-printing.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/banner-reprographic.jpg',
                     'alt' => 'CAD printing workflows involving technical drawings, engineering plans and architectural layouts',
                 ],
@@ -275,7 +275,7 @@
                     'id' => 'gis-printing',
                     'title' => 'GIS Printing',
                     'description' => 'Designed for printing geographical information, maps and spatial representations.',
-                    'image' => 'images/products/compatibility/novacad-gis-printing.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/reprographic-media.jpg',
                     'alt' => 'GIS printing for geographical information, maps and spatial representations',
                 ],
@@ -283,7 +283,7 @@
                     'id' => 'proofing',
                     'title' => 'Proofing',
                     'description' => 'Suitable for proofing workflows requiring accurate visual reproduction and output evaluation.',
-                    'image' => 'images/products/compatibility/novacad-proofing.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/gallery/carousel-2.jpg',
                     'alt' => 'Proofing workflows requiring accurate visual reproduction and output evaluation',
                 ],
@@ -291,8 +291,8 @@
                     'id' => 'screen-printing',
                     'title' => 'Screen Printing',
                     'description' => 'Designed for compatible screen printing applications requiring specialised film and paper media.',
-                    'image' => 'images/products/compatibility/novacad-screen-printing.jpg',
-                    'fallbackImage' => 'images/products/technologies/screen.png',
+                    'image' => 'images/products/technologies/Screen.png',
+                    'fallbackImage' => 'images/products/technologies/Screen.png',
                     'alt' => 'Compatible screen printing applications requiring specialised film and paper media',
                 ],
             ],
@@ -333,7 +333,7 @@
                     'id' => 'cad-printing',
                     'title' => 'CAD Printing',
                     'description' => 'Suitable for computer-aided design printing workflows involving technical drawings, engineering plans and architectural layouts.',
-                    'image' => 'images/products/compatibility/novacad-cad-printing.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/banner-reprographic.jpg',
                     'alt' => 'CAD printing workflows involving technical drawings, engineering plans and architectural layouts',
                 ],
@@ -341,7 +341,7 @@
                     'id' => 'gis-printing',
                     'title' => 'GIS Printing',
                     'description' => 'Designed for printing geographical information, maps and spatial representations.',
-                    'image' => 'images/products/compatibility/novacad-gis-printing.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/reprographic-media.jpg',
                     'alt' => 'GIS printing for geographical information, maps and spatial representations',
                 ],
@@ -349,7 +349,7 @@
                     'id' => 'proofing',
                     'title' => 'Proofing',
                     'description' => 'Suitable for proofing workflows requiring accurate visual reproduction and output evaluation.',
-                    'image' => 'images/products/compatibility/novacad-proofing.jpg',
+                    'image' => 'images/products/technologies/inkjet-dye-pigment.png',
                     'fallbackImage' => 'images/products/gallery/carousel-2.jpg',
                     'alt' => 'Proofing workflows requiring accurate visual reproduction and output evaluation',
                 ],
@@ -357,8 +357,8 @@
                     'id' => 'screen-printing',
                     'title' => 'Screen Printing',
                     'description' => 'Designed for compatible screen printing applications requiring specialised film and paper media.',
-                    'image' => 'images/products/compatibility/novacad-screen-printing.jpg',
-                    'fallbackImage' => 'images/products/technologies/screen.png',
+                    'image' => 'images/products/technologies/Screen.png',
+                    'fallbackImage' => 'images/products/technologies/Screen.png',
                     'alt' => 'Compatible screen printing applications requiring specialised film and paper media',
                 ],
             ],
@@ -542,7 +542,61 @@
     ];
 
     $currentSlug = $slug ?? 'novajet';
-    $brand = $brandsData[$currentSlug] ?? $brandsData['novajet'];
+    $dbBrand = null;
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('brands')) {
+            $dbBrand = \App\Models\Brand::with(['features', 'compatibilities'])->where('slug', $currentSlug)->first();
+        }
+    } catch (\Throwable) {
+        $dbBrand = null;
+    }
+    $hardcodedBrand = $brandsData[$currentSlug] ?? ($brandsData['novajet'] ?? []);
+
+    $brand = [
+        'id' => $dbBrand?->slug ?? ($hardcodedBrand['id'] ?? $currentSlug),
+        'title' => $dbBrand?->name ?? ($hardcodedBrand['title'] ?? ucwords(str_replace('-', ' ', $currentSlug))),
+        'banner' => (!empty($dbBrand?->banner)) ? $dbBrand->banner : ($hardcodedBrand['banner'] ?? 'images/products/banner-non-tear.jpg'),
+        'bannerAlt' => ($dbBrand?->name ?? $hardcodedBrand['title'] ?? 'Brand') . ' Print Media Substrates',
+        'badgeLogo' => $dbBrand?->logo ?? ($hardcodedBrand['badgeLogo'] ?? 'images/brands/logos/' . $currentSlug . '.png'),
+        'badgeLogoAlt' => $dbBrand?->alt ?? ($hardcodedBrand['badgeLogoAlt'] ?? (($dbBrand?->name ?? 'Brand') . ' - ' . ($dbBrand?->subtitle ?? ''))),
+        'badgeSubtitle' => $dbBrand?->subtitle ?? ($hardcodedBrand['badgeSubtitle'] ?? ''),
+        'badgeDescription' => (!empty($dbBrand?->badge_description)) ? $dbBrand->badge_description : ($hardcodedBrand['badgeDescription'] ?? ''),
+        'paragraphs' => (!empty($dbBrand?->paragraphs))
+            ? array_values(array_filter(explode("\n\n", $dbBrand->paragraphs)))
+            : ($hardcodedBrand['paragraphs'] ?? []),
+        'brochureUrl' => $dbBrand?->brochure_url ?? ($hardcodedBrand['brochureUrl'] ?? '#download-brochure'),
+        'brochureText' => $hardcodedBrand['brochureText'] ?? 'Download Brochure',
+        'featuresOverline' => $hardcodedBrand['featuresOverline'] ?? 'FEATURES',
+        'features' => ($dbBrand && $dbBrand->features->isNotEmpty())
+            ? $dbBrand->features->map(function ($f) {
+                return [
+                    'id' => (string) $f->id,
+                    'title' => $f->title,
+                    'description' => $f->description,
+                ];
+            })->toArray()
+            : ($hardcodedBrand['features'] ?? []),
+        'statement' => (!empty($dbBrand?->statement)) ? $dbBrand->statement : ($hardcodedBrand['statement'] ?? null),
+        'compatibilityOverline' => $hardcodedBrand['compatibilityOverline'] ?? 'COMPATIBILITY',
+        'compatibilityHeadline' => (!empty($dbBrand?->compatibility_headline))
+            ? $dbBrand->compatibility_headline
+            : ($hardcodedBrand['compatibilityHeadline'] ?? null),
+        'compatibility' => ($dbBrand && $dbBrand->compatibilities->isNotEmpty())
+            ? $dbBrand->compatibilities->map(function ($c) {
+                return [
+                    'id' => (string) $c->id,
+                    'title' => $c->title,
+                    'description' => $c->description,
+                    'image' => $c->image,
+                    'alt' => $c->alt ?? $c->title,
+                ];
+            })->toArray()
+            : ($hardcodedBrand['compatibility'] ?? null),
+        'recommendationsTitle' => $hardcodedBrand['recommendationsTitle'] ?? 'You Might Also Like',
+        'recommendedBrands' => $hardcodedBrand['recommendedBrands'] ?? null,
+        'exploreBrandsUrl' => $hardcodedBrand['exploreBrandsUrl'] ?? route('products'),
+        'exploreBrandsText' => $hardcodedBrand['exploreBrandsText'] ?? 'Explore all brands',
+    ];
 @endphp
 
 <x-layouts.app :title="$brand['title'] . ' | Polyplex DigiPrint - Synthetic Paper & Specialty Print Media'">
