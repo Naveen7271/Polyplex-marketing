@@ -38,8 +38,8 @@ class NavigationTest extends TestCase
         $response->assertSee('Multi-Purpose Labels');
         $response->assertSee('Digital Wide-Format Media');
         $response->assertSee('Reprographic Media');
-        $response->assertSee('Polyester Offset Plate');
-        $response->assertSee('Laser &amp; Inkjet Offset Print', false);
+        $response->assertSee('Polyester Offset Plates');
+        $response->assertSee('Laser and Inkjet Positive Films');
 
         // Verify fonts (Inter and Montserrat) are referenced
         $response->assertSee('inter');
@@ -256,6 +256,25 @@ class NavigationTest extends TestCase
 
         // Verify NovaJet links to the novajet product page
         $response->assertSee(route('products.show', 'novajet'));
+    }
+
+    /**
+     * Test that the desktop products dropdown renders the two-pane split category and brand panels.
+     */
+    public function test_products_dropdown_renders_split_categories_and_brand_panels(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('products-dropdown-category', false);
+        $response->assertSee('products-dropdown-panel', false);
+        $response->assertSee('data-category-trigger="non-tear-media"', false);
+        $response->assertSee('data-category-panel="non-tear-media"', false);
+        $response->assertSee('Polyester Offset Plates');
+        $response->assertSee('Laser and Inkjet Positive Films');
+        $response->assertSee(route('products.show', 'novalife'), false);
+        $response->assertSee(route('products.show', 'novajet'), false);
+        $response->assertSee(route('products.show', 'saraprint'), false);
     }
 
     /**

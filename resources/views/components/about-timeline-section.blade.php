@@ -13,8 +13,12 @@
 
     {{-- Timeline Graphic Banner --}}
     <section class="timeline" id="timeline" tabindex="0" aria-roledescription="carousel" aria-label="Our journey">
-        <div class="timeline__bg" aria-hidden="true"></div>
+        <div class="timeline__bg" aria-hidden="true">
+            <img src="{{ asset('images/time.png') }}" alt=""
+                class="h-full w-full object-cover object-center pointer-events-none" loading="eager" />
+        </div>
         <div class="timeline__dots" aria-hidden="true"></div>
+        <div class="timeline__overlay" aria-hidden="true"></div>
 
         {{-- Rotating dial: ticks, arc, dots and year labels are built by app.js --}}
         <div class="dial" aria-hidden="true">

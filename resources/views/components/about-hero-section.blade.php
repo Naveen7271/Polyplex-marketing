@@ -50,11 +50,11 @@ or pass custom paths via props:
     </div>
 
     {{-- Floating Text Content Overlay (pointer-events-none ensures hover passes through to background images) --}}
-    <div class="absolute inset-0 z-20 flex items-center pointer-events-none">
+    <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
         <div class="w-full max-w-full px-6 py-8 sm:px-8 md:px-[108px] md:py-[174px]">
-            <div class="max-w-full">
+            <div class="max-w-full text-center">
                 <h1
-                    class="font-heading max-w-[1255px] sm:max-w-none md:max-w-[1255px] font-[600] text-[26px] min-[360px]:text-[28px] min-[400px]:text-[32px] sm:text-3xl md:text-[36px] lg:text-[40px] xl:text-[40px] text-[#F3F3F3] tracking-tight leading-[1.28] sm:leading-[1.28] drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+                    class="font-heading max-w-[1255px] mx-auto sm:max-w-none md:max-w-[1255px] font-[600] text-[26px] min-[360px]:text-[28px] min-[400px]:text-[32px] sm:text-3xl md:text-[36px] lg:text-[40px] xl:text-[40px] text-[#F3F3F3] text-center tracking-tight leading-[1.28] sm:leading-[1.28] drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
                     {{ $headline }}
                 </h1>
             </div>

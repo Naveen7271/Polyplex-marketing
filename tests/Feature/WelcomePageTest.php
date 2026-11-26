@@ -21,6 +21,21 @@ class WelcomePageTest extends TestCase
     }
 
     /**
+     * Test that the hero section renders the Explore Products link and Find Media by Applications search button.
+     */
+    public function test_hero_section_renders_explore_products_and_find_media_search_button(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('Explore Products');
+        $response->assertSee(route('products'), false);
+        $response->assertSee('Find Media by Applications');
+        $response->assertSee('id="hero-find-media-btn"', false);
+        $response->assertSee('data-open-search', false);
+    }
+
+    /**
      * Test that global overflow protection is present to avoid horizontal space on mobile.
      */
     public function test_layout_prevents_horizontal_overflow_on_mobile(): void
@@ -67,6 +82,7 @@ class WelcomePageTest extends TestCase
         $response->assertSee('Distribution');
         $response->assertSee('Partners');
         $response->assertSee('Pan - India Reach');
+        $response->assertSee('Combined Legacy and Group Reach of Polyplex and TechNova');
     }
 
     /**
@@ -82,8 +98,9 @@ class WelcomePageTest extends TestCase
         $response->assertSee('id="innovation-prev-btn"', false);
         $response->assertSee('id="innovation-next-btn"', false);
         $response->assertSee('id="innovation-dots-container"', false);
-        // Tall portrait height on mobile
+        // Tall portrait height on mobile & vertically centered slide content
         $response->assertSee('h-[440px] sm:h-[480px] lg:h-auto lg:aspect-16/10', false);
+        $response->assertSee('flex flex-col justify-center pointer-events-none z-10', false);
         // Slide counter & titles
         $response->assertSee('1 / 4');
         $response->assertSee('Material Science Expertise');
@@ -105,6 +122,35 @@ class WelcomePageTest extends TestCase
         $response->assertSee('id="apps-next-btn"', false);
         $response->assertSee('Commercial Print');
         $response->assertSee('Photo and Digital Imaging');
+    }
+
+    /**
+     * Test that all newly added application slider items are rendered.
+     */
+    public function test_applications_slider_renders_all_application_items(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $expectedTitles = [
+            'Menus and Communication Materials',
+            'Labels and Tags',
+            'Branding and Marketing',
+            'Identification and Information',
+            'Packaging',
+            'Office and Business Printing',
+            'Logistics and Tracking',
+            'Healthcare',
+            'Retail and Point-of-Sale',
+            'Indoor and Outdoor Graphics',
+            'Signage and Displays',
+            'Technical, CAD and GIS',
+            'Pre-Press and Specialised Printing',
+        ];
+
+        foreach ($expectedTitles as $title) {
+            $response->assertSee($title);
+        }
     }
 
     /**

@@ -31,7 +31,7 @@
 
                 {{-- Body Paragraph (Inter) --}}
                 <p
-                    class="font-sans text-[16px] font-[500] sm:text-base text-white leading-relaxed max-w-[480px] font-normal">
+                    class="font-sans text-[16px] font-[500] sm:text-base text-white leading-relaxed max-w-[550px] font-normal">
                     A great print begins before ink or toner reaches the surface. It begins with choosing the right
                     substrate, coating and finish for the application. Our approach connects material performance with
                     practical printing requirements to help customers make more informed media choices.

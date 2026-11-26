@@ -13,23 +13,23 @@
             'counter' => '2 / 4',
             'title' => 'Print-Process Compatibility',
             'description' => 'We consider print-process requirements to develop media that works effectively with different printing technologies.',
-            'default_img' => 'images/innovation-slide-2.png',
+            'default_img' => 'images/innovation-slide-2.jpg',
             'alt' => 'Print-process compatibility - technical workshop session',
         ],
         [
             'index' => 2,
             'counter' => '3 / 4',
-            'title' => 'Application-Driven Innovation',
-            'description' => 'Formulating specialty surface coatings and high-performance synthetic media engineered for modern high-speed digital presses.',
-            'default_img' => 'images/innovation-slide-3.png',
+            'title' => 'Application-Led Development',
+            'description' => 'Our development approach connects technical expertise with specific application requirements to create physical application-ready solutions.',
+            'default_img' => 'images/innovation-slide-3.jpg',
             'alt' => 'Application-driven innovation - wide format digital press',
         ],
         [
             'index' => 3,
             'counter' => '4 / 4',
-            'title' => 'Performance Validation & Durability',
-            'description' => 'Comprehensive laboratory analysis and real-world durability testing ensuring uncompromising print reliability across diverse applications.',
-            'default_img' => 'images/innovation-slide-4.png',
+            'title' => 'Research and Development',
+            'description' => 'Our R&D capablities bring together material sciences, coating expertise, print-process knowledge and customer insight to support continuous innovation in product performance and application-specific solutions.',
+            'default_img' => 'images/innovation-slide-4.jpg',
             'alt' => 'Performance validation - hydrophobic contact angle testing',
         ],
     ];
@@ -57,7 +57,7 @@
 
             {{-- Right: Narrative Paragraph --}}
             <div
-                class="max-w-md md:text-left text-[#000000] font-[#000000] font-sans text-[16px] sm:text-sm lg:text-[16px] leading-relaxed">
+                class="max-w-[581px] md:text-left text-[#000000] font-[#000000] font-sans text-[16px] sm:text-sm lg:text-[16px] leading-relaxed">
                 <p>
                     Our innovation approach starts with understanding the substrate, the printing process and the
                     intended use. Product recommendations are backed by approved technical information and real
@@ -124,29 +124,32 @@
 
                         {{-- Slide Content Overlay --}}
                         <div
-                            class="absolute inset-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-between pointer-events-none z-10">
+                            class="absolute inset-0 p-6 sm:p-10 lg:p-14 flex flex-col justify-center pointer-events-none z-10">
 
-                            {{-- Counter: e.g. 1 / 4 --}}
-                            <div>
-                                <span
-                                    class="text-xs sm:text-sm font-medium tracking-[0.25em] text-white/90 uppercase font-sans">
-                                    {{ $slide['counter'] }}
-                                </span>
-                            </div>
+                            {{-- Centered Content Group: Counter + Title + Description --}}
+                            <div class="space-y-4 sm:space-y-5 max-w-2xl">
+                                {{-- Counter: e.g. 1 / 4 --}}
+                                <div>
+                                    <span
+                                        class="text-xs sm:text-sm lg:text-[15px] font-medium tracking-[0.25em] text-white/95 uppercase font-sans">
+                                        {{ $slide['counter'] }}
+                                    </span>
+                                </div>
 
-                            {{-- Bottom Group: Title + Description --}}
-                            <div class="space-y-2 sm:space-y-3">
-                                {{-- Title: Montserrat Bold --}}
-                                <h3
-                                    class="font-heading font-[600] text-xl sm:text-2xl lg:text-[32px] text-white tracking-tight leading-snug drop-shadow-md max-w-xl">
-                                    {{ $slide['title'] }}
-                                </h3>
+                                {{-- Title + Description --}}
+                                <div class="space-y-2.5 sm:space-y-3.5">
+                                    {{-- Title: Montserrat SemiBold --}}
+                                    <h3
+                                        class="font-heading font-[600] text-xl sm:text-2xl lg:text-[32px] text-white tracking-tight leading-snug drop-shadow-md">
+                                        {{ $slide['title'] }}
+                                    </h3>
 
-                                {{-- Description: Inter Regular --}}
-                                <p
-                                    class="font-sans text-xs sm:text-sm lg:text-base text-white/90 font-[400] leading-relaxed max-w-lg">
-                                    {{ $slide['description'] }}
-                                </p>
+                                    {{-- Description: Inter Regular --}}
+                                    <p
+                                        class="font-sans text-sm sm:text-base lg:text-[18px] text-white/95 font-[400] leading-relaxed max-w-xl">
+                                        {{ $slide['description'] }}
+                                    </p>
+                                </div>
                             </div>
 
                         </div>

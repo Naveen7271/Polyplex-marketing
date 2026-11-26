@@ -31,11 +31,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Desktop Products Dropdown Click Support ---
+    // --- Desktop Products Dropdown Click & Category Switching Support ---
+    const productsMenuContainer = document.getElementById('products-menu-container');
     const productsMenuButton = document.getElementById('products-menu-button');
+    const productsMenuChevron = document.getElementById('products-menu-chevron');
     const productsDropdown = document.getElementById('products-dropdown');
 
     if (productsMenuButton && productsDropdown) {
+        const categoryTriggers = productsDropdown.querySelectorAll('.products-dropdown-category');
+        const categoryPanels = productsDropdown.querySelectorAll('.products-dropdown-panel');
+        const defaultCategoryId = productsDropdown.getAttribute('data-default-category')
+            || categoryTriggers[0]?.getAttribute('data-category-trigger');
+
+        const activateCategory = (categoryId) => {
+            if (!categoryId) return;
+
+            categoryTriggers.forEach((trigger) => {
+                const isMatch = trigger.getAttribute('data-category-trigger') === categoryId;
+                trigger.classList.toggle('bg-[#E5E5E5]', isMatch);
+                trigger.classList.toggle('is-active', isMatch);
+                trigger.classList.toggle('bg-white', !isMatch);
+            });
+
+            categoryPanels.forEach((panel) => {
+                const isMatch = panel.getAttribute('data-category-panel') === categoryId;
+                panel.classList.toggle('hidden', !isMatch);
+            });
+        };
+
+        categoryTriggers.forEach((trigger) => {
+            const categoryId = trigger.getAttribute('data-category-trigger');
+            trigger.addEventListener('mouseenter', () => activateCategory(categoryId));
+            trigger.addEventListener('focus', () => activateCategory(categoryId));
+        });
+
+        const openDropdown = () => {
+            productsDropdown.classList.add('!opacity-100', '!visible', '!pointer-events-auto');
+            productsMenuButton.setAttribute('aria-expanded', 'true');
+            if (productsMenuChevron) {
+                productsMenuChevron.classList.add('rotate-180');
+            }
+        };
+
+        const closeDropdown = () => {
+            productsDropdown.classList.remove('!opacity-100', '!visible', '!pointer-events-auto');
+            productsMenuButton.setAttribute('aria-expanded', 'false');
+            if (productsMenuChevron) {
+                productsMenuChevron.classList.remove('rotate-180');
+            }
+            if (defaultCategoryId) {
+                activateCategory(defaultCategoryId);
+            }
+        };
+
         productsMenuButton.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = productsDropdown.classList.contains('!opacity-100');
@@ -46,15 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const openDropdown = () => {
-            productsDropdown.classList.add('!opacity-100', '!visible', '!pointer-events-auto');
-            productsMenuButton.setAttribute('aria-expanded', 'true');
-        };
-
-        const closeDropdown = () => {
-            productsDropdown.classList.remove('!opacity-100', '!visible', '!pointer-events-auto');
-            productsMenuButton.setAttribute('aria-expanded', 'false');
-        };
+        if (productsMenuContainer) {
+            productsMenuContainer.addEventListener('mouseleave', () => {
+                if (!productsDropdown.classList.contains('!opacity-100') && defaultCategoryId) {
+                    activateCategory(defaultCategoryId);
+                }
+            });
+        }
 
         // Close on click outside
         document.addEventListener('click', (e) => {
@@ -101,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Search Modal Toggle ---
     const openSearchBtn = document.getElementById('open-search-btn');
+    const searchTriggers = document.querySelectorAll('[data-open-search]');
     const closeSearchBtn = document.getElementById('close-search-btn');
     const searchModal = document.getElementById('search-modal');
     const searchInput = document.getElementById('search-input');
@@ -123,6 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (openSearchBtn) {
         openSearchBtn.addEventListener('click', openSearch);
     }
+
+    searchTriggers.forEach((trigger) => {
+        if (trigger !== openSearchBtn) {
+            trigger.addEventListener('click', openSearch);
+        }
+    });
 
     if (closeSearchBtn) {
         closeSearchBtn.addEventListener('click', closeSearch);
@@ -551,31 +604,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- News Pagination ---
-    const page1 = document.getElementById('news-grid-page-1');
-    const page2 = document.getElementById('news-grid-page-2');
-    const dot1 = document.getElementById('news-dot-1');
-    const dot2 = document.getElementById('news-dot-2');
-    const dot3 = document.getElementById('news-dot-3');
+    const newsPages = [
+        document.getElementById('news-grid-page-1'),
+        document.getElementById('news-grid-page-2'),
+        document.getElementById('news-grid-page-3'),
+    ].filter(Boolean);
+    const newsDots = [
+        document.getElementById('news-dot-1'),
+        document.getElementById('news-dot-2'),
+        document.getElementById('news-dot-3'),
+    ];
+    const newsPrevBtn = document.getElementById('news-prev-btn');
     const newsNextBtn = document.getElementById('news-next-btn');
 
-    if (page1 && (dot1 || newsNextBtn)) {
+    if (newsPages.length > 0 && (newsDots[0] || newsPrevBtn || newsNextBtn)) {
         let currentPage = 1;
-        const totalPages = page2 ? 2 : 1;
+        const totalPages = newsPages.length;
 
         const setNewsPage = (p) => {
             currentPage = p;
-            if (page1 && page2) {
-                if (p === 1) {
-                    page1.classList.remove('hidden');
-                    page2.classList.add('hidden');
-                } else {
-                    page1.classList.add('hidden');
-                    page2.classList.remove('hidden');
-                }
-            }
+            newsPages.forEach((page, idx) => {
+                page.classList.toggle('hidden', idx + 1 !== currentPage);
+            });
 
-            const dots = [dot1, dot2, dot3];
-            dots.forEach((dot, idx) => {
+            newsDots.forEach((dot, idx) => {
                 if (!dot) return;
                 if (idx + 1 === currentPage) {
                     dot.className = 'w-2 h-2 rounded-full bg-[#0b2b4e] transition-all cursor-pointer focus:outline-hidden';
@@ -585,9 +637,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        if (dot1) dot1.addEventListener('click', () => setNewsPage(1));
-        if (dot2) dot2.addEventListener('click', () => setNewsPage(2));
-        if (dot3) dot3.addEventListener('click', () => setNewsPage(1));
+        newsDots.forEach((dot, idx) => {
+            if (dot) {
+                dot.addEventListener('click', () => setNewsPage(idx + 1));
+            }
+        });
+
+        if (newsPrevBtn) {
+            newsPrevBtn.addEventListener('click', () => {
+                const prevP = currentPage <= 1 ? totalPages : currentPage - 1;
+                setNewsPage(prevP);
+            });
+        }
 
         if (newsNextBtn) {
             newsNextBtn.addEventListener('click', () => {

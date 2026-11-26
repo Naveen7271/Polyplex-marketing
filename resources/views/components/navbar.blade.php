@@ -1,30 +1,27 @@
 @php
-    $productColumn1 = [
+    $defaultProductCategories = [
         [
             'id' => 'non-tear-media',
             'title' => 'Non-Tear Media',
             'url' => route('products.show', 'non-tear-media'),
-            'defaultExpanded' => true,
             'brands' => [
+                ['name' => 'NovaLife', 'url' => route('products.show', 'novalife')],
                 ['name' => 'NovaJet', 'url' => route('products.show', 'novajet')],
-                ['name' => 'NovaLife', 'url' => route('products.show', 'non-tear-media') . '#novalife'],
-                ['name' => 'Saraprint', 'url' => route('products.show', 'non-tear-media') . '#saraprint'],
+                ['name' => 'Saraprint', 'url' => route('products.show', 'saraprint')],
             ],
         ],
         [
             'id' => 'gloss-art-paper-media',
             'title' => 'Gloss Art Paper Media',
             'url' => route('products.show', 'gloss-art-paper-media'),
-            'defaultExpanded' => false,
             'brands' => [
-                ['name' => 'NovaLife', 'url' => route('products.show', 'gloss-art-paper-media') . '#novalife'],
+                ['name' => 'NovaLife', 'url' => route('products.show', 'novalife')],
             ],
         ],
         [
             'id' => 'inkjet-photo-media',
             'title' => 'Inkjet Photo Media',
             'url' => route('products.show', 'inkjet-photo-media'),
-            'defaultExpanded' => false,
             'brands' => [
                 ['name' => 'NovaJet', 'url' => route('products.show', 'novajet')],
             ],
@@ -33,19 +30,14 @@
             'id' => 'digital-labels',
             'title' => 'Digital Labels',
             'url' => route('products.show', 'digital-labels'),
-            'defaultExpanded' => false,
             'brands' => [
-                ['name' => 'NovaStick', 'url' => route('products.show', 'digital-labels') . '#novastick'],
+                ['name' => 'NovaStick', 'url' => route('products.show', 'novastick')],
             ],
         ],
-    ];
-
-    $productColumn2 = [
         [
             'id' => 'multi-purpose-labels',
             'title' => 'Multi-Purpose Labels',
             'url' => route('products.show', 'multi-purpose-labels'),
-            'defaultExpanded' => false,
             'brands' => [
                 ['name' => 'NovaJet', 'url' => route('products.show', 'novajet')],
             ],
@@ -54,45 +46,79 @@
             'id' => 'digital-wide-format-media',
             'title' => 'Digital Wide-Format Media',
             'url' => route('products.show', 'digital-wide-format-media'),
-            'defaultExpanded' => false,
             'brands' => [
                 ['name' => 'NovaJet', 'url' => route('products.show', 'novajet')],
-                ['name' => 'NovaSign', 'url' => route('products.show', 'digital-wide-format-media') . '#novasign'],
+                ['name' => 'NovaSign', 'url' => route('products.show', 'novasign')],
             ],
         ],
         [
             'id' => 'reprographic-media',
             'title' => 'Reprographic Media',
             'url' => route('products.show', 'reprographic-media'),
-            'defaultExpanded' => false,
             'brands' => [
-                ['name' => 'NovaCad', 'url' => route('products.show', 'reprographic-media') . '#novacad'],
+                ['name' => 'NovaCad', 'url' => route('products.show', 'novacad')],
                 ['name' => 'NovaJet', 'url' => route('products.show', 'novajet')],
-                ['name' => 'Saraprint', 'url' => route('products.show', 'reprographic-media') . '#saraprint'],
+                ['name' => 'Saraprint', 'url' => route('products.show', 'saraprint')],
             ],
         ],
         [
             'id' => 'polyester-offset-plates',
-            'title' => 'Polyester Offset Plate',
+            'title' => 'Polyester Offset Plates',
             'url' => route('products.show', 'polyester-offset-plates'),
-            'defaultExpanded' => false,
             'brands' => [
-                ['name' => 'NovaDom', 'url' => route('products.show', 'polyester-offset-plates') . '#novadom'],
-                ['name' => 'NovaTrace', 'url' => route('products.show', 'polyester-offset-plates') . '#novatrace'],
-                ['name' => 'PoliJet', 'url' => route('products.show', 'polyester-offset-plates') . '#polijet'],
+                ['name' => 'NovaDom', 'url' => route('products.show', 'novadom')],
+                ['name' => 'Saraprint', 'url' => route('products.show', 'saraprint')],
+                ['name' => 'PoliJet', 'url' => route('products.show', 'polijet')],
             ],
         ],
         [
             'id' => 'laser-and-inkjet-positive-films',
-            'title' => 'Laser & Inkjet Offset Print',
+            'title' => 'Laser and Inkjet Positive Films',
             'url' => route('products.show', 'laser-and-inkjet-positive-films'),
-            'defaultExpanded' => false,
             'brands' => [
-                ['name' => 'PosiJet', 'url' => route('products.show', 'laser-and-inkjet-positive-films') . '#posijet'],
-                ['name' => 'NovaSharp', 'url' => route('products.show', 'laser-and-inkjet-positive-films') . '#novasharp'],
+                ['name' => 'PosiJet', 'url' => route('products.show', 'posijet')],
+                ['name' => 'NovaSharp', 'url' => route('products.show', 'novasharp')],
             ],
         ],
     ];
+
+    try {
+        $dbNavProducts = \Illuminate\Support\Facades\Schema::hasTable('products')
+            && \Illuminate\Support\Facades\Schema::hasTable('brands')
+            ? \App\Models\Product::with('brands')->where('is_active', true)->orderBy('sort_order')->get()
+            : collect();
+    } catch (\Throwable) {
+        $dbNavProducts = collect();
+    }
+
+    if ($dbNavProducts->isNotEmpty()) {
+        $productCategories = $dbNavProducts->map(function ($product) {
+            return [
+                'id' => $product->slug,
+                'title' => $product->name,
+                'url' => route('products.show', $product->slug),
+                'brands' => $product->brands->map(function ($brand) {
+                    return [
+                        'name' => $brand->name,
+                        'url' => route('products.show', $brand->slug),
+                    ];
+                })->values()->all(),
+            ];
+        })->values()->all();
+    } else {
+        $productCategories = $defaultProductCategories;
+    }
+
+    $defaultActiveCategoryId = $productCategories[0]['id'] ?? 'non-tear-media';
+    foreach ($productCategories as $category) {
+        if (request()->is('*' . $category['id'] . '*')) {
+            $defaultActiveCategoryId = $category['id'];
+            break;
+        }
+    }
+
+    $productColumn1 = array_slice($productCategories, 0, 4);
+    $productColumn2 = array_slice($productCategories, 4);
 
     $isProductsActive = request()->routeIs('products*')
         || request()->is('products*')
@@ -120,7 +146,7 @@
             </div>
 
             {{-- Center: Desktop Navigation Links --}}
-            <nav class="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[16px] font-[500] font-normal text-[#000000]"
+            <nav class="hidden lg:flex items-center h-full space-x-7 xl:space-x-9 text-[16px] font-[500] font-normal text-[#000000]"
                 aria-label="Main Navigation">
                 <a href="{{ url('/') }}"
                     class="py-2 border-b transition-colors {{ request()->is('/') ? 'text-[#0E4174] border-[#0E4174] font-medium' : 'text-[#000000] border-transparent' }}"
@@ -135,110 +161,64 @@
                 </a>
 
                 {{-- Products Dropdown Menu --}}
-                <div class="relative group flex items-center" id="products-menu-container">
+                <div class="relative group flex items-center h-full" id="products-menu-container">
                     <a href="{{ route('products') }}"
                         class="py-2 border-b transition-colors text-[16px] {{ $isProductsActive ? 'text-[#0E4174] border-[#0E4174] font-medium' : 'text-[#000000] border-transparent hover:text-blue-600' }}"
                         {!! $isProductsActive ? 'aria-current="page"' : '' !!}>
                         Products
                     </a>
                     <button type="button" id="products-menu-button"
-                        class="py-2 pl-1 pr-1 text-slate-500 hover:text-blue-600 transition-colors focus:outline-hidden"
+                        class="py-2 pl-1 pr-1 text-slate-600 hover:text-blue-600 transition-colors focus:outline-hidden cursor-pointer"
                         aria-expanded="false" aria-haspopup="true" aria-label="Toggle products dropdown menu">
-                        <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"
+                        <svg id="products-menu-chevron"
+                            class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
                     </button>
 
-                    {{-- Products Dropdown Panel --}}
+                    {{-- Products Dropdown Panel (Split Master-Detail) --}}
                     <div id="products-dropdown"
-                        class="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[560px] lg:w-[620px] transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto z-50"
+                        data-default-category="{{ $defaultActiveCategoryId }}"
+                        class="absolute left-0 top-full w-[640px] xl:w-[680px] transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto z-50"
                         role="menu" aria-orientation="vertical" aria-labelledby="products-menu-button">
                         <div
-                            class="bg-white rounded-xl shadow-xl border border-slate-200/90 p-6 sm:p-7 grid grid-cols-2 gap-x-8 gap-y-4">
-                            {{-- Column 1 --}}
-                            <div class="space-y-4">
-                                @foreach ($productColumn1 as $item)
+                            class="bg-white border border-[#DCDCDC] shadow-[0_12px_32px_rgba(0,0,0,0.08)] grid grid-cols-[310px_1fr] xl:grid-cols-[330px_1fr]">
+                            {{-- Left Column: Product Categories --}}
+                            <div class="bg-white border-r border-[#E2E2E2] divide-y divide-[#E2E2E2]">
+                                @foreach ($productCategories as $category)
                                     @php
-                                        $isExpanded = $item['defaultExpanded'] || request()->is('*' . $item['id'] . '*');
+                                        $isDefaultActive = $category['id'] === $defaultActiveCategoryId;
                                     @endphp
-                                    <div class="product-category-accordion" data-category-id="{{ $item['id'] }}">
-                                        <div class="inline-flex items-center gap-2 group/category">
-                                            <a href="{{ $item['url'] }}"
-                                                class="text-[15px] font-[500] text-[#000000] hover:text-[#0E4174] transition-colors leading-snug">
-                                                {{ $item['title'] }}
-                                            </a>
-                                            <button type="button"
-                                                class="product-category-toggle p-0.5 text-[#000000] hover:text-[#0E4174] transition-colors focus:outline-hidden cursor-pointer"
-                                                aria-expanded="{{ $isExpanded ? 'true' : 'false' }}"
-                                                aria-label="Toggle {{ $item['title'] }} brands">
-                                                <svg class="w-3.5 h-3.5 transition-transform duration-200 {{ $isExpanded ? 'rotate-180' : '' }} product-category-chevron"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="2.5" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                                </svg>
-                                            </button>
-                                        </div>
-
-                                        @if (!empty($item['brands']))
-                                            <div
-                                                class="product-category-brands {{ $isExpanded ? '' : 'hidden' }} pt-1 text-[13px] text-slate-700 leading-normal flex items-center flex-wrap">
-                                                @foreach ($item['brands'] as $brandIndex => $brand)
-                                                    <a href="{{ $brand['url'] }}"
-                                                        class="hover:text-[#0E4174] hover:underline transition-colors">
-                                                        {{ $brand['name'] }}
-                                                    </a>
-                                                    @if ($brandIndex < count($item['brands']) - 1)
-                                                        <span class="mx-1.5 text-slate-400 select-none">|</span>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
+                                    <a href="{{ $category['url'] }}"
+                                        data-category-trigger="{{ $category['id'] }}"
+                                        class="products-dropdown-category flex items-center justify-between px-6 py-3.5 text-[15px] font-normal leading-snug text-[#000000] transition-colors focus:outline-hidden {{ $isDefaultActive ? 'bg-[#E5E5E5] is-active' : 'bg-white hover:bg-[#E5E5E5]' }}">
+                                        <span>{{ $category['title'] }}</span>
+                                        <svg class="w-4 h-4 shrink-0 text-[#000000]" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                        </svg>
+                                    </a>
                                 @endforeach
                             </div>
 
-                            {{-- Column 2 --}}
-                            <div class="space-y-4">
-                                @foreach ($productColumn2 as $item)
+                            {{-- Right Column: Brands for Active Category --}}
+                            <div class="bg-[#EFEFEF]">
+                                @foreach ($productCategories as $category)
                                     @php
-                                        $isExpanded = $item['defaultExpanded'] || request()->is('*' . $item['id'] . '*');
+                                        $isDefaultActive = $category['id'] === $defaultActiveCategoryId;
                                     @endphp
-                                    <div class="product-category-accordion" data-category-id="{{ $item['id'] }}">
-                                        <div class="inline-flex items-center gap-2 group/category">
-                                            <a href="{{ $item['url'] }}"
-                                                class="text-[15px] font-[500] text-[#000000] hover:text-[#0E4174] transition-colors leading-snug">
-                                                {{ $item['title'] }}
+                                    <div data-category-panel="{{ $category['id'] }}"
+                                        class="products-dropdown-panel flex flex-col {{ $isDefaultActive ? '' : 'hidden' }}">
+                                        @foreach ($category['brands'] as $brand)
+                                            <a href="{{ $brand['url'] }}"
+                                                class="px-6 py-3.5 text-[15px] font-normal leading-snug text-[#000000] hover:text-[#0E4174] hover:bg-[#E5E5E5]/70 transition-colors focus:outline-hidden focus:bg-[#E5E5E5]/70">
+                                                {{ $brand['name'] }}
                                             </a>
-                                            <button type="button"
-                                                class="product-category-toggle p-0.5 text-[#000000] hover:text-[#0E4174] transition-colors focus:outline-hidden cursor-pointer"
-                                                aria-expanded="{{ $isExpanded ? 'true' : 'false' }}"
-                                                aria-label="Toggle {{ $item['title'] }} brands">
-                                                <svg class="w-3.5 h-3.5 transition-transform duration-200 {{ $isExpanded ? 'rotate-180' : '' }} product-category-chevron"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="2.5" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                                </svg>
-                                            </button>
-                                        </div>
-
-                                        @if (!empty($item['brands']))
-                                            <div
-                                                class="product-category-brands {{ $isExpanded ? '' : 'hidden' }} pt-1 text-[13px] text-slate-700 leading-normal flex items-center flex-wrap">
-                                                @foreach ($item['brands'] as $brandIndex => $brand)
-                                                    <a href="{{ $brand['url'] }}"
-                                                        class="hover:text-[#0E4174] hover:underline transition-colors">
-                                                        {{ $brand['name'] }}
-                                                    </a>
-                                                    @if ($brandIndex < count($item['brands']) - 1)
-                                                        <span class="mx-1.5 text-slate-400 select-none">|</span>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        @endif
+                                        @endforeach
                                     </div>
                                 @endforeach
                             </div>
@@ -353,6 +333,9 @@
                     <p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Substrates &amp; Media
                     </p>
                     @foreach ($productColumn1 as $item)
+                        @php
+                            $isMobileExpanded = $item['id'] === $defaultActiveCategoryId;
+                        @endphp
                         <div class="product-category-accordion py-1 px-3">
                             <div class="flex items-center justify-between">
                                 <a href="{{ $item['url'] }}" class="text-sm text-slate-700 hover:text-blue-600">
@@ -361,8 +344,8 @@
                                 @if (!empty($item['brands']))
                                     <button type="button"
                                         class="product-category-toggle p-1 text-slate-500 hover:text-blue-600 focus:outline-hidden"
-                                        aria-expanded="{{ $item['defaultExpanded'] ? 'true' : 'false' }}">
-                                        <svg class="w-3.5 h-3.5 transition-transform duration-200 {{ $item['defaultExpanded'] ? 'rotate-180' : '' }} product-category-chevron"
+                                        aria-expanded="{{ $isMobileExpanded ? 'true' : 'false' }}">
+                                        <svg class="w-3.5 h-3.5 transition-transform duration-200 {{ $isMobileExpanded ? 'rotate-180' : '' }} product-category-chevron"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="2.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -373,7 +356,7 @@
                             </div>
                             @if (!empty($item['brands']))
                                 <div
-                                    class="product-category-brands {{ $item['defaultExpanded'] ? '' : 'hidden' }} pt-1 text-xs text-slate-500 flex items-center flex-wrap">
+                                    class="product-category-brands {{ $isMobileExpanded ? '' : 'hidden' }} pt-1 text-xs text-slate-500 flex items-center flex-wrap">
                                     @foreach ($item['brands'] as $brandIndex => $brand)
                                         <a href="{{ $brand['url'] }}" class="hover:text-blue-600">
                                             {{ $brand['name'] }}
@@ -389,6 +372,9 @@
                     <p class="px-3 pt-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">Labels &amp;
                         Print Solutions</p>
                     @foreach ($productColumn2 as $item)
+                        @php
+                            $isMobileExpanded = $item['id'] === $defaultActiveCategoryId;
+                        @endphp
                         <div class="product-category-accordion py-1 px-3">
                             <div class="flex items-center justify-between">
                                 <a href="{{ $item['url'] }}" class="text-sm text-slate-700 hover:text-blue-600">
@@ -397,8 +383,8 @@
                                 @if (!empty($item['brands']))
                                     <button type="button"
                                         class="product-category-toggle p-1 text-slate-500 hover:text-blue-600 focus:outline-hidden"
-                                        aria-expanded="{{ $item['defaultExpanded'] ? 'true' : 'false' }}">
-                                        <svg class="w-3.5 h-3.5 transition-transform duration-200 {{ $item['defaultExpanded'] ? 'rotate-180' : '' }} product-category-chevron"
+                                        aria-expanded="{{ $isMobileExpanded ? 'true' : 'false' }}">
+                                        <svg class="w-3.5 h-3.5 transition-transform duration-200 {{ $isMobileExpanded ? 'rotate-180' : '' }} product-category-chevron"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="2.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -409,7 +395,7 @@
                             </div>
                             @if (!empty($item['brands']))
                                 <div
-                                    class="product-category-brands {{ $item['defaultExpanded'] ? '' : 'hidden' }} pt-1 text-xs text-slate-500 flex items-center flex-wrap">
+                                    class="product-category-brands {{ $isMobileExpanded ? '' : 'hidden' }} pt-1 text-xs text-slate-500 flex items-center flex-wrap">
                                     @foreach ($item['brands'] as $brandIndex => $brand)
                                         <a href="{{ $brand['url'] }}" class="hover:text-blue-600">
                                             {{ $brand['name'] }}

@@ -1,5 +1,5 @@
 {{-- Footer Component matching official Polyplex DigiPrint design --}}
-<footer class="relative bg-[#1B1B1B] text-slate-300 pt-14 sm:pt-16 select-none overflow-hidden">
+<footer class="relative bg-[#0C0D0D] text-slate-300 pt-14 sm:pt-16 select-none overflow-hidden">
 
     {{-- Main Footer Content Directory --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,16 +10,18 @@
                 <div class="space-y-4">
                     <div>
                         <a href="{{ url('/') }}" class="inline-block" aria-label="Polyplex DigiPrint">
-                            <img src="{{ asset('images/Polyplex Digiprint_RGB_Colour 1.png') }}" alt="Polyplex DigiPrint"
-                                class="h-10 w-auto object-contain">
+                            <img src="{{ asset('images/Polyplex Digiprint_RGB_Colour 1.png') }}"
+                                alt="Polyplex DigiPrint" class="h-10 w-auto object-contain">
                         </a>
                     </div>
 
-                    <p class="text-[#F3F3F3] font-sans font-normal text-[14px] sm:text-[15px] leading-snug max-w-[290px] pt-1">
+                    <p
+                        class="text-[#F3F3F3] font-sans font-normal text-[14px] sm:text-[15px] leading-snug max-w-[290px] pt-1">
                         Formerly known as TechNova Printrite Products Private Limited
                     </p>
 
-                    <p class="text-[#C8C8C8] font-sans font-normal text-[11.5px] sm:text-[12px] leading-[1.6] max-w-[300px]">
+                    <p
+                        class="text-[#C8C8C8] font-sans font-normal text-[11.5px] sm:text-[12px] leading-[1.6] max-w-[300px]">
                         Polyplex DigiPrint brings together materials expertise and print-industry know-how to develop
                         and supply application-focused print media. Explore our products or connect with our team for
                         product-specific guidance.
@@ -77,9 +79,11 @@
                     </p>
                     <p class="font-sans text-[11px] text-[#A3A3A3]">
                         Use of this website is subject to our
-                        <a href="{{ route('terms-of-use') }}" class="hover:text-white transition-colors">*Terms of Use*</a>
+                        <a href="{{ route('terms-of-use') }}" class="hover:text-white transition-colors">*Terms of
+                            Use*</a>
                         and
-                        <a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">*Privacy Policy*</a>.
+                        <a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">*Privacy
+                            Policy*</a>.
                     </p>
                 </div>
             </div>
@@ -93,12 +97,16 @@
                     <li><a href="{{ url('/') }}" class="hover:text-white transition-colors">Home</a></li>
                     <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Us</a></li>
                     <li><a href="{{ route('products') }}" class="hover:text-white transition-colors">Products</a></li>
-                    <li><a href="{{ route('industries') }}" class="hover:text-white transition-colors">Industries</a></li>
-                    <li><a href="{{ route('blog') }}" class="hover:text-white transition-colors">Insights &amp; News</a></li>
+                    <li><a href="{{ route('industries') }}" class="hover:text-white transition-colors">Industries</a>
+                    </li>
+                    <li><a href="{{ route('blog') }}" class="hover:text-white transition-colors">Insights &amp; News</a>
+                    </li>
                     <li><a href="{{ route('careers') }}" class="hover:text-white transition-colors">Careers</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
-                    <li><a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="{{ route('terms-of-use') }}" class="hover:text-white transition-colors">Terms of use</a></li>
+                    <li><a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">Privacy
+                            Policy</a></li>
+                    <li><a href="{{ route('terms-of-use') }}" class="hover:text-white transition-colors">Terms of
+                            use</a></li>
                 </ul>
             </div>
 
@@ -108,15 +116,24 @@
                     <a href="{{ route('products') }}" class="hover:text-blue-300 transition-colors">Products</a>
                 </h3>
                 <ul class="space-y-3 font-sans text-[12.5px] sm:text-[13px] font-normal text-[#E5E5E5]">
-                    <li><a href="{{ route('products.show', 'non-tear-media') }}" class="hover:text-white transition-colors">Non-Tear Media</a></li>
-                    <li><a href="{{ route('products.show', 'gloss-art-paper-media') }}" class="hover:text-white transition-colors">Gloss Art Paper Media</a></li>
-                    <li><a href="{{ route('products.show', 'inkjet-photo-media') }}" class="hover:text-white transition-colors">Inkjet Photo Media</a></li>
-                    <li><a href="{{ route('products.show', 'digital-labels') }}" class="hover:text-white transition-colors">Digital Labels</a></li>
-                    <li><a href="{{ route('products.show', 'multi-purpose-labels') }}" class="hover:text-white transition-colors">Multi-Purpose Labels</a></li>
-                    <li><a href="{{ route('products.show', 'digital-wide-format-media') }}" class="hover:text-white transition-colors">Digital Wide-Format Media</a></li>
-                    <li><a href="{{ route('products.show', 'reprographic-media') }}" class="hover:text-white transition-colors">Reprographic Media</a></li>
-                    <li><a href="{{ route('products.show', 'polyester-offset-plates') }}" class="hover:text-white transition-colors">Polyester Offset Plates</a></li>
-                    <li><a href="{{ route('products.show', 'laser-and-inkjet-positive-films') }}" class="hover:text-white transition-colors">Laser &amp; Inkjet Positive Films</a></li>
+                    <li><a href="{{ route('products.show', 'non-tear-media') }}"
+                            class="hover:text-white transition-colors">Non-Tear Media</a></li>
+                    <li><a href="{{ route('products.show', 'gloss-art-paper-media') }}"
+                            class="hover:text-white transition-colors">Gloss Art Paper Media</a></li>
+                    <li><a href="{{ route('products.show', 'inkjet-photo-media') }}"
+                            class="hover:text-white transition-colors">Inkjet Photo Media</a></li>
+                    <li><a href="{{ route('products.show', 'digital-labels') }}"
+                            class="hover:text-white transition-colors">Digital Labels</a></li>
+                    <li><a href="{{ route('products.show', 'multi-purpose-labels') }}"
+                            class="hover:text-white transition-colors">Multi-Purpose Labels</a></li>
+                    <li><a href="{{ route('products.show', 'digital-wide-format-media') }}"
+                            class="hover:text-white transition-colors">Digital Wide-Format Media</a></li>
+                    <li><a href="{{ route('products.show', 'reprographic-media') }}"
+                            class="hover:text-white transition-colors">Reprographic Media</a></li>
+                    <li><a href="{{ route('products.show', 'polyester-offset-plates') }}"
+                            class="hover:text-white transition-colors">Polyester Offset Plates</a></li>
+                    <li><a href="{{ route('products.show', 'laser-and-inkjet-positive-films') }}"
+                            class="hover:text-white transition-colors">Laser &amp; Inkjet Positive Films</a></li>
                 </ul>
             </div>
 
@@ -126,18 +143,30 @@
                     Brands
                 </h3>
                 <ul class="space-y-2.5 font-sans text-[12.5px] sm:text-[13px] font-normal text-[#E5E5E5]">
-                    <li><a href="{{ route('products.saraprint') }}" class="hover:text-white transition-colors">Saraprint</a></li>
-                    <li><a href="{{ route('products.novalife') }}" class="hover:text-white transition-colors">NovaLife</a></li>
-                    <li><a href="{{ route('products.novacad') }}" class="hover:text-white transition-colors">NovaCad</a></li>
-                    <li><a href="{{ route('products.novadom') }}" class="hover:text-white transition-colors">NovaDom</a></li>
-                    <li><a href="{{ route('products.novajet') }}" class="hover:text-white transition-colors">NovaJet MPL</a></li>
-                    <li><a href="{{ route('products.novajet') }}" class="hover:text-white transition-colors">NovaJet</a></li>
-                    <li><a href="{{ route('products.novasharp') }}" class="hover:text-white transition-colors">NovaSharp</a></li>
-                    <li><a href="{{ route('products.novastick') }}" class="hover:text-white transition-colors">NovaStick</a></li>
-                    <li><a href="{{ route('products.polijet') }}" class="hover:text-white transition-colors">PoliJet</a></li>
-                    <li><a href="{{ route('products.novasign') }}" class="hover:text-white transition-colors">NovaSign</a></li>
-                    <li><a href="{{ route('products.posijet') }}" class="hover:text-white transition-colors">PosiJet</a></li>
-                    <li><a href="{{ route('products.novatrace') }}" class="hover:text-white transition-colors">NovaTrace</a></li>
+                    <li><a href="{{ route('products.saraprint') }}"
+                            class="hover:text-white transition-colors">Saraprint</a></li>
+                    <li><a href="{{ route('products.novalife') }}"
+                            class="hover:text-white transition-colors">NovaLife</a></li>
+                    <li><a href="{{ route('products.novacad') }}" class="hover:text-white transition-colors">NovaCad</a>
+                    </li>
+                    <li><a href="{{ route('products.novadom') }}" class="hover:text-white transition-colors">NovaDom</a>
+                    </li>
+                    <li><a href="{{ route('products.novajet') }}" class="hover:text-white transition-colors">NovaJet
+                            MPL</a></li>
+                    <li><a href="{{ route('products.novajet') }}" class="hover:text-white transition-colors">NovaJet</a>
+                    </li>
+                    <li><a href="{{ route('products.novasharp') }}"
+                            class="hover:text-white transition-colors">NovaSharp</a></li>
+                    <li><a href="{{ route('products.novastick') }}"
+                            class="hover:text-white transition-colors">NovaStick</a></li>
+                    <li><a href="{{ route('products.polijet') }}" class="hover:text-white transition-colors">PoliJet</a>
+                    </li>
+                    <li><a href="{{ route('products.novasign') }}"
+                            class="hover:text-white transition-colors">NovaSign</a></li>
+                    <li><a href="{{ route('products.posijet') }}" class="hover:text-white transition-colors">PosiJet</a>
+                    </li>
+                    <li><a href="{{ route('products.novatrace') }}"
+                            class="hover:text-white transition-colors">NovaTrace</a></li>
                 </ul>
             </div>
 

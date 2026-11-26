@@ -196,7 +196,7 @@
                             <h3 class="font-heading  text-base sm:text-lg lg:text-[28px] font-[600] text-[#0E4174] tracking-tight leading-snug ">
                                 {{ $cap['title'] }}
                             </h3>
-                            <p class="font-sans text-[16px] font-[500] sm:text-[13px] text-[#000000] mt-0.5 max-w-[729px] leading-relaxed">
+                            <p class="font-sans text-[16px] font-[500] sm:text-[16px] text-[#000000] mt-0.5 max-w-[729px] leading-relaxed">
                                 {{ $cap['description'] }}
                             </p>
                         </div>

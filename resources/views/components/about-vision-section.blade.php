@@ -13,26 +13,20 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                 <button type="button"
                     class="about-pillar-toggle group w-full text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#003570] focus-visible:ring-offset-4 rounded-sm transition-colors cursor-pointer"
                     aria-expanded="false" aria-controls="pillar-content-vision" id="pillar-btn-vision">
-                    {{-- Eyebrow Row: Red Icon + Navy Title + Blue Underline --}}
-                    <div class="flex items-center gap-3">
-                        {{-- Vision Icon (Viewfinder Scanner + Eye) --}}
-                        <div class="shrink-0 text-[#d6001c]">
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3.75 8.25V5.25A1.5 1.5 0 0 1 5.25 3.75h3M15 3.75h3.75a1.5 1.5 0 0 1 1.5 1.5v3M20.25 15.75v3a1.5 1.5 0 0 1-1.5 1.5H15M8.25 20.25H5.25a1.5 1.5 0 0 1-1.5-1.5v-3" />
-                                <circle cx="12" cy="12" r="2.75" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M7 12c1.333-2.667 3.333-4 5-4s3.667 1.333 5 4c-1.333 2.667-3.333 4-5 4s-3.667-1.333-5-4z" />
-                            </svg>
-                        </div>
-                        <div>
+                    {{-- Eyebrow Row: Red Icon + Red Title + Full Underline --}}
+                    <div class="inline-flex flex-col">
+                        <div class="flex items-center gap-3">
+                            {{-- Vision Icon --}}
+                            <div class="shrink-0">
+                                <img src="{{ asset('images/about-vision-icon.png') }}" alt="Our Vision"
+                                    class="w-6 h-6 object-contain" loading="lazy" />
+                            </div>
                             <h2
-                                class="font-heading font-[500] text-[16px] tracking-[.12em] sm:text-sm tracking-widest  text-[#0E4174] uppercase">
+                                class="font-heading font-[600] text-[16px] tracking-[0.12em] text-[#D6001C] uppercase">
                                 OUR VISION
                             </h2>
-                            <div class="w-[43px] h-[1px] bg-[#0E4174] mt-[12px]"></div>
                         </div>
+                        <div class="w-full h-[1px] bg-[#D6001C] mt-[12px]"></div>
                     </div>
 
                     {{-- Main Statement + Chevron Row --}}
@@ -74,24 +68,20 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                 <button type="button"
                     class="about-pillar-toggle group w-full text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#003570] focus-visible:ring-offset-4 rounded-sm transition-colors cursor-pointer"
                     aria-expanded="false" aria-controls="pillar-content-mission" id="pillar-btn-mission">
-                    {{-- Eyebrow Row: Red Icon + Navy Title + Blue Underline --}}
-                    <div class="flex items-center gap-3">
-                        {{-- Mission Icon (Target / Bullseye) --}}
-                        <div class="shrink-0 text-[#d6001c]">
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-                                <circle cx="12" cy="12" r="9" />
-                                <circle cx="12" cy="12" r="5.25" />
-                                <circle cx="12" cy="12" r="1.75" fill="currentColor" stroke="none" />
-                            </svg>
-                        </div>
-                        <div>
+                    {{-- Eyebrow Row: Red Icon + Red Title + Full Underline --}}
+                    <div class="inline-flex flex-col">
+                        <div class="flex items-center gap-3">
+                            {{-- Mission Icon --}}
+                            <div class="shrink-0">
+                                <img src="{{ asset('images/about-mission-icon.png') }}" alt="Our Mission"
+                                    class="w-6 h-6 object-contain" loading="lazy" />
+                            </div>
                             <h2
-                                class="font-heading font-[500] text-[16px] tracking-[.12em] sm:text-sm tracking-widest  text-[#0E4174] uppercase">
+                                class="font-heading font-[600] text-[16px] tracking-[0.12em] text-[#D6001C] uppercase">
                                 OUR MISSION
                             </h2>
-                            <div class="w-[43px] h-[1px] bg-[#0E4174] mt-[12px]"></div>
                         </div>
+                        <div class="w-full h-[1px] bg-[#D6001C] mt-[12px]"></div>
                     </div>
 
                     {{-- Main Statement + Chevron Row --}}
@@ -136,26 +126,20 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                 <button type="button"
                     class="about-pillar-toggle group w-full text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#003570] focus-visible:ring-offset-4 rounded-sm transition-colors cursor-pointer"
                     aria-expanded="false" aria-controls="pillar-content-purpose" id="pillar-btn-purpose">
-                    {{-- Eyebrow Row: Red Icon + Navy Title + Blue Underline --}}
-                    <div class="flex items-center gap-3">
-                        {{-- Purpose Icon (Brain & Innovation Network) --}}
-                        <div class="shrink-0 text-[#d6001c]">
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9.5 4a3.5 3.5 0 0 0-3.5 3.5c0 .5.1 1 .3 1.4A3.5 3.5 0 0 0 4 12c0 1.2.6 2.3 1.5 2.9A3.5 3.5 0 0 0 8 18.5c.5 0 1-.1 1.5-.3V4zM14.5 4a3.5 3.5 0 0 1 3.5 3.5c0 .5-.1 1-.3 1.4A3.5 3.5 0 0 1 20 12c0 1.2-.6 2.3-1.5 2.9A3.5 3.5 0 0 1 16 18.5c-.5 0-1-.1-1.5-.3V4z" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9.5 8.5H12m-2.5 3.5H12m-2.5 3.5H12m2.5-7H12m2.5 3.5H12m2.5 3.5H12" />
-                            </svg>
-                        </div>
-                        <div>
+                    {{-- Eyebrow Row: Red Icon + Red Title + Full Underline --}}
+                    <div class="inline-flex flex-col">
+                        <div class="flex items-center gap-3">
+                            {{-- Purpose Icon --}}
+                            <div class="shrink-0">
+                                <img src="{{ asset('images/about-purpose-icon.png') }}" alt="Our Purpose"
+                                    class="w-6 h-6 object-contain" loading="lazy" />
+                            </div>
                             <h2
-                                class="font-heading font-[500] text-[16px] tracking-[.12em] sm:text-sm tracking-widest  text-[#003570] uppercase">
+                                class="font-heading font-[600] text-[16px] tracking-[0.12em] text-[#D6001C] uppercase">
                                 OUR PURPOSE
                             </h2>
-                            <div class="w-[43px] h-[1px] bg-[#0E4174] mt-[12px]"></div>
-
                         </div>
+                        <div class="w-full h-[1px] bg-[#D6001C] mt-[12px]"></div>
                     </div>
 
                     {{-- Main Statement + Chevron Row --}}
@@ -199,26 +183,20 @@ underlines, statements, and smooth expandable accordion drawers (one at a time).
                 <button type="button"
                     class="about-pillar-toggle group w-full text-left focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#003570] focus-visible:ring-offset-4 rounded-sm transition-colors cursor-pointer"
                     aria-expanded="false" aria-controls="pillar-content-values" id="pillar-btn-values">
-                    {{-- Eyebrow Row: Red Icon + Navy Title + Blue Underline --}}
-                    <div class="flex items-center gap-3">
-                        {{-- Core Values Icon (Handshake / Trust) --}}
-                        <div class="shrink-0 text-[#d6001c]">
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M7 11.5 4 14.5l3.5 3.5 3.5-3.5M17 11.5l3 3-3.5 3.5-3.5-3.5" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m6.5 11 3-3a2.121 2.121 0 0 1 3 0l.5.5a2.121 2.121 0 0 0 3 0l1.5-1.5a2.121 2.121 0 0 1 3 0l1 1" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m11 14.5 2 2 2-2" />
-                            </svg>
-                        </div>
-                        <div>
+                    {{-- Eyebrow Row: Red Icon + Red Title + Full Underline --}}
+                    <div class="inline-flex flex-col">
+                        <div class="flex items-center gap-3">
+                            {{-- Core Values Icon --}}
+                            <div class="shrink-0">
+                                <img src="{{ asset('images/about-values-icon.png') }}" alt="Our Core Values"
+                                    class="w-6 h-6 object-contain" loading="lazy" />
+                            </div>
                             <h2
-                                class="font-heading font-[500] text-[16px] tracking-[.12em] sm:text-sm tracking-widest  text-[#0E4174] uppercase">
+                                class="font-heading font-[600] text-[16px] tracking-[0.12em] text-[#D6001C] uppercase">
                                 OUR CORE VALUES
                             </h2>
-                            <div class="w-[43px] h-[1px] bg-[#0E4174] mt-[12px]"></div>
                         </div>
+                        <div class="w-full h-[1px] bg-[#D6001C] mt-[12px]"></div>
                     </div>
 
                     {{-- Main Statement + Chevron Row --}}

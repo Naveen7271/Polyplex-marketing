@@ -25,7 +25,7 @@
         ],
         [
             'type' => 'image',
-            'image' => asset('images/about-presence-2.png'),
+            'image' => asset('images/about-hero-2.png'),
             'alt' => 'Polyplex State-of-the-Art Production Facility',
         ],
         [
@@ -65,7 +65,8 @@
                                     </h3>
                                 @endif
                                 @if (!empty($item['bullets']))
-                                    <ul class="mt-4 list-disc space-y-1.5 pl-5 font-sans text-[15px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-[16px]">
+                                    <ul
+                                        class="mt-4 list-disc space-y-1.5 pl-5 font-sans text-[15px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-[16px]">
                                         @foreach ($item['bullets'] as $bullet)
                                             <li>{{ $bullet }}</li>
                                         @endforeach
@@ -74,7 +75,7 @@
                             </div>
                         @else
                             <p
-                                class="mx-auto max-w-xs text-center font-sans text-[16px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-base lg:text-[16px]">
+                                class="mx-auto max-w-xs text-left font-sans text-[16px] font-[500] leading-[24px] text-[#1E1E1E] sm:text-base lg:text-[16px]">
                                 {{ $item['text'] }}
                             </p>
                         @endif

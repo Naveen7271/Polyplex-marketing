@@ -1,17 +1,17 @@
 @php
     $testimonials = [
         [
-            'quote' => 'We have been using NovaLife non-tear media for the last 7 years and are impressed with the consistency of product quality and support services.',
-            'author' => 'Mr. Ramanan',
-            'company' => 'Glo Color Lab, Coimbatore',
-            'avatar' => asset('images/avatar-ramanan.png'),
+            'quote' => 'DBM-350M Booklet making system from Duplo has helped me eliminate human labour for the collation process. I thank TechNova for introducing me for this fantastic solution.',
+            'author' => 'Chetan Purshottam Gautam`s',
+            'company' => 'Bangalore',
+            'avatar' => asset('images/avatar-chetan.png'),
             'initials' => 'MR',
         ],
         [
-            'quote' => 'NovaJet Inkjet media is exceptional in terms of colour consistency and image definition. Every sheet is perfectly cut with impeccable finish. My customers love the print quality, and that is what finally matters.',
-            'author' => 'Mr. Sam Jagdale',
-            'company' => 'Image Photo Shop & Digital Lab, Navi Mumbai',
-            'avatar' => asset('images/avatar-sam-jagdale.png'),
+            'quote' => 'We acquired Duplo DDC 810 embellishment set-up, Konica Minolta digital press with finishing solutions Duplo DC series & JWEI LST series from TechNova. They helped us to automate & integrate entire digital press & post-press productions.',
+            'author' => 'Partha Sarathi Mondal',
+            'company' => 'Sri Jagannath Digital World, Bhubaneshwar',
+            'avatar' => asset('images/avatar-partha.png'),
             'initials' => 'SJ',
         ],
     ];

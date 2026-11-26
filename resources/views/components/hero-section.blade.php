@@ -66,11 +66,22 @@
                         applications.
                     </p>
 
-                    <div>
-                        <a href="#about"
+                    <div class="flex flex-wrap items-center gap-3.5 sm:gap-4">
+                        <a href="{{ route('products') }}"
                             class="inline-flex items-center justify-center px-[20px] py-[10px] rounded-sm bg-[#003570] hover:bg-[#071d36] text-white font-[500] text-[16px] transition-colors shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#0b2b4e] focus:ring-offset-2">
-                            Know More
+                            Explore Products
                         </a>
+
+                        <button type="button" id="hero-find-media-btn" data-open-search
+                            class="inline-flex items-center gap-2.5 px-5 sm:px-6 py-[10px] rounded-full bg-white border border-[#D4D4D4] hover:border-[#003570] hover:bg-slate-50 text-[#003570] font-[500] text-[15px] sm:text-[16px] transition-colors shadow-2xs cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#0b2b4e] focus:ring-offset-2"
+                            aria-label="Find Media by Applications">
+                            <svg class="w-5 h-5 shrink-0 text-[#003570]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                            <span>Find Media by Applications</span>
+                        </button>
                     </div>
                 </div>
 

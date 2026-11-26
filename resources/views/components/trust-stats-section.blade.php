@@ -87,5 +87,9 @@
             </div>
         </div>
 
+        <p class="mt-3 text-right font-sans text-xs sm:text-[13px] font-normal text-[#000000]">
+            Combined Legacy and Group Reach of Polyplex and TechNova
+        </p>
+
     </div>
 </section>

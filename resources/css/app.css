@@ -148,22 +148,8 @@
 /* ---------- Background ---------- */
 .timeline__bg {
   position: absolute;
-  inset: -80px;
-  background:
-    radial-gradient(circle at 22% 80%, rgba(240, 180, 80, 0.75) 0 4.5%, transparent 8%),
-    radial-gradient(circle at 37% 82%, rgba(240, 182, 86, 0.7) 0 5%, transparent 8.5%),
-    radial-gradient(circle at 51% 80%, rgba(226, 170, 84, 0.6) 0 4.5%, transparent 8%),
-    radial-gradient(circle at 63% 82%, rgba(216, 160, 80, 0.5) 0 4%, transparent 7.5%),
-    radial-gradient(circle at 75% 26%, rgba(240, 176, 100, 0.7) 0 4%, transparent 7.5%),
-    radial-gradient(ellipse 24% 16% at 45% 30%, rgba(236, 172, 70, 0.95), transparent 75%),
-    radial-gradient(ellipse 20% 13% at 62% 25%, rgba(226, 160, 66, 0.8), transparent 75%),
-    radial-gradient(ellipse 26% 60% at 3% 42%, rgba(46, 176, 182, 0.95), transparent 75%),
-    radial-gradient(ellipse 16% 34% at 12% 88%, rgba(60, 150, 140, 0.7), transparent 75%),
-    radial-gradient(ellipse 22% 70% at 100% 55%, rgba(48, 110, 206, 1), transparent 75%),
-    radial-gradient(ellipse 20% 40% at 88% 10%, rgba(54, 160, 172, 0.75), transparent 75%),
-    radial-gradient(ellipse 40% 50% at 30% 10%, rgba(90, 96, 92, 0.6), transparent 75%),
-    linear-gradient(180deg, #2e3233 0%, #33302a 55%, #26282a 100%);
-  filter: blur(30px) saturate(1.15);
+  inset: 0;
+  pointer-events: none;
 }
 
 /* Halftone / LED dot screen overlay */
@@ -174,6 +160,15 @@
     linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.08) 35%, transparent 60%),
     radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 1.2px, rgba(0, 0, 0, 0.32) 2.3px);
   background-size: 100% 100%, 7px 7px;
+  pointer-events: none;
+}
+
+.timeline__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(288.38deg, rgba(14, 65, 116, 0.4) 0%, rgba(0, 0, 0, 0.4) 14.62%, rgba(0, 0, 0, 0.4) 51%, rgba(14, 65, 116, 0.4) 100%);
+  -webkit-backdrop-filter: blur(5.199999809265137px);
+  backdrop-filter: blur(5.199999809265137px);
   pointer-events: none;
 }
 

@@ -21,16 +21,6 @@
             'link' => '#digital-labels',
         ],
         [
-            'id' => 'multi-purpose-labels',
-            'title' => 'Multi-Purpose Labels',
-            'title_lines' => ['Multi-Purpose', 'Labels'],
-            'description' => 'Versatile Commercial & Retail Labeling for Everyday Performance',
-            'default_img' => 'images/product-multi-purpose.png',
-            'alt' => 'Multi-Purpose Labels retail price tag application',
-            'category' => 'Versatile Commercial & Retail Labeling',
-            'link' => '#multi-purpose-labels',
-        ],
-        [
             'id' => 'inkjet-photo-media',
             'title' => 'Inkjet Photo Media',
             'title_lines' => ['Inkjet Photo', 'Media'],
@@ -64,14 +54,17 @@
                 class="font-heading font-[700] text-[32px] sm:text-3xl lg:text-[32px] text-white tracking-tight leading-snug drop-shadow-sm">
                 Our Products are Engineered for Exceptional Results
             </h2>
-            <p class="mt-4 font-sans text-sm sm:text-[15px] lg:text-[16px] font-normal text-white/90 leading-relaxed max-w-2xl mx-auto">
-                Explore specialised media for photo printing, commercial print, labels, wide-format graphics, reprographics and prepress. Each category has its own application needs, finishes and compatible printing processes.
+            <p
+                class="mt-4 font-sans text-sm sm:text-[15px] lg:text-[16px] font-normal text-white/90 leading-relaxed max-w-2xl mx-auto">
+                Explore specialised media for photo printing, commercial print, labels, wide-format graphics,
+                reprographics and prepress. Each category has its own application needs, finishes and compatible
+                printing processes.
             </p>
         </div>
 
         {{-- 4 Product Cards Grid --}}
         <div
-            class="mt-10 sm:mt-12 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px] sm:gap-5 lg:gap-[20px] justify-items-center">
+            class="mt-10 sm:mt-12 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] sm:gap-5 lg:gap-[20px] justify-items-center">
             @foreach ($products as $prod)
                 @php
                     // Check if custom uploaded product image exists
@@ -99,7 +92,8 @@
                     </div>
 
                     {{-- Default Product Title Overlay (Top-Left, Montserrat Bold, White Text) --}}
-                    <div class="absolute top-0 left-0 pt-[32px] px-[28px] z-10 text-left pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+                    <div
+                        class="absolute top-0 left-0 pt-[32px] px-[28px] z-10 text-left pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
                         <h3
                             class="font-heading font-[700] text-[28px] sm:text-xl lg:text-[28px] text-white tracking-tight leading-tight drop-shadow-md">
                             @foreach ($prod['title_lines'] as $line)
@@ -111,7 +105,8 @@
                     {{-- Hover State Overlay: White background with Deep Navy Title & Black Description --}}
                     <div
                         class="absolute inset-0 z-20 bg-white pt-[32px] px-[28px] text-left opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col justify-start">
-                        <h3 class="font-heading font-[700] text-[28px] sm:text-xl lg:text-[28px] text-[#0E4174] tracking-tight leading-tight">
+                        <h3
+                            class="font-heading font-[700] text-[28px] sm:text-xl lg:text-[28px] text-[#0E4174] tracking-tight leading-tight">
                             @foreach ($prod['title_lines'] as $line)
                                 <span class="block">{{ $line }}</span>
                             @endforeach
