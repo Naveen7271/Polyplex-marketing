@@ -38,12 +38,14 @@ class IndustriesPageTest extends TestCase
         // Section container and accessibility label
         $response->assertSee('id="industries-hero"', false);
 
-        // Exact headline from user's design reference
-        $response->assertSee('Solutions Designed for Diverse Industries', false);
-
-        // Exact narrative description from user's design reference
+        // Exact headline, badge copy, and narrative from user's design reference
+        $response->assertSee('Industries', false);
+        $response->assertSee('Solutions for the', false);
+        $response->assertSee('Way Your Industry', false);
+        $response->assertSee('Prints.', false);
+        $response->assertSee('Explore media by the work you create.', false);
         $response->assertSee(
-            'Polyplex DigiPrint brings together material expertise and printing industry knowledge to support a wide range of applications across commercial, industrial, retail and specialised printing environments.',
+            'Different industries use print for different purposes—from brand presentation and photography to labels, technical drawings and operational identification. Explore typical applications and connect with our team to determine which approved Polyplex DigiPrint product grades suit your workflow.',
             false
         );
     }
@@ -102,104 +104,133 @@ class IndustriesPageTest extends TestCase
 
         // Section container
         $response->assertSee('id="industries-grid"', false);
+        $response->assertSee(
+            'Choose your industry to view common print applications and relevant product families. Final product suitability should be determined by the specific media grade, printer and end-use conditions.',
+            false
+        );
 
         // Card 1: Commercial Printing
         $response->assertSee('Commercial Printing', false);
+        $response->assertSee('Make Every Print Piece Count.', false);
         $response->assertSee(
-            'Commercial printing continues to play an important role in business communication, marketing and brand promotion. From brochures and catalogues to promotional materials and business documents, the industry demands versatile substrates that deliver quality, consistency and reliable print performance.',
+            'From brochures and catalogues to premium presentation material, media selection can influence how printed communication looks and feels. Explore suitable commercial print media based on the intended finish, process and format.',
             false
         );
 
         // Card 2: Photography and Imaging
         $response->assertSee('Photography and Imaging', false);
+        $response->assertSee('Turn Images into Keepsakes.', false);
         $response->assertSee(
-            'Photography and imaging rely on print media that reproduces colours, details and visual depth with accuracy. From photographic prints to digital proofing, suitable materials support image quality across professional and creative applications.',
+            'Great photography deserves a thoughtful print presentation. Discover media for portraits, photobooks and creative photo output, selected for the required printer technology and finish.',
             false
         );
 
         // Card 3: Publishing and Printing
         $response->assertSee('Publishing and Printing', false);
+        $response->assertSee('Bring Stories to the Printed Page.', false);
         $response->assertSee(
-            'Publishing and printing bring written and visual content to audiences through books, magazines, journals and other publications. Reliable print media supports text clarity, image reproduction and consistent output across publishing requirements.',
+            'From short-run publications to image-led print pieces, choosing appropriate substrates supports the appearance and usability of finished publications.',
             false
         );
 
         // Card 4: Advertising and Marketing
         $response->assertSee('Advertising and Marketing', false);
+        $response->assertSee('Make the Message Visible.', false);
         $response->assertSee(
-            'Advertising and marketing use printed communication to build brand visibility, promote offerings and engage audiences. From campaign materials and promotional graphics to branded collateral, print media supports impactful communication across marketing channels.',
+            'Print continues to bring campaigns into shops, events and everyday spaces. Explore media for posters, display graphics and branded promotional applications.',
             false
         );
 
         // Card 5: Packaging and Labelling
         $response->assertSee('Packaging and Labelling', false);
+        $response->assertSee('Give Every Pack a Stronger Presence.', false);
         $response->assertSee(
-            'Packaging and labelling support product identification, information sharing and brand presentation across industries. Print media enables clear reproduction of product details, graphics and branding across different packaging formats and labelling applications.',
+            'Packaging labels help communicate identity, information and presentation. Find self-adhesive media for selected printed label applications and compatible converting workflows.',
             false
         );
 
         // Card 6: Retail and Point-of-Sale
         $response->assertSee('Retail and Point-of-Sale', false);
+        $response->assertSee('Catch Attention Where Decisions Happen.', false);
         $response->assertSee(
-            'Retail environments use printed materials to highlight products, communicate promotions and improve customer engagement. From shelf displays and pricing materials to promotional graphics, print media supports effective communication across physical shopping spaces.',
+            'Shelf graphics, window messages and in-store displays help customers navigate products and promotions. Explore display and labelling media suited to the installation environment.',
             false
         );
 
         // Card 7: Healthcare
         $response->assertSee('Healthcare', false);
+        $response->assertSee('Clear Information for Everyday Healthcare Workflows.', false);
         $response->assertSee(
-            'Healthcare environments depend on clear and reliable printed communication. From patient records and medical documentation to identification labels and informational materials, print media supports information exchange and organised workflows across healthcare facilities.',
+            'Printed documents, administrative labels and information materials support communication and organisation in healthcare settings. Choose products only after confirming the specific application requirements.',
             false
         );
 
         // Card 8: Education
         $response->assertSee('Education', false);
+        $response->assertSee('Support Learning Through Print.', false);
         $response->assertSee(
-            'Educational institutions rely on printed materials for learning, communication and administration. From textbooks and classroom resources to examination papers and certificates, print media supports knowledge sharing and everyday academic activities.',
+            'Educational institutions use printed materials for teaching, administration, identification and communication. Discover media options for learning resources, notices and general-purpose labels.',
             false
         );
 
         // Card 9: Office and Corporate
         $response->assertSee('Office and Corporate', false);
+        $response->assertSee('Keep Business Communication Clear.', false);
         $response->assertSee(
-            'Office and corporate environments require dependable print media for documentation and daily communication. From business reports and presentations to internal records and forms, printed materials support information management and workplace operations.',
+            'From internal documents and labels to presentation materials, offices rely on printed information every day. Explore practical media for routine and special-use applications.',
             false
         );
 
         // Card 10: Logistics and Supply Chain
         $response->assertSee('Logistics and Supply Chain', false);
+        $response->assertSee('Support Identification at Every Step.', false);
         $response->assertSee(
-            'Logistics operations depend on accurate printed information for identification and tracking. From shipping labels and barcodes to inventory records and package documentation, print media supports organised processes and information flow across supply chains.',
+            'Packages, stock locations and internal workflows depend on legible identification. Explore relevant label and tag substrates, with adhesive and handling performance verified against the intended use.',
             false
         );
 
         // Card 11: Architecture, Engineering and Construction
         $response->assertSee('Architecture, Engineering and Construction', false);
+        $response->assertSee('Make Technical Detail Easy to Read.', false);
         $response->assertSee(
-            'Architecture, engineering and construction rely on precise printed documentation and technical visualisation. From architectural drawings and engineering plans to construction layouts, print media supports detailed reproduction and effective project communication.',
+            'Clear plans and technical drawings support coordination across project teams. Explore reprographic media for architectural, engineering and plotting applications.',
             false
         );
 
         // Card 12: Textile and Garments
         $response->assertSee('Textile and Garments', false);
+        $response->assertSee('From Design Ideas to Product Identification.', false);
         $response->assertSee(
-            'The textile and garment industry uses printed materials across design, production and identification processes. From pattern printing and technical documentation to labels and tags, print media supports varied creative and operational requirements.',
+            'Printed patterns, product tags and labels contribute to the garment development and presentation process. Choose media according to the print equipment and application requirements.',
             false
         );
 
-        // Card 13: Signage and Visuals Communication
-        $response->assertSee('Signage and Visuals Communication', false);
+        // Card 13: Signage and Visual Communication
+        $response->assertSee('Signage and Visual Communication', false);
+        $response->assertSee('Make Messages Seen.', false);
         $response->assertSee(
-            'Signage and visual communication help businesses share information, establish visibility and guide audiences. From directional signs and promotional graphics to informational displays, print media supports clear messaging across commercial and public environments.',
+            'Promotional displays, directional graphics and interior visuals turn printed media into useful communication. Explore formats and finishes that fit your printer and installation method.',
             false
         );
 
         // Card 14: Manufacturing and Industrial
         $response->assertSee('Manufacturing and Industrial', false);
+        $response->assertSee('Help Information Stay Visible in the Workflow.', false);
         $response->assertSee(
-            'Manufacturing and industrial environments rely on printed materials for product identification, operational communication and equipment labelling. From barcode labels and technical documentation to safety signage, print media supports organised workflows and information management across industrial operations.',
+            'Identification labels, internal tags and technical documents support daily manufacturing operations. Evaluate material, adhesive and print performance for each operating condition.',
             false
         );
+
+        // Action link & product family pills
+        $response->assertSee('Ask for Application Guidance', false);
+        $response->assertSee('Gloss Art Paper Media', false);
+        $response->assertSee('Non-Tear Media', false);
+        $response->assertSee('Inkjet Photo Media', false);
+        $response->assertSee('Polyester Offset Plates', false);
+        $response->assertSee('Digital Wide-Format Media', false);
+        $response->assertSee('Digital Labels', false);
+        $response->assertSee('Multi-Purpose Labels', false);
+        $response->assertSee('Reprographic Media', false);
     }
 
     /**

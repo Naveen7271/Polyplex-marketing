@@ -8,111 +8,194 @@ Customization:
 <x-industries-grid-section :industries="$customIndustries" />
 --}}
 @props([
+    'intro' => 'Choose your industry to view common print applications and relevant product families. Final product suitability should be determined by the specific media grade, printer and end-use conditions.',
     'industries' => [
         [
             'id' => 'commercial-printing',
             'title' => 'Commercial Printing',
             'image' => 'images/industries/commercial-printing.jpg',
-            'alt' => 'Commercial Printing corporate identity, brochures, catalogues and business stationery mockups',
-            'description' => 'Commercial printing continues to play an important role in business communication, marketing and brand promotion. From brochures and catalogues to promotional materials and business documents, the industry demands versatile substrates that deliver quality, consistency and reliable print performance.',
+            'alt' => 'Commercial Printing brochures, catalogues and presentation material',
+            'leadIn' => 'Make Every Print Piece Count.',
+            'description' => 'From brochures and catalogues to premium presentation material, media selection can influence how printed communication looks and feels. Explore suitable commercial print media based on the intended finish, process and format.',
+            'products' => [
+                ['name' => 'Gloss Art Paper Media', 'slug' => 'gloss-art-paper-media'],
+                ['name' => 'Non-Tear Media', 'slug' => 'non-tear-media'],
+            ],
         ],
         [
             'id' => 'photography-imaging',
             'title' => 'Photography and Imaging',
-            'image' => 'images/industries/photography-imaging.jpg',
-            'alt' => 'Photography and Imaging high-fidelity family portraits and professional photo media',
-            'description' => 'Photography and imaging rely on print media that reproduces colours, details and visual depth with accuracy. From photographic prints to digital proofing, suitable materials support image quality across professional and creative applications.',
+            'image' => 'images/industries/photography-imaging.png',
+            'alt' => 'Photography and Imaging vibrant printed photo and portrait keepsake',
+            'leadIn' => 'Turn Images into Keepsakes.',
+            'description' => 'Great photography deserves a thoughtful print presentation. Discover media for portraits, photobooks and creative photo output, selected for the required printer technology and finish.',
+            'products' => [
+                ['name' => 'Inkjet Photo Media', 'slug' => 'inkjet-photo-media'],
+                ['name' => 'Non-Tear Media', 'slug' => 'non-tear-media'],
+            ],
         ],
         [
             'id' => 'publishing-printing',
             'title' => 'Publishing and Printing',
             'image' => 'images/industries/publishing-printing.jpg',
-            'alt' => 'Publishing and Printing magazines, journals, books and editorial publications',
-            'description' => 'Publishing and printing bring written and visual content to audiences through books, magazines, journals and other publications. Reliable print media supports text clarity, image reproduction and consistent output across publishing requirements.',
+            'alt' => 'Publishing and Printing books, journals and editorial publications',
+            'leadIn' => 'Bring Stories to the Printed Page.',
+            'description' => 'From short-run publications to image-led print pieces, choosing appropriate substrates supports the appearance and usability of finished publications.',
+            'products' => [
+                ['name' => 'Gloss Art Paper Media', 'slug' => 'gloss-art-paper-media'],
+                ['name' => 'Polyester Offset Plates', 'slug' => 'polyester-offset-plates'],
+            ],
         ],
         [
             'id' => 'advertising-marketing',
             'title' => 'Advertising and Marketing',
-            'image' => 'images/industries/advertising-marketing.jpg',
-            'alt' => 'Advertising and Marketing illuminated promotional posters and campaign collateral',
-            'description' => 'Advertising and marketing use printed communication to build brand visibility, promote offerings and engage audiences. From campaign materials and promotional graphics to branded collateral, print media supports impactful communication across marketing channels.',
+            'image' => 'images/industries/advertising-marketing.png',
+            'alt' => 'Advertising and Marketing promotional posters and display graphics',
+            'leadIn' => 'Make the Message Visible.',
+            'description' => 'Print continues to bring campaigns into shops, events and everyday spaces. Explore media for posters, display graphics and branded promotional applications.',
+            'products' => [
+                ['name' => 'Digital Wide-Format Media', 'slug' => 'digital-wide-format-media'],
+                ['name' => 'Gloss Art Paper Media', 'slug' => 'gloss-art-paper-media'],
+            ],
         ],
         [
             'id' => 'packaging-labelling',
             'title' => 'Packaging and Labelling',
             'image' => 'images/industries/packaging-labelling.jpg',
-            'alt' => 'Packaging and Labelling gourmet jars, boxes and specialty printed packaging',
-            'description' => 'Packaging and labelling support product identification, information sharing and brand presentation across industries. Print media enables clear reproduction of product details, graphics and branding across different packaging formats and labelling applications.',
+            'alt' => 'Packaging and Labelling bottles and specialty printed product labels',
+            'leadIn' => 'Give Every Pack a Stronger Presence.',
+            'description' => 'Packaging labels help communicate identity, information and presentation. Find self-adhesive media for selected printed label applications and compatible converting workflows.',
+            'products' => [
+                ['name' => 'Digital Labels', 'slug' => 'digital-labels'],
+                ['name' => 'Multi-Purpose Labels', 'slug' => 'multi-purpose-labels'],
+            ],
         ],
         [
             'id' => 'retail-point-of-sale',
             'title' => 'Retail and Point-of-Sale',
             'image' => 'images/industries/retail-point-of-sale.jpg',
-            'alt' => 'Retail and Point-of-Sale shelf displays, product boxes and promotional point of sale signage',
-            'description' => 'Retail environments use printed materials to highlight products, communicate promotions and improve customer engagement. From shelf displays and pricing materials to promotional graphics, print media supports effective communication across physical shopping spaces.',
+            'alt' => 'Retail and Point-of-Sale promotional display graphics and labels',
+            'leadIn' => 'Catch Attention Where Decisions Happen.',
+            'description' => 'Shelf graphics, window messages and in-store displays help customers navigate products and promotions. Explore display and labelling media suited to the installation environment.',
+            'products' => [
+                ['name' => 'Digital Wide-Format Media', 'slug' => 'digital-wide-format-media'],
+                ['name' => 'Digital Labels', 'slug' => 'digital-labels'],
+            ],
         ],
         [
             'id' => 'healthcare',
             'title' => 'Healthcare',
             'image' => 'images/industries/healthcare.jpg',
-            'alt' => 'Healthcare medical personnel discussing patient records and clinical print documentation',
-            'description' => 'Healthcare environments depend on clear and reliable printed communication. From patient records and medical documentation to identification labels and informational materials, print media supports information exchange and organised workflows across healthcare facilities.',
+            'alt' => 'Healthcare medical imaging, patient records and workflow labels',
+            'leadIn' => 'Clear Information for Everyday Healthcare Workflows.',
+            'description' => 'Printed documents, administrative labels and information materials support communication and organisation in healthcare settings. Choose products only after confirming the specific application requirements.',
+            'products' => [
+                ['name' => 'Multi-Purpose Labels', 'slug' => 'multi-purpose-labels'],
+                ['name' => 'Reprographic Media', 'slug' => 'reprographic-media'],
+            ],
         ],
         [
             'id' => 'education',
             'title' => 'Education',
-            'image' => 'images/industries/education.jpg',
-            'alt' => 'Education students and academic personnel collaborating with learning materials',
-            'description' => 'Educational institutions rely on printed materials for learning, communication and administration. From textbooks and classroom resources to examination papers and certificates, print media supports knowledge sharing and everyday academic activities.',
+            'image' => 'images/industries/education.png',
+            'alt' => 'Education printed learning puzzles, notices and classroom materials',
+            'leadIn' => 'Support Learning Through Print.',
+            'description' => 'Educational institutions use printed materials for teaching, administration, identification and communication. Discover media options for learning resources, notices and general-purpose labels.',
+            'products' => [
+                ['name' => 'Gloss Art Paper Media', 'slug' => 'gloss-art-paper-media'],
+                ['name' => 'Multi-Purpose Labels', 'slug' => 'multi-purpose-labels'],
+            ],
         ],
         [
             'id' => 'office-corporate',
             'title' => 'Office and Corporate',
             'image' => 'images/industries/office-corporate.jpg',
-            'alt' => 'Office and corporate team reviewing business presentations and documentation',
-            'description' => 'Office and corporate environments require dependable print media for documentation and daily communication. From business reports and presentations to internal records and forms, printed materials support information management and workplace operations.',
+            'alt' => 'Office and Corporate ring binders, labels and printed documentation',
+            'leadIn' => 'Keep Business Communication Clear.',
+            'description' => 'From internal documents and labels to presentation materials, offices rely on printed information every day. Explore practical media for routine and special-use applications.',
+            'products' => [
+                ['name' => 'Multi-Purpose Labels', 'slug' => 'multi-purpose-labels'],
+                ['name' => 'Gloss Art Paper Media', 'slug' => 'gloss-art-paper-media'],
+            ],
         ],
         [
             'id' => 'logistics-supply-chain',
             'title' => 'Logistics and Supply Chain',
             'image' => 'images/industries/logistics-supply-chain.jpg',
-            'alt' => 'Logistics and supply chain freight port with shipping containers and barcode tracking',
-            'description' => 'Logistics operations depend on accurate printed information for identification and tracking. From shipping labels and barcodes to inventory records and package documentation, print media supports organised processes and information flow across supply chains.',
+            'alt' => 'Logistics and Supply Chain parcels with printed barcode labels',
+            'leadIn' => 'Support Identification at Every Step.',
+            'description' => 'Packages, stock locations and internal workflows depend on legible identification. Explore relevant label and tag substrates, with adhesive and handling performance verified against the intended use.',
+            'products' => [
+                ['name' => 'Multi-Purpose Labels', 'slug' => 'multi-purpose-labels'],
+                ['name' => 'Digital Labels', 'slug' => 'digital-labels'],
+                ['name' => 'Non-Tear Media', 'slug' => 'non-tear-media'],
+            ],
         ],
         [
             'id' => 'architecture-engineering-construction',
             'title' => 'Architecture, Engineering and Construction',
             'image' => 'images/industries/architecture-engineering-construction.jpg',
-            'alt' => 'Architecture, engineering and construction modern commercial building plans and CAD drawings',
-            'description' => 'Architecture, engineering and construction rely on precise printed documentation and technical visualisation. From architectural drawings and engineering plans to construction layouts, print media supports detailed reproduction and effective project communication.',
+            'alt' => 'Architecture, Engineering and Construction architectural plans and CAD drawings',
+            'leadIn' => 'Make Technical Detail Easy to Read.',
+            'description' => 'Clear plans and technical drawings support coordination across project teams. Explore reprographic media for architectural, engineering and plotting applications.',
+            'products' => [
+                ['name' => 'Reprographic Media', 'slug' => 'reprographic-media'],
+            ],
         ],
         [
             'id' => 'textile-garments',
             'title' => 'Textile and Garments',
             'image' => 'images/industries/textile-garments.jpg',
-            'alt' => 'Textile and garments vibrant apparel on hangers and garment tags',
-            'description' => 'The textile and garment industry uses printed materials across design, production and identification processes. From pattern printing and technical documentation to labels and tags, print media supports varied creative and operational requirements.',
+            'alt' => 'Textile and Garments printed bib numbers, tags and apparel labels',
+            'leadIn' => 'From Design Ideas to Product Identification.',
+            'description' => 'Printed patterns, product tags and labels contribute to the garment development and presentation process. Choose media according to the print equipment and application requirements.',
+            'products' => [
+                ['name' => 'Reprographic Media', 'slug' => 'reprographic-media'],
+                ['name' => 'Digital Labels', 'slug' => 'digital-labels'],
+                ['name' => 'Non-Tear Media', 'slug' => 'non-tear-media'],
+            ],
         ],
         [
             'id' => 'signage-visuals-communication',
-            'title' => 'Signage and Visuals Communication',
+            'title' => 'Signage and Visual Communication',
             'image' => 'images/industries/signage-visuals-communication.jpg',
-            'alt' => 'Signage and visuals communication durable airline safety cards and informational displays',
-            'description' => 'Signage and visual communication help businesses share information, establish visibility and guide audiences. From directional signs and promotional graphics to informational displays, print media supports clear messaging across commercial and public environments.',
+            'alt' => 'Signage and Visual Communication safety signs and directional display graphics',
+            'leadIn' => 'Make Messages Seen.',
+            'description' => 'Promotional displays, directional graphics and interior visuals turn printed media into useful communication. Explore formats and finishes that fit your printer and installation method.',
+            'products' => [
+                ['name' => 'Digital Wide-Format Media', 'slug' => 'digital-wide-format-media'],
+            ],
         ],
         [
             'id' => 'manufacturing-industrial',
             'title' => 'Manufacturing and Industrial',
             'image' => 'images/industries/manufacturing-industrial.jpg',
-            'alt' => 'Manufacturing and industrial durable equipment identification tags and barcode labels',
-            'description' => 'Manufacturing and industrial environments rely on printed materials for product identification, operational communication and equipment labelling. From barcode labels and technical documentation to safety signage, print media supports organised workflows and information management across industrial operations.',
+            'alt' => 'Manufacturing and Industrial equipment warning and identification labels',
+            'leadIn' => 'Help Information Stay Visible in the Workflow.',
+            'description' => 'Identification labels, internal tags and technical documents support daily manufacturing operations. Evaluate material, adhesive and print performance for each operating condition.',
+            'products' => [
+                ['name' => 'Digital Labels', 'slug' => 'digital-labels'],
+                ['name' => 'Multi-Purpose Labels', 'slug' => 'multi-purpose-labels'],
+                ['name' => 'Reprographic Media', 'slug' => 'reprographic-media'],
+                ['name' => 'Non-Tear Media', 'slug' => 'non-tear-media'],
+            ],
         ],
     ],
 ])
 
 <section id="industries-grid" class="relative w-full py-[60px] sm:py-16 md:py-20 lg:py-[60px] bg-white"
     aria-label="Industry Solutions and Sectors">
-    <div class="max-w-7xl mx-auto sm:px-6 ">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {{-- Centered Intro Statement --}}
+        @if (!empty($intro))
+            <div class="max-w-4xl mx-auto text-center mb-10 sm:mb-12 lg:mb-14">
+                <p
+                    class="font-heading font-[600] text-[17px] sm:text-[19px] md:text-[21px] text-[#0E4174] leading-[1.5] tracking-tight">
+                    {{ $intro }}
+                </p>
+            </div>
+        @endif
 
         {{-- 2-Column Responsive Card Grid --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-[30px] sm:gap-7 lg:gap-[30px] xl:gap-[30px]">
@@ -148,15 +231,39 @@ Customization:
                     <div class="flex flex-col grow justify-start px-0.5 sm:px-1">
                         {{-- Industry Title: Polyplex Navy --}}
                         <h2 id="industry-title-{{ $industry['id'] }}"
-                            class="font-heading font-[600] text-[27px] sm:text-[21px] md:text-[22px] text-[#0E4174] tracking-tight leading-snug">
+                            class="font-heading font-[600] text-[24px] sm:text-[22px] md:text-[23px] text-[#0E4174] tracking-tight leading-snug">
                             {{ $industry['title'] }}
                         </h2>
 
                         {{-- Industry Narrative Description --}}
                         <p
-                            class="mt-2.5 sm:mt-3 font-sans font-[500] text-[16px] sm:text-[13.5px] md:text-sm text-slate-600 leading-relaxed sm:leading-[1.65]">
+                            class="mt-2 sm:mt-2.5 font-sans font-[400] text-[15px] sm:text-[13.5px] md:text-sm text-slate-700 leading-relaxed sm:leading-[1.6]">
+                            @if (!empty($industry['leadIn']))
+                                <strong class="font-semibold text-slate-900">{{ $industry['leadIn'] }}</strong>
+                            @endif
                             {{ $industry['description'] }}
                         </p>
+
+                        {{-- Red Guidance Action Link --}}
+                        <div class="mt-2.5 sm:mt-3">
+                            <a href="{{ $industry['ctaUrl'] ?? route('contact') }}"
+                                class="inline-flex items-center gap-1.5 font-sans font-medium text-[13.5px] sm:text-sm text-[#D6001C] hover:text-[#b00017] transition-colors">
+                                <span>{{ $industry['ctaText'] ?? 'Ask for Application Guidance' }}</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+
+                        {{-- Product Family Pill Tags --}}
+                        @if (!empty($industry['products']))
+                            <div class="mt-4 sm:mt-5 flex flex-wrap gap-2.5">
+                                @foreach ($industry['products'] as $product)
+                                    <a href="{{ route('products.show', $product['slug']) }}"
+                                        class="inline-flex items-center px-3.5 py-1.5 rounded-[6px] bg-[#0E4174] hover:bg-[#0a325a] text-white font-sans font-medium text-[12px] sm:text-[12.5px] leading-tight transition-colors">
+                                        {{ $product['name'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
 
                 </article>
