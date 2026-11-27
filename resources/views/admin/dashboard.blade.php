@@ -109,7 +109,7 @@
             </svg>
             <div>
                 <p class="font-semibold mb-1">Getting Started</p>
-                <p class="text-blue-700">Use this admin panel to manage products and their "Designed for Diverse Applications" entries displayed on individual product pages. Create a product first, then add applications to it.</p>
+                <p class="text-blue-700">Use this admin panel to manage products, brands, key benefits, and application categories displayed on individual product pages.</p>
             </div>
         </div>
     </div>

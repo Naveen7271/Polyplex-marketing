@@ -448,7 +448,14 @@
     $dbProduct = null;
     try {
         if (\Illuminate\Support\Facades\Schema::hasTable('products')) {
-            $dbProduct = \App\Models\Product::with(['applications', 'brands'])->where('slug', $currentSlug)->first();
+            $relations = ['applications', 'brands'];
+            if (\Illuminate\Support\Facades\Schema::hasTable('product_benefits')) {
+                $relations[] = 'benefits';
+            }
+            if (\Illuminate\Support\Facades\Schema::hasTable('product_application_categories')) {
+                $relations[] = 'applicationCategories.items';
+            }
+            $dbProduct = \App\Models\Product::with($relations)->where('slug', $currentSlug)->first();
         }
     } catch (\Throwable) {
         $dbProduct = null;
@@ -507,6 +514,39 @@
                 ];
             })->toArray();
         }
+        if (!empty($dbProduct->benefits_overline)) {
+            $product['benefitsOverline'] = $dbProduct->benefits_overline;
+        }
+        if (!empty($dbProduct->benefits_title)) {
+            $product['benefitsTitle'] = $dbProduct->benefits_title;
+        }
+        if (!empty($dbProduct->benefits_description)) {
+            $product['benefitsDescription'] = $dbProduct->benefits_description;
+        }
+        if ($dbProduct->relationLoaded('benefits')) {
+            if ($dbProduct->benefits->isNotEmpty()) {
+                $product['benefits'] = $dbProduct->benefits->pluck('content')->toArray();
+            } elseif ($dbProduct->benefits_title !== null || $dbProduct->benefits_description !== null) {
+                $product['benefits'] = [];
+            }
+        }
+        if ($dbProduct->relationLoaded('applicationCategories')) {
+            $product['applicationCategories'] = $dbProduct->applicationCategories->map(function ($cat) {
+                return [
+                    'id' => $cat->slug ?: (string) $cat->id,
+                    'title' => $cat->title,
+                    'hasCarousel' => (bool) $cat->has_carousel,
+                    'items' => $cat->items->map(function ($item) {
+                        return [
+                            'slug' => $item->slug ?: \Illuminate\Support\Str::slug($item->title),
+                            'title' => $item->title,
+                            'image' => $item->image,
+                            'alt' => $item->alt ?? $item->title,
+                        ];
+                    })->toArray(),
+                ];
+            })->toArray();
+        }
     }
 @endphp
 
@@ -520,16 +560,24 @@
     <x-product-brands-section :title="$product['brandsTitle'] ?? null" :product-name="$product['title']"
         :brands="$product['brands'] ?? null" />
 
-    {{-- Third Section of Individual Product Page: Gallery Carousel ("A Closer Look at the Product") --}}
-    <x-product-gallery-section :overline="$product['galleryOverline'] ?? 'GALLERY'" :title="$product['galleryTitle'] ?? 'A Closer Look at the Product'" :slides="$product['gallerySlides'] ?? null" />
+    {{-- Third Section of Individual Product Page: Key Benefits ("Where the Material Makes a Difference") --}}
+    <x-product-benefits-section
+        :title="$product['benefitsTitle'] ?? 'Where the Material Makes a Difference'"
+        :description="$product['benefitsDescription'] ?? null"
+        :overline="$product['benefitsOverline'] ?? 'KEY BENEFITS'"
+        :benefits="$product['benefits'] ?? null" />
 
-    {{-- Fourth Section of Individual Product Page: Applications ("Designed for Diverse Applications") --}}
-    <x-product-applications-section :title="$product['applicationsTitle'] ?? 'Designed for Diverse Applications'"
-        :applications="$product['applications'] ?? null" />
-
-    {{-- Fifth Section of Individual Product Page: Compatible Technologies --}}
+    {{-- Fourth Section of Individual Product Page: Compatible Technologies --}}
     <x-product-technologies-section :title="$product['technologiesTitle'] ?? 'Compatible Technologies'"
         :technologies="$product['technologies'] ?? null" />
+
+    {{-- Fifth Section of Individual Product Page: Applications Impact Banner --}}
+    <x-product-impact-banner />
+
+    {{-- Sixth Section of Individual Product Page: Application Categories Carousels --}}
+    @if (!isset($product['applicationCategories']) || !empty($product['applicationCategories']))
+        <x-product-application-categories-section :categories="$product['applicationCategories'] ?? null" />
+    @endif
 
     {{-- Call to Action: Let's Build the Future Together --}}
     <x-cta-section />

@@ -51,7 +51,7 @@ class AdminPanelTest extends TestCase
     }
 
     /**
-     * Test admin dashboard renders with sidebar containing Diverse Applications.
+     * Test admin dashboard renders with Products and Brands sidebar links (and without legacy Diverse Applications).
      */
     public function test_admin_dashboard_renders_with_sidebar_links(): void
     {
@@ -59,8 +59,7 @@ class AdminPanelTest extends TestCase
             ->get('/admin');
 
         $response->assertStatus(200);
-        $response->assertSee('Diverse Applications', false);
-        $response->assertSee(route('admin.applications.index'), false);
+        $response->assertDontSee('Diverse Applications', false);
         $response->assertSee('Products', false);
         $response->assertSee('Brands', false);
     }

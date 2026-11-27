@@ -1150,6 +1150,57 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Product Application Categories Carousels ---
+    const appCategoryCarousels = document.querySelectorAll('.app-category-carousel[data-has-carousel="true"]');
+    appCategoryCarousels.forEach((carousel) => {
+        const pages = Array.from(carousel.querySelectorAll('.app-cat-page'));
+        const dots = Array.from(carousel.querySelectorAll('.app-cat-dot'));
+        const prevBtn = carousel.querySelector('.app-cat-prev');
+        const nextBtn = carousel.querySelector('.app-cat-next');
+        const totalSlides = Math.max(pages.length, dots.length);
+
+        if (totalSlides <= 1) return;
+
+        let activeIndex = 0;
+
+        const updateCarousel = (targetIdx) => {
+            const nextIndex = (targetIdx + totalSlides) % totalSlides;
+            const step = nextIndex - activeIndex;
+            activeIndex = nextIndex;
+
+            if (pages.length > 1) {
+                pages.forEach((pg, idx) => {
+                    pg.classList.toggle('hidden', idx !== activeIndex);
+                });
+            } else if (pages[0] && step !== 0) {
+                const grid = pages[0];
+                const cards = Array.from(grid.querySelectorAll('.app-cat-card'));
+                if (cards.length > 1) {
+                    const shift = ((step % cards.length) + cards.length) % cards.length;
+                    for (let i = 0; i < shift; i++) {
+                        grid.appendChild(grid.firstElementChild);
+                    }
+                }
+            }
+
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('bg-slate-900', idx === activeIndex);
+                dot.classList.toggle('bg-slate-300', idx !== activeIndex);
+                dot.classList.toggle('hover:bg-slate-400', idx !== activeIndex);
+            });
+        };
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => updateCarousel(activeIndex - 1));
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => updateCarousel(activeIndex + 1));
+        }
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => updateCarousel(idx));
+        });
+    });
 });
 
 // ========== Timeline / Journey Section ==========

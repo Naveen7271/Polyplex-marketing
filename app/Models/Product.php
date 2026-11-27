@@ -24,6 +24,12 @@ class Product extends Model
         'short_description',
         'banner_image',
         'brochure_url',
+        'benefits_overline',
+        'benefits_title',
+        'benefits_description',
+        'impact_title',
+        'impact_description',
+        'impact_banner',
         'is_active',
         'sort_order',
     ];
@@ -47,6 +53,22 @@ class Product extends Model
     public function applications(): HasMany
     {
         return $this->hasMany(ProductApplication::class)->orderBy('sort_order');
+    }
+
+    /**
+     * Get all key benefits for this product.
+     */
+    public function benefits(): HasMany
+    {
+        return $this->hasMany(ProductBenefit::class)->orderBy('sort_order')->orderBy('id');
+    }
+
+    /**
+     * Get all application categories for this product.
+     */
+    public function applicationCategories(): HasMany
+    {
+        return $this->hasMany(ProductApplicationCategory::class)->orderBy('sort_order')->orderBy('id');
     }
 
     /**

@@ -37,55 +37,48 @@ Pass a custom title or technologies array via props:
     $items = $technologies ?? $defaultTechnologies;
 @endphp
 
-<section id="compatible-technologies" class="relative w-full py-[72px] sm:py-20 lg:py-[72px] bg-white select-none"
+<section id="compatible-technologies" class="relative w-full py-14 sm:py-16 lg:py-[72px] bg-[#F3F3F3] select-none"
     aria-labelledby="compatible-technologies-heading">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Section Heading: Montserrat Bold Centered Navy --}}
-        <div class="text-center mb-10 sm:mb-12 lg:mb-[73px]">
+        <div class="text-center mb-8 sm:mb-10 lg:mb-12">
             <h2 id="compatible-technologies-heading"
-                class="font-heading font-[700] text-[32px] sm:text-3xl md:text-[34px] lg:text-[32px] text-[#0E4174] tracking-tight">
+                class="font-heading font-[700] text-[26px] sm:text-3xl lg:text-[32px] text-[#0E4174] tracking-tight">
                 {{ $title }}
             </h2>
         </div>
 
         @php
-            $containerClasses = match (count($items)) {
-                1 => 'max-w-md mx-auto flex justify-center',
-                2 => 'max-w-3xl lg:max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 lg:gap-8 justify-center',
-                default => 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8',
+            $count = count($items);
+            $gridClasses = match (true) {
+                $count === 1 => 'grid grid-cols-1 max-w-md mx-auto',
+                $count === 2 => 'grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-200',
+                $count === 4 => 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200',
+                default => 'grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200',
             };
-            $cardClasses = count($items) === 1 ? 'w-full ' : '';
         @endphp
 
-        {{-- Technology Compatibility Cards Grid --}}
-        <div class="{{ $containerClasses }}">
-            @foreach ($items as $tech)
-                <div id="tech-card-{{ $tech['id'] }}"
-                    class="{{ $cardClasses }}group bg-[#F3F3F3] rounded-[1px] sm: p-5 sm:p-6 lg:p-[20px] flex flex-col items-center justify-between shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        {{-- Floating White Card with Divided Technology Items --}}
+        <div class="bg-white rounded-[10px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-slate-100/80 px-5 py-4 sm:px-8 sm:py-6">
+            <div class="{{ $gridClasses }}">
+                @foreach ($items as $tech)
+                    <div id="tech-card-{{ $tech['id'] }}"
+                        class="flex items-center justify-start sm:justify-center gap-4 py-4 sm:py-2 px-4 sm:px-6">
+                        <div class="shrink-0 flex items-center justify-center">
+                            @if (!empty($tech['icon'] ?? $tech['image']))
+                                <img src="{{ asset($tech['icon'] ?? $tech['image']) }}" alt="{{ $tech['alt'] ?? $tech['title'] }}"
+                                    class="h-11 w-auto max-w-[84px] object-contain"
+                                    loading="lazy" />
+                            @endif
+                        </div>
 
-                    {{-- Inner Framed Box Housing Equipment Preview --}}
-                    <div
-                        class="w-full rounded-[5px] sm: border border-slate-300/80 sm: flex items-center justify-center min-h-[162px] sm:min-h-[162px] md:min-h-[175px] overflow-hidden bg-transparent">
-                        @if (!empty($tech['image']))
-                            <img src="{{ asset($tech['image']) }}" alt="{{ $tech['alt'] ?? $tech['title'] }}"
-                                class="max-h-[162px] max-w-[350px] w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-                                loading="lazy" />
-                        @else
-                            <div class="text-slate-400 font-sans text-xs uppercase tracking-wider">
-                                Preview Coming Soon
-                            </div>
-                        @endif
+                        <h3 class="font-heading font-[600] text-[15px] sm:text-[16px] text-[#0E4174] leading-snug text-left">
+                            {{ $tech['title'] }}
+                        </h3>
                     </div>
-
-                    {{-- Technology Title --}}
-                    <h3
-                        class="font-heading font-bold text-base sm:text-lg md:text-[19px] text-[#0E4174] tracking-tight mt-4 sm:mt-5 text-center leading-snug">
-                        {{ $tech['title'] }}
-                    </h3>
-
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
 
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductApplication;
+use App\Models\ProductApplicationCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -46,9 +47,15 @@ class AdminProductController
     {
         $categories = $this->getProductCategories();
         $allBrands = Brand::orderBy('name')->get();
-        $presetApplications = ProductApplication::getPresets();
+        $presetApplicationCategories = ProductApplicationCategory::getPresets();
+        $presetCategoryItems = ProductApplicationCategory::getItemPresets();
 
-        return view('admin.products.create', compact('categories', 'allBrands', 'presetApplications'));
+        return view('admin.products.create', compact(
+            'categories',
+            'allBrands',
+            'presetApplicationCategories',
+            'presetCategoryItems'
+        ));
     }
 
     /**
@@ -66,11 +73,22 @@ class AdminProductController
             'banner_image_file' => ['nullable', 'file', 'image', 'max:10240'],
             'brochure_url' => ['nullable', 'string', 'max:500'],
             'brochure_file' => ['nullable', 'file', 'mimes:pdf,doc,docx,zip', 'max:20480'],
+            'benefits_overline' => ['nullable', 'string', 'max:120'],
+            'benefits_title' => ['nullable', 'string', 'max:255'],
+            'benefits_description' => ['nullable', 'string'],
             'is_active' => ['boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'brand_ids' => ['nullable', 'array'],
             'brand_ids.*' => ['exists:brands,id'],
-            'initial_application_presets' => ['nullable', 'array'],
+            'benefits' => ['nullable', 'array'],
+            'benefits.*' => ['nullable', 'string'],
+            'application_categories' => ['nullable', 'array'],
+            'application_categories.*.title' => ['nullable', 'string', 'max:255'],
+            'application_categories.*.has_carousel' => ['nullable', 'boolean'],
+            'application_categories.*.items' => ['nullable', 'array'],
+            'application_categories.*.items.*.title' => ['nullable', 'string', 'max:255'],
+            'application_categories.*.items.*.image' => ['nullable', 'string', 'max:500'],
+            'application_categories.*.items.*.image_file' => ['nullable', 'file', 'image', 'max:10240'],
         ]);
 
         $validated['slug'] = $validated['slug'] ?? Str::slug($validated['name']);
@@ -88,7 +106,12 @@ class AdminProductController
             $validated['brochure_url'] = 'storage/'.$path;
         }
 
-        unset($validated['banner_image_file'], $validated['brochure_file']);
+        unset(
+            $validated['banner_image_file'],
+            $validated['brochure_file'],
+            $validated['benefits'],
+            $validated['application_categories']
+        );
 
         $product = Product::create($validated);
 
@@ -97,21 +120,59 @@ class AdminProductController
             $product->brands()->sync($validated['brand_ids']);
         }
 
-        // Attach selected application presets
-        if (! empty($validated['initial_application_presets'])) {
-            $presets = ProductApplication::getPresets();
-            $order = 1;
-            foreach ($validated['initial_application_presets'] as $key) {
-                if (isset($presets[$key])) {
-                    $appData = $presets[$key];
-                    $appData['sort_order'] = $order++;
-                    $product->applications()->create($appData);
+        // Create initial key benefits
+        $benefitOrder = 1;
+        foreach ($request->input('benefits', []) as $benefitContent) {
+            $trimmed = trim((string) $benefitContent);
+            if ($trimmed !== '') {
+                $product->benefits()->create([
+                    'content' => $trimmed,
+                    'sort_order' => $benefitOrder++,
+                ]);
+            }
+        }
+
+        // Create initial application categories and items
+        $categoryOrder = 1;
+        foreach ($request->input('application_categories', []) as $catIdx => $catInput) {
+            $catTitle = trim((string) ($catInput['title'] ?? ''));
+            if ($catTitle === '') {
+                continue;
+            }
+
+            $category = $product->applicationCategories()->create([
+                'title' => $catTitle,
+                'slug' => Str::slug($catTitle),
+                'has_carousel' => filter_var($catInput['has_carousel'] ?? true, FILTER_VALIDATE_BOOLEAN),
+                'sort_order' => $categoryOrder++,
+            ]);
+
+            $itemOrder = 1;
+            foreach ($catInput['items'] ?? [] as $itemIdx => $itemInput) {
+                $itemTitle = trim((string) ($itemInput['title'] ?? ''));
+                if ($itemTitle === '') {
+                    continue;
                 }
+
+                $itemImage = ! empty($itemInput['image']) ? trim((string) $itemInput['image']) : null;
+                if ($request->hasFile("application_categories.{$catIdx}.items.{$itemIdx}.image_file")) {
+                    $path = $request->file("application_categories.{$catIdx}.items.{$itemIdx}.image_file")
+                        ->store('products/application-items', 'public');
+                    $itemImage = 'storage/'.$path;
+                }
+
+                $category->items()->create([
+                    'title' => $itemTitle,
+                    'slug' => Str::slug($itemTitle),
+                    'image' => $itemImage,
+                    'alt' => $itemTitle,
+                    'sort_order' => $itemOrder++,
+                ]);
             }
         }
 
         return redirect()->route('admin.products.edit', $product)
-            ->with('success', 'Product "'.$validated['name'].'" created successfully! You can now manage its brands and applications below.');
+            ->with('success', 'Product "'.$validated['name'].'" created successfully! You can now manage its brands, benefits, and application categories below.');
     }
 
     /**
@@ -120,11 +181,23 @@ class AdminProductController
     public function edit(Product $product): View
     {
         $categories = $this->getProductCategories();
-        $product->load(['applications', 'brands']);
+        $product->load(['brands', 'benefits', 'applicationCategories.items']);
         $allBrands = Brand::orderBy('name')->get();
-        $presetApplications = ProductApplication::getPresets();
+        $presetApplicationCategories = ProductApplicationCategory::getPresets();
+        $presetCategoryItems = ProductApplicationCategory::getItemPresets();
+        $existingApplicationCategories = ProductApplicationCategory::with(['product', 'items'])
+            ->where('product_id', '!=', $product->id)
+            ->orderBy('title')
+            ->get();
 
-        return view('admin.products.edit', compact('product', 'categories', 'allBrands', 'presetApplications'));
+        return view('admin.products.edit', compact(
+            'product',
+            'categories',
+            'allBrands',
+            'presetApplicationCategories',
+            'presetCategoryItems',
+            'existingApplicationCategories'
+        ));
     }
 
     /**
@@ -132,6 +205,21 @@ class AdminProductController
      */
     public function update(Request $request, Product $product): RedirectResponse
     {
+        $section = $request->input('_section');
+
+        if ($section === 'benefits_header') {
+            $validated = $request->validate([
+                'benefits_overline' => ['nullable', 'string', 'max:120'],
+                'benefits_title' => ['nullable', 'string', 'max:255'],
+                'benefits_description' => ['nullable', 'string'],
+            ]);
+
+            $product->update($validated);
+
+            return redirect()->route('admin.products.edit', $product)
+                ->with('success', 'Key Benefits header updated successfully!');
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:products,slug,'.$product->id],
@@ -142,6 +230,9 @@ class AdminProductController
             'banner_image_file' => ['nullable', 'file', 'image', 'max:10240'],
             'brochure_url' => ['nullable', 'string', 'max:500'],
             'brochure_file' => ['nullable', 'file', 'mimes:pdf,doc,docx,zip', 'max:20480'],
+            'benefits_overline' => ['nullable', 'string', 'max:120'],
+            'benefits_title' => ['nullable', 'string', 'max:255'],
+            'benefits_description' => ['nullable', 'string'],
             'is_active' => ['boolean'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);

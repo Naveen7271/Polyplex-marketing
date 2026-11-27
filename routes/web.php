@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminBrandCompatibilityController;
 use App\Http\Controllers\Admin\AdminBrandController;
 use App\Http\Controllers\Admin\AdminBrandFeatureController;
+use App\Http\Controllers\Admin\AdminProductApplicationCategoryController;
+use App\Http\Controllers\Admin\AdminProductApplicationCategoryItemController;
+use App\Http\Controllers\Admin\AdminProductBenefitController;
 use App\Http\Controllers\Admin\AdminProductBrandController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Models\Brand;
@@ -64,6 +67,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('{application}/edit', [AdminApplicationController::class, 'edit'])->name('edit');
             Route::put('{application}', [AdminApplicationController::class, 'update'])->name('update');
             Route::delete('{application}', [AdminApplicationController::class, 'destroy'])->name('destroy');
+        });
+
+        // Product Key Benefits (nested)
+        Route::prefix('products/{product}/benefits')->name('products.benefits.')->group(function () {
+            Route::post('/', [AdminProductBenefitController::class, 'store'])->name('store');
+            Route::put('{benefit}', [AdminProductBenefitController::class, 'update'])->name('update');
+            Route::delete('{benefit}', [AdminProductBenefitController::class, 'destroy'])->name('destroy');
+        });
+
+        // Product Application Categories & Items (nested)
+        Route::prefix('products/{product}/application-categories')->name('products.application-categories.')->group(function () {
+            Route::post('/', [AdminProductApplicationCategoryController::class, 'store'])->name('store');
+            Route::put('{category}', [AdminProductApplicationCategoryController::class, 'update'])->name('update');
+            Route::delete('{category}', [AdminProductApplicationCategoryController::class, 'destroy'])->name('destroy');
+
+            Route::prefix('{category}/items')->name('items.')->group(function () {
+                Route::post('/', [AdminProductApplicationCategoryItemController::class, 'store'])->name('store');
+                Route::put('{item}', [AdminProductApplicationCategoryItemController::class, 'update'])->name('update');
+                Route::delete('{item}', [AdminProductApplicationCategoryItemController::class, 'destroy'])->name('destroy');
+            });
         });
     });
 });
